@@ -1,0 +1,2 @@
+http://sourceforge.net/projects/dockpanelsuite
+http://www.icsharpcode.net/OpenSource/SharpZipLib/Download.aspx
