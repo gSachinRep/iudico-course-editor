@@ -1,0 +1,473 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FB48587D-389E-40A0-BD66-F772279A719A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FireFly.CourseEditor</RootNamespace>
+    <AssemblyName>CourseEditor</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <SignManifests>false</SignManifests>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <StartupObject>FireFly.CourseEditor.Program</StartupObject>
+    <ApplicationIcon>Images\FireFly.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CHECKERS;LOGGER;DISABLE_PRECOMPILATION</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <PlatformTarget>x86</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\RELEASE\</OutputPath>
+    <DefineConstants>CHECKERS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <PlatformTarget>x86</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UnitTest|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CHECKERS;UNITTESTS;DISABLE_PRECOMPILATION_</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UnitTest|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\UnitTest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Precompilation|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Precompilation\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CHECKERS;LOGGER;PRECOMPILATION</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Precompilation|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Precompilation\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="SgmlReaderDll, Version=1.4.1976.34865, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\SgmlReaderDll.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47, processorArchitecture=MSIL">
+      <HintPath>Lib\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Annotations.cs" />
+    <Compile Include="Common\ComboBoxItem.cs" />
+    <Compile Include="Common\Consts.cs" />
+    <Compile Include="Common\Delegates.cs" />
+    <Compile Include="Common\Exceptions.cs" />
+    <Compile Include="Common\Extenders.cs" />
+    <Compile Include="Common\FileUtils.cs" />
+    <Compile Include="Common\IdGenerator.cs" />
+    <Compile Include="Common\InitializeUtils.cs" />
+    <Compile Include="Common\PropertyGridUtils.cs" />
+    <Compile Include="Common\ConfigHelper.cs" />
+    <Compile Include="Common\UndoRedoUtils.cs" />
+    <Compile Include="GUI\HtmlEditor\BoundControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\HtmlPage.UndoRedo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\PageErrorsSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\SplashForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\SplashForm.Designer.cs">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.cs" />
+    <Compile Include="Common\Validate.cs" />
+    <Compile Include="Common\Zipper.cs" />
+    <Compile Include="Common\Configuration.cs" />
+    <Compile Include="Course\Answers.cs">
+      <DependentUpon>Answers.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Course\Course.cs" />
+    <Compile Include="Course\CourseUpgradeManager.cs" />
+    <Compile Include="Course\CourseUpgraderBase.cs" />
+    <Compile Include="Course\Manifest\AbstractManifestNode.cs" />
+    <Compile Include="Course\Manifest\Item.cs" />
+    <Compile Include="Course\Manifest\ManifestIntf.cs" />
+    <Compile Include="Course\Manifest\ManifestNodeList.cs" />
+    <Compile Include="Course\Manifest\ManifestStringConverter.cs" />
+    <Compile Include="Course\Manifest\ManifestTypes.cs" />
+    <Compile Include="Course\Manifest\Organization.cs" />
+    <Compile Include="GUI\ConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigForm.Designer.cs">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\CourseDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CourseDesigner.Designer.cs">
+      <DependentUpon>CourseDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\CourseExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CourseExplorer.Designer.cs">
+      <DependentUpon>CourseExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ErrorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ErrorDialog.Designer.cs">
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FFTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\FFTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\FFWebBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\CodeSnippet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\CodeSnippet.Designer.cs">
+      <DependentUpon>CodeSnippet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\ErrorControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\FFHtmlWriter.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlDesignMovableControl.cs">
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\HtmlButton.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlComboBox.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlCodeSnippet.cs">
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\HtmlCompiledTest.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlControl.cs" />
+    <Compile Include="GUI\HtmlEditor\HighlightControl\HtmlHighlightedCode.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlLabel.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlPage.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlPageBase.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlSerializers.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlSimpleQuestion.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlStyleReader.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlTestControl.cs" />
+    <Compile Include="GUI\HtmlEditor\HtmlTextBox.cs" />
+    <Compile Include="GUI\HtmlEditor\SimpleQuestion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\SimpleQuestion.Designer.cs">
+      <DependentUpon>SimpleQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\SummaryPage.cs" />
+    <Compile Include="GUI\HtmlEditor\TestCasesEditor.cs" />
+    <Compile Include="GUI\HtmlEditor\Validators.cs" />
+    <Compile Include="GUI\LastCoursesXml.cs" />
+    <Compile Include="GUI\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\EditorWindowBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\EditorWindowBase.Designer.cs">
+      <DependentUpon>EditorWindowBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ManifestBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ManifestBrowser.Designer.cs">
+      <DependentUpon>ManifestBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\PageEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\PageEditor.Designer.cs">
+      <DependentUpon>PageEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\NodesWrappers.cs" />
+    <Compile Include="GUI\WaitForm\WaitForm.cs">
+    </Compile>
+    <Compile Include="FFDebug.cs" />
+    <Compile Include="HttpCourseProvider.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\ConfigForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CourseDesigner.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CourseDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CourseExplorer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CourseExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ErrorDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FFTreeView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FFTreeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\EditorWindowBase.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EditorWindowBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ManifestBrowser.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ManifestBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\HtmlEditor\PageEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PageEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\PropertyEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="GUI\PropertyEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\PropertyEditor.Designer.cs">
+      <DependentUpon>PropertyEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Course\Manifest\PosibilityManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\right_green24_h.bmp" />
+    <None Include="Images\F_green_16.bmp" />
+    <None Include="Images\D_blue_16.bmp" />
+    <None Include="Images\R_purple_16.bmp" />
+    <None Include="Images\I_orange_16.bmp" />
+    <None Include="Images\O_metal_16.bmp" />
+    <None Include="Images\add_to_list16.bmp" />
+    <None Include="Images\delete_16.bmp" />
+    <None Include="Images\properties_16.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Course\LMSIntf.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HtmlToolBar_Button.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HtmlToolBar_Cursor.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HtmlToolBar_Edit.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HtmlToolBar_Label.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HtmlToolBar_ComboBox.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HtmlToolBar_CheckBox.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HtmlToolBar_RadioGroup.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GUI\WaitForm\WaitForm.resx">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Images\Loading.gif">
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GUI\WaitForm\gear0.png" />
+    <EmbeddedResource Include="GUI\WaitForm\gear1.png" />
+    <EmbeddedResource Include="GUI\WaitForm\gear2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Course\help.js" />
+    <EmbeddedResource Include="Course\SCOObj.js" />
+    <EmbeddedResource Include="Course\LMSDebugger.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\CodeSnippet.resx">
+      <DependentUpon>CodeSnippet.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\HtmlEditor\SimpleQuestion.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SimpleQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\sample.css" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\highlight.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\axapta.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\cpp.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\delphi.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\html.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\java.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\javascript.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\perl.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\php.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\python.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\rib.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\rsl.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\ruby.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\smalltalk.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\sql.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\vbscript.js" />
+    <EmbeddedResource Include="GUI\HtmlEditor\PageErrorsSummary.resx">
+      <DependentUpon>PageErrorsSummary.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\SplashForm.resx">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\Error.bmp" />
+    <Content Include="Images\FireFly.ico" />
+    <None Include="Images\Redo.bmp" />
+    <None Include="Images\Rename.bmp" />
+    <EmbeddedResource Include="Images\Splash.jpg" />
+    <Content Include="Images\start.bmp" />
+    <Content Include="Images\stop.bmp" />
+    <None Include="Images\Undo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

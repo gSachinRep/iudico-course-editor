@@ -1,0 +1,234 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FireFly.CourseEditor.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MainForm_WindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="MainForm_Visible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CourseFileFilter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FireFly course|*.zip</Value>
+    </Setting>
+    <Setting Name="Options_SaveRestoreWindowsState" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Options_ShowToolBar" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DeliveryControlsType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Delivery Controls</Value>
+    </Setting>
+    <Setting Name="ObjectivesType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Objectives</Value>
+    </Setting>
+    <Setting Name="RollupRuleType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rule</Value>
+    </Setting>
+    <Setting Name="RollupRuleTypeRollupConditionsRollupCondition_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rollup Condition</Value>
+    </Setting>
+    <Setting Name="RollupRuleTypeRollupAction_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rollup Action</Value>
+    </Setting>
+    <Setting Name="RollupRulesType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rollup Rules</Value>
+    </Setting>
+    <Setting Name="LimitConditionsType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Limit Conditions</Value>
+    </Setting>
+    <Setting Name="PreConditionRuleType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PreCondition Rule</Value>
+    </Setting>
+    <Setting Name="PreConditionRuleTypeRuleAction_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rule Action</Value>
+    </Setting>
+    <Setting Name="PostConditionRuleType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Post Condition Rule</Value>
+    </Setting>
+    <Setting Name="ExitConditionRuleType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Exit Rule</Value>
+    </Setting>
+    <Setting Name="SequencingRulesType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sequencing rules</Value>
+    </Setting>
+    <Setting Name="OrganizationsType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Organizations</Value>
+    </Setting>
+    <Setting Name="ResourcesType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Resources</Value>
+    </Setting>
+    <Setting Name="MetadataType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MetaData</Value>
+    </Setting>
+    <Setting Name="ExitConditionRuleTypeRuleAction_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rule Action</Value>
+    </Setting>
+    <Setting Name="SequencingRuleTypeRuleConditions_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Conditions</Value>
+    </Setting>
+    <Setting Name="SequencingRuleTypeRuleConditionsRuleCondition_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Conditon</Value>
+    </Setting>
+    <Setting Name="RollupRuleTypeRollupConditions_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Conditions</Value>
+    </Setting>
+    <Setting Name="SequencingType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sequencing</Value>
+    </Setting>
+    <Setting Name="PresentationType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Presentation</Value>
+    </Setting>
+    <Setting Name="RandomizationType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Randomization</Value>
+    </Setting>
+    <Setting Name="SupportEMailAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ffeditor@gmail.com</Value>
+    </Setting>
+    <Setting Name="Options_EnableLMSEmulation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ControlModeType_ToString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Control Mode</Value>
+    </Setting>
+    <Setting Name="DefaultTheoryItemTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">New Theory</Value>
+    </Setting>
+    <Setting Name="DefaultQuestionItemTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">New Examination</Value>
+    </Setting>
+    <Setting Name="DefaultSummaryItemTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Summary</Value>
+    </Setting>
+    <Setting Name="MainFormCaptionFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{0} - FireFly Course Editor</Value>
+    </Setting>
+    <Setting Name="Options_PlainTextEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CourseDesigner_Visible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MainForm_Location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">152, 190</Value>
+    </Setting>
+    <Setting Name="MainForm_Size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">748, 631</Value>
+    </Setting>
+    <Setting Name="DockingLayout" Type="System.String" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="us-ascii"?&gt;
+&lt;!--DockPanel configuration file. Author: Weifen Luo, all rights reserved.--&gt;
+&lt;!--!!! AUTOMATICALLY GENERATED FILE. DO NOT MODIFY !!!--&gt;
+&lt;DockPanel FormatVersion="1.0" DockLeftPortion="0.25" DockRightPortion="0.253420752565564" DockTopPortion="0.25" DockBottomPortion="0.25" ActiveDocumentPane="0" ActivePane="0"&gt;
+  &lt;Contents Count="4"&gt;
+    &lt;Content ID="0" PersistString="FireFly.CourseEditor.GUI.ManifestBrowser" AutoHidePortion="0.25" IsHidden="True" IsFloat="True" /&gt;
+    &lt;Content ID="1" PersistString="FireFly.CourseEditor.GUI.PropertyEditor" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" /&gt;
+    &lt;Content ID="2" PersistString="FireFly.CourseEditor.GUI.CourseExplorer" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" /&gt;
+    &lt;Content ID="3" PersistString="FireFly.CourseEditor.GUI.CourseDesigner" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" /&gt;
+  &lt;/Contents&gt;
+  &lt;Panes Count="3"&gt;
+    &lt;Pane ID="0" DockState="Document" ActiveContent="3"&gt;
+      &lt;Contents Count="3"&gt;
+        &lt;Content ID="0" RefID="3" /&gt;
+        &lt;Content ID="1" RefID="0" /&gt;
+        &lt;Content ID="2" RefID="2" /&gt;
+      &lt;/Contents&gt;
+    &lt;/Pane&gt;
+    &lt;Pane ID="1" DockState="DockRight" ActiveContent="1"&gt;
+      &lt;Contents Count="1"&gt;
+        &lt;Content ID="0" RefID="1" /&gt;
+      &lt;/Contents&gt;
+    &lt;/Pane&gt;
+    &lt;Pane ID="2" DockState="Float" ActiveContent="-1"&gt;
+      &lt;Contents Count="1"&gt;
+        &lt;Content ID="0" RefID="0" /&gt;
+      &lt;/Contents&gt;
+    &lt;/Pane&gt;
+  &lt;/Panes&gt;
+  &lt;DockWindows&gt;
+    &lt;DockWindow ID="0" DockState="Document" ZOrderIndex="0"&gt;
+      &lt;NestedPanes Count="1"&gt;
+        &lt;Pane ID="0" RefID="0" PrevPane="-1" Alignment="Right" Proportion="0.5" /&gt;
+      &lt;/NestedPanes&gt;
+    &lt;/DockWindow&gt;
+    &lt;DockWindow ID="1" DockState="DockLeft" ZOrderIndex="2"&gt;
+      &lt;NestedPanes Count="0" /&gt;
+    &lt;/DockWindow&gt;
+    &lt;DockWindow ID="2" DockState="DockRight" ZOrderIndex="1"&gt;
+      &lt;NestedPanes Count="1"&gt;
+        &lt;Pane ID="0" RefID="1" PrevPane="-1" Alignment="Bottom" Proportion="0.5" /&gt;
+      &lt;/NestedPanes&gt;
+    &lt;/DockWindow&gt;
+    &lt;DockWindow ID="3" DockState="DockTop" ZOrderIndex="3"&gt;
+      &lt;NestedPanes Count="0" /&gt;
+    &lt;/DockWindow&gt;
+    &lt;DockWindow ID="4" DockState="DockBottom" ZOrderIndex="4"&gt;
+      &lt;NestedPanes Count="0" /&gt;
+    &lt;/DockWindow&gt;
+  &lt;/DockWindows&gt;
+  &lt;FloatWindows Count="1"&gt;
+    &lt;FloatWindow ID="0" Bounds="320, 289, 300, 300" ZOrderIndex="0"&gt;
+      &lt;NestedPanes Count="1"&gt;
+        &lt;Pane ID="0" RefID="2" PrevPane="-1" Alignment="Right" Proportion="0.5" /&gt;
+      &lt;/NestedPanes&gt;
+    &lt;/FloatWindow&gt;
+  &lt;/FloatWindows&gt;
+&lt;/DockPanel&gt;</Value>
+    </Setting>
+    <Setting Name="ManifestBrowser_Location" Type="System.String" Scope="User">
+      <Value Profile="(Default)">491, 2</Value>
+    </Setting>
+    <Setting Name="CourseExplorer_Location" Type="System.String" Scope="User">
+      <Value Profile="(Default)">492, 350</Value>
+    </Setting>
+    <Setting Name="PropertyEditor_Location" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="ManifestBrowser_Visible" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CourseExplorer_Visible" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PropertyEditor_Visible" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ManifestBrowser_WindowState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="CourseExplorer_WindowState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="PropertyEditor_WindowState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="ManifestBrowser_Size" Type="System.String" Scope="User">
+      <Value Profile="(Default)">240, 346</Value>
+    </Setting>
+    <Setting Name="CourseExplorer_Size" Type="System.String" Scope="User">
+      <Value Profile="(Default)">240, 187</Value>
+    </Setting>
+    <Setting Name="PropertyEditor_Size" Type="System.String" Scope="User">
+      <Value Profile="(Default)">240, 370</Value>
+    </Setting>
+    <Setting Name="CourseDesigner_Location" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2, 2</Value>
+    </Setting>
+    <Setting Name="CourseDesigner_WindowState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="CourseDesigner_Size" Type="System.String" Scope="User">
+      <Value Profile="(Default)">487, 534</Value>
+    </Setting>
+    <Setting Name="SaveRestoreWindowsState" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowToolBar" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LastCourses" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
