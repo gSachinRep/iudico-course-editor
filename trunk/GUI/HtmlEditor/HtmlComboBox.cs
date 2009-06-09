@@ -83,7 +83,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             {
                 w.AddAttribute(HtmlAttribute.Value, i.ToString());
                 w.RenderBeginTag(HtmlTag.Option);
-                w.Write(Control.Items[i]);
+                w.Write(Control.Items[i].ToString().HttpEncode());
                 w.RenderEndTag();
             }
 
@@ -108,7 +108,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             HtmlSerializeHelper<HtmlComboBox>.ReadRootElementAttributes(node, this);
             foreach (XmlNode sub in node.ChildNodes)
             {
-                Control.Items.Add(sub.InnerText);
+                Control.Items.Add(sub.InnerText.HttpDecode());
             }
         }
 

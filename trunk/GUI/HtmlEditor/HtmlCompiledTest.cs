@@ -140,7 +140,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             w.RenderBeginTag(HtmlTextWriterTag.Textarea);
             if (Control.Text.IsNotNull())
             {
-                w.Write(Control.Text);
+                w.Write(Control.Text.HttpEncode());
             }
             w.RenderEndTag();
         }
@@ -164,7 +164,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         {
             base.Parse(node);
             HtmlSerializeHelper<HtmlCompiledTest>.ReadRootElementAttributes(node, this);
-            Control.Text = node.InnerText;
+            Control.Text = node.InnerText.HttpDecode();
         }
 
         private long _MemoryLimit;

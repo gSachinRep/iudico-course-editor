@@ -101,7 +101,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor.HighlightControl
             w.RenderBeginTag(HtmlTag.Span);
             w.AddAttribute(HtmlAttribute.Class, ls);
             w.WriteFullBeginTag(string.Concat("pre><code class=\"", ls, "\""));
-            w.Write(HttpUtility.HtmlEncode(Control.Text));
+            w.Write(Control.Text.HttpEncode());
             w.WriteFullBeginTag("/code></pre");
             w.RenderEndTag();
         }
@@ -151,7 +151,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor.HighlightControl
             base.Parse(node);
             HtmlSerializeHelper<HtmlHighlightedCode>.ReadRootElementAttributes(node, this);
             node = node.SelectSingleNode("pre");
-            Control.Text = node.InnerText;
+            Control.Text = node.InnerText.HttpDecode();
             node = node.SelectSingleNode("code");
             Language = (LANGUAGE)Enum.Parse(typeof(LANGUAGE), node.Attributes["class"].Value, true);
         }

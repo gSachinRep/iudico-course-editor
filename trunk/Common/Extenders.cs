@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Web;
 using System.Windows.Forms;
 using FireFly.CourseEditor.Course.Manifest;
 
@@ -11,6 +12,16 @@ namespace FireFly.CourseEditor.Common
     ///</summary>
     public static class Extenders
     {
+        public static string HttpEncode([CanBeNull]this string s)
+        {
+            return HttpUtility.HtmlEncode(s);
+        }
+
+        public static string HttpDecode([CanBeNull]this string s)
+        {
+            return HttpUtility.HtmlDecode(s);
+        }
+
         public static bool IsEqual([CanBeNull]this string s1, [CanBeNull]string s2)
         {
             return s1 == s2 || (s1.IsNull() && s2.IsNull());
