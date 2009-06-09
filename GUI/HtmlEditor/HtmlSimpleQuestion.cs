@@ -1,6 +1,7 @@
 using HtmlWriter = System.Web.UI.HtmlTextWriter;
 using HtmlAttribute = System.Web.UI.HtmlTextWriterAttribute;
 using HtmlTag = System.Web.UI.HtmlTextWriterTag;
+using FireFly.CourseEditor.Common;
 
 namespace FireFly.CourseEditor.GUI.HtmlEditor
 {
@@ -33,7 +34,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             w.AddAttribute(HtmlAttribute.Name, Control.SingleCase ? "gen:single" : "gen:multy");
             w.RenderBeginTag(HtmlTag.Div);
             w.RenderBeginTag(HtmlTag.P);
-            w.Write(HttpUtility.HtmlEncode(Control.Question));
+            w.Write(Control.Question.HttpEncode());
             w.RenderEndTag();
 
             foreach (var tb in Control.textBoxesList)
@@ -45,7 +46,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
                 w.RenderEndTag();
 
                 w.RenderBeginTag(HtmlTag.Span);
-                w.Write(HttpUtility.HtmlEncode(tb.Text));
+                w.Write(tb.Text.HttpEncode());
                 w.RenderEndTag();
 
                 w.RenderBeginTag(HtmlTag.Br);
@@ -72,13 +73,13 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             HtmlSerializeHelper<HtmlSimpleQuestion>.ReadRootElementAttributes(node, this);
 
             Control.SingleCase = node.Attributes["name"].Value.EndsWith("single");
-            Control.Question = node.SelectSingleNode("p").InnerText;
+            Control.Question = node.SelectSingleNode("p").InnerText.HttpDecode();
             var spans = node.SelectNodes("span");
             Control.EnsureCount(spans.Count);
             var i = 0;
             foreach (XmlNode s in spans)
             {
-                Control.textBoxesList[i++].Text = s.InnerText;
+                Control.textBoxesList[i++].Text = s.InnerText.HttpDecode();
             }
         }
 
