@@ -153,7 +153,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
     /// Typed helper to read-write common properties of controls
     ///</summary>
     ///<typeparam name="TControl">Type of control</typeparam>
-    [StartupInitializable(typeof(HtmlButton), typeof(HtmlCodeSnippet), typeof(HtmlComboBox), typeof(HtmlCompiledTest), typeof(HtmlLabel), typeof(HtmlSimpleQuestion), typeof(HtmlTextBox))]
+    [StartupInitializable(typeof(HtmlButton), typeof(HighlightControl.HtmlHighlightedCode), typeof(HtmlCodeSnippet), typeof(HtmlComboBox), typeof(HtmlCompiledTest), typeof(HtmlLabel), typeof(HtmlSimpleQuestion), typeof(HtmlTextBox))]
     public static class HtmlSerializeHelper<TControl>
         where TControl : HtmlControl
     {

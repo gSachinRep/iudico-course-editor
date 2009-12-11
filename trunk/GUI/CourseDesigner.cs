@@ -177,7 +177,7 @@ namespace FireFly.CourseEditor.GUI
         {
             try
             {
-                var res = Process.Start("winword.exe", string.Concat("\"", fileName, "\""));
+                var res = Process.Start("winword.exe", string.Concat("/t \"", fileName, "\""));
                 res.EnableRaisingEvents = true;
                 Course.CourseClosed += res.Kill;
                 res.Exited += (sender, e) => Course.CourseClosed -= res.Kill;

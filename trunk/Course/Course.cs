@@ -286,10 +286,13 @@ namespace FireFly.CourseEditor.Course
         /// Save current course to zip package
         /// </summary>
         /// <param name="fileName">File name of zip package. If file not exists it will be created</param>
-        public static void SaveToZipPackage([NotNull]string fileName)
+        public static bool SaveToZipPackage([NotNull]string fileName)
         {
             FFDebug.EnterMethod(Cattegory.Course, string.Format("fileName:'{0}'", fileName));
-            Save();
+
+            if (Save() != true)
+                return false;
+
             Zipper.CreateZip(fileName, __FullPath);
             var lc = Settings.Default.LastCoursesXml;
             if (!lc.Contains(fileName))
@@ -302,6 +305,7 @@ namespace FireFly.CourseEditor.Course
                 Settings.Default.LastCoursesXml = lc;
             }
             FFDebug.LeaveMethod(Cattegory.Course, MethodBase.GetCurrentMethod());
+            return true;
         }
 
         /// <summary>
@@ -365,7 +369,7 @@ namespace FireFly.CourseEditor.Course
         /// <summary>
         /// Save all changes of current course to folder that represents is
         /// </summary>
-        public static void Save()
+        public static bool Save()
         {
             FFDebug.EnterMethod(Cattegory.Course, State.ToString());
             State |= CourseStates.Saving;
@@ -390,6 +394,7 @@ namespace FireFly.CourseEditor.Course
             if (!cv.Validate())
             {
                 ErrorDialog.ShowError("THIS COURSE IS INVALID!!! It cannot be played. Errors:" + Environment.NewLine + cv.GetErrorMessages());
+                return false;
             }
 
             using (var f = new FileStream(MapPath(MANIFEST_FILE_NAME), FileMode.Create))
@@ -406,6 +411,8 @@ namespace FireFly.CourseEditor.Course
             }
 
             FFDebug.LeaveMethod(Cattegory.Course, MethodBase.GetCurrentMethod());
+
+            return true;
         }
 
         /// <summary>

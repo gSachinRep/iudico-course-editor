@@ -30,8 +30,8 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             {
                 return "(none)";
             }
-            const int maxSize = 5;
-            return value.Length < maxSize ? value : value.Remove(maxSize + 1);
+            const int maxSize = 10;
+            return value.Length < maxSize+1 ? value : value.Remove(maxSize);
         }
 
         protected override object CreateInstance(Type itemType)

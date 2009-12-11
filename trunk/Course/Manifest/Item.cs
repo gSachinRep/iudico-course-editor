@@ -82,7 +82,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         {
             var res = new StringBuilder(Title);
             var p = Parent;
-            while (!(p is OrganizationType))
+            while (!(p is OrganizationType) && (p as ITitled) != null)
             {
                 res.Insert(0, ((ITitled)p).Title + (res.Length > 0 ? "/" : string.Empty));
                 p = p.Parent;
