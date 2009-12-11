@@ -33,7 +33,9 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
 
         public void EditInWord()
         {
-            string fileName = Path.Combine(Course.FullPath, string.Format(@"{0}.html", Name));
+            //((this.Tag as HtmlControl).Parent as ).Tag as HtmlPage)
+            string fileName = Path.Combine(Course.FullPath, string.Format(@"{0}_{1}.html", ((this.Tag as HtmlControl).Parent as HtmlPageBase).PageItem.Identifier, Name));
+            //Path.Combine(Course.FullPath, this.Parent)
             WriteToNewWordFile(fileName, HtmlCode);
             Process p = CourseDesigner.EditUsingWord(fileName);
             if (p != null)

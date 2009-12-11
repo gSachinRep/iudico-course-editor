@@ -130,10 +130,14 @@ namespace FireFly.CourseEditor.GUI
             }
             if (_CourseFileName != null)
             {
-                Course.SaveToZipPackage(_CourseFileName);
-                if (saveNew)
+                if (Course.SaveToZipPackage(_CourseFileName) == true)
                 {
-                    Course.Manifest.Identifier = Path.GetFileNameWithoutExtension(_CourseFileName);
+                    if (saveNew)
+                    {
+                        Course.Manifest.Identifier = Path.GetFileNameWithoutExtension(_CourseFileName);
+                    }
+                    
+                    saveToolStripButton.Enabled = saveToolStripMenuItem.Enabled = false;
                 }
             }
             return _CourseFileName != null;
@@ -156,7 +160,6 @@ namespace FireFly.CourseEditor.GUI
 
         private void DoSaveCoursePackage(object sender, EventArgs e)
         {
-            saveToolStripButton.Enabled = saveToolStripMenuItem.Enabled = false;
             SaveCourse(sender == saveAsToolStripMenuItem);
         }
 

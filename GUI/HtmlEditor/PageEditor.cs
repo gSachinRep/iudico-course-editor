@@ -400,6 +400,10 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         private static void ControlKeyUp(object sender, KeyEventArgs e)
         {
             Control c;
+
+            if ( ((Control)sender).GetType().Name == "TextBox" )
+                return;
+
             switch (e.KeyCode)
             {
                 case Keys.Up:
