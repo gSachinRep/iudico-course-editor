@@ -438,7 +438,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Images\Error.bmp" />
     <Content Include="Images\FireFly.ico" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Images\Redo.bmp" />
     <None Include="Images\Rename.bmp" />
     <EmbeddedResource Include="Images\Splash.jpg" />

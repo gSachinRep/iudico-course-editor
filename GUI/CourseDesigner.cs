@@ -542,6 +542,10 @@ namespace FireFly.CourseEditor.GUI
                 try
                 {
                     ((IDisposable)tvItems.SelectedNode.Tag).Dispose();
+
+                    IContainer c = tvItems.SelectedNode.Parent.Tag as IContainer;
+                    Debug.Assert(c != null, "Parent of the selected object is not support Manifest.IContainer");
+                    c.RemoveChild(tvItems.SelectedNode.Tag as IManifestNode);
                 }
                 catch (IOException)
                 {

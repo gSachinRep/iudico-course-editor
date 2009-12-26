@@ -365,6 +365,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         ///</summary>
         public override void Dispose()
         {
+            base.Dispose();
             if (IsWinControlCreated)
             {
                 ClearControls();
@@ -373,7 +374,6 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             {
                 __Pages.Remove(PageItem.UID);
             }
-            base.Dispose();
         }
 
         protected static void RemoveControl([NotNull]Control c)
