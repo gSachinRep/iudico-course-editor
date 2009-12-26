@@ -42,8 +42,8 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         [Description("Maximum size of memory that program can use in Kb")]
         public decimal MemoryLimit
         {
-            get {   return _MemoryLimit; }
-            set { _MemoryLimit = (long)Math.Round(value); }
+            get { return _MemoryLimit; }
+            set { _MemoryLimit = (long)value; }
         }
 
         ///<summary>
@@ -54,11 +54,8 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         [Description("Maximum time period that program can use in seconds")]
         public decimal TimeLimit
         {
-            get
-            {
-                 return _TimeLimit;
-            }
-            set { _TimeLimit = (long)Math.Round(value); }
+            get { return _TimeLimit; }
+            set { _TimeLimit = (long)value; }
         }
 
         ///<summary>
@@ -70,7 +67,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         public decimal OutputLimit
         {
             get { return _OutputLimit; }
-            set { _OutputLimit = (long)Math.Round(value); }
+            set { _OutputLimit = (long)value; }
         }
 
         ///<summary>

@@ -121,11 +121,14 @@ namespace FireFly.CourseEditor.Course.Manifest
         {
             _dispose(this);
 
+            
+            /*
             var pc = Parent as IContainer;
             if (pc != null)
             {
                 pc.RemoveChild(this);
             }
+            */
         }
 
         #endregion
