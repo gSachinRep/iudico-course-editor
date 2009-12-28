@@ -278,16 +278,14 @@ namespace FireFly.CourseEditor.GUI
 
         private void fsWatcher_Action(object sender, FileSystemEventArgs e)
         {
-            if (!Directory.Exists(e.FullPath) && !File.Exists(e.FullPath))
-                return;
-
-            if (e.ChangeType == WatcherChangeTypes.Created)
+            if (e.ChangeType == WatcherChangeTypes.Created /*&& (Directory.Exists(e.FullPath) || File.Exists(e.FullPath))*/ )
             {
                 AddNode(e.FullPath);
             }
             if (e.ChangeType == WatcherChangeTypes.Deleted)
             {
-                DeleteNode(e.FullPath);
+                if (!DeleteNode(e.FullPath))
+                    return;
             }
             Course.NotifyChanged();
         }
@@ -343,14 +341,18 @@ namespace FireFly.CourseEditor.GUI
             }
         }
 
-        private void DeleteNode(string fullName)
+        private bool DeleteNode(string fullName)
         {
             TreeNode n = GetNodeByPath(tvCourse.Nodes, fullName);
             if (n != null)
             {
                 tvCourse.Nodes.Remove(n);
                 Forms.CourseDesigner.DeleteItemByHref(fullName, null);
+
+                return true;
             }
+
+            return false;
         }
 
         private void AddNode(string fullName)

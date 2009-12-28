@@ -44,6 +44,7 @@ namespace FireFly.CourseEditor.GUI
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miView = new System.Windows.Forms.ToolStripMenuItem();
             this.miShowToolBar = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,9 +134,10 @@ namespace FireFly.CourseEditor.GUI
             this.printToolStripMenuItem,
             this.printPreviewToolStripMenuItem,
             this.toolStripSeparator4,
+            this.closeToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -144,7 +146,7 @@ namespace FireFly.CourseEditor.GUI
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.DoCreateNewCourse);
             // 
@@ -154,14 +156,14 @@ namespace FireFly.CourseEditor.GUI
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.DoOpenCoursePackage);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(153, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -170,7 +172,7 @@ namespace FireFly.CourseEditor.GUI
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.DoSaveCoursePackage);
             // 
@@ -178,19 +180,19 @@ namespace FireFly.CourseEditor.GUI
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.DoSaveCoursePackage);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(153, 6);
             // 
             // miLastCourses
             // 
             this.miLastCourses.Name = "miLastCourses";
-            this.miLastCourses.Size = new System.Drawing.Size(151, 22);
+            this.miLastCourses.Size = new System.Drawing.Size(156, 22);
             this.miLastCourses.Text = "Open &Recently";
             // 
             // printToolStripMenuItem
@@ -198,7 +200,7 @@ namespace FireFly.CourseEditor.GUI
             this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.printToolStripMenuItem.Text = "&Print";
             this.printToolStripMenuItem.Visible = false;
             // 
@@ -207,19 +209,27 @@ namespace FireFly.CourseEditor.GUI
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             this.printPreviewToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(153, 6);
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Enabled = false;
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.closeToolStripMenuItem.Text = "&Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -233,7 +243,7 @@ namespace FireFly.CourseEditor.GUI
             this.miShowCourseExplorer,
             this.miShowCourseDesigner});
             this.miView.Name = "miView";
-            this.miView.Size = new System.Drawing.Size(44, 20);
+            this.miView.Size = new System.Drawing.Size(41, 20);
             this.miView.Text = "&View";
             this.miView.DropDownOpening += new System.EventHandler(this.miView_DropDownOpening);
             // 
@@ -241,21 +251,21 @@ namespace FireFly.CourseEditor.GUI
             // 
             this.miShowToolBar.CheckOnClick = true;
             this.miShowToolBar.Name = "miShowToolBar";
-            this.miShowToolBar.Size = new System.Drawing.Size(199, 22);
+            this.miShowToolBar.Size = new System.Drawing.Size(202, 22);
             this.miShowToolBar.Text = "Show ToolBar";
             this.miShowToolBar.CheckedChanged += new System.EventHandler(this.miShowToolBar_CheckedChanged);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(196, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(199, 6);
             // 
             // miShowPropertyEditor
             // 
             this.miShowPropertyEditor.CheckOnClick = true;
             this.miShowPropertyEditor.Name = "miShowPropertyEditor";
             this.miShowPropertyEditor.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F4)));
-            this.miShowPropertyEditor.Size = new System.Drawing.Size(199, 22);
+            this.miShowPropertyEditor.Size = new System.Drawing.Size(202, 22);
             this.miShowPropertyEditor.Text = "Property Editor";
             this.miShowPropertyEditor.Click += new System.EventHandler(this.miShowPropertyEditor_Click);
             // 
@@ -263,7 +273,7 @@ namespace FireFly.CourseEditor.GUI
             // 
             this.miShowManifestBrowser.CheckOnClick = true;
             this.miShowManifestBrowser.Name = "miShowManifestBrowser";
-            this.miShowManifestBrowser.Size = new System.Drawing.Size(199, 22);
+            this.miShowManifestBrowser.Size = new System.Drawing.Size(202, 22);
             this.miShowManifestBrowser.Text = "Manifest Browser";
             this.miShowManifestBrowser.Click += new System.EventHandler(this.miShowManifestBrowser_Click);
             // 
@@ -271,7 +281,7 @@ namespace FireFly.CourseEditor.GUI
             // 
             this.miShowCourseExplorer.CheckOnClick = true;
             this.miShowCourseExplorer.Name = "miShowCourseExplorer";
-            this.miShowCourseExplorer.Size = new System.Drawing.Size(199, 22);
+            this.miShowCourseExplorer.Size = new System.Drawing.Size(202, 22);
             this.miShowCourseExplorer.Text = "Course Explorer";
             this.miShowCourseExplorer.Click += new System.EventHandler(this.miShowCourseExplorer_Click);
             // 
@@ -279,7 +289,7 @@ namespace FireFly.CourseEditor.GUI
             // 
             this.miShowCourseDesigner.CheckOnClick = true;
             this.miShowCourseDesigner.Name = "miShowCourseDesigner";
-            this.miShowCourseDesigner.Size = new System.Drawing.Size(199, 22);
+            this.miShowCourseDesigner.Size = new System.Drawing.Size(202, 22);
             this.miShowCourseDesigner.Text = "&Course Designer";
             this.miShowCourseDesigner.Click += new System.EventHandler(this.miShowCourseDesigner_Click);
             // 
@@ -289,13 +299,13 @@ namespace FireFly.CourseEditor.GUI
             this.customizeToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // customizeToolStripMenuItem
             // 
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.customizeToolStripMenuItem.Text = "&Customize";
             this.customizeToolStripMenuItem.Visible = false;
             // 
@@ -303,7 +313,7 @@ namespace FireFly.CourseEditor.GUI
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -314,26 +324,26 @@ namespace FireFly.CourseEditor.GUI
             this.toolStripMenuItem1,
             this.toolStripMenuItem2});
             this.miWizards.Name = "miWizards";
-            this.miWizards.Size = new System.Drawing.Size(60, 20);
+            this.miWizards.Size = new System.Drawing.Size(57, 20);
             this.miWizards.Text = "&Wizards";
             this.miWizards.Visible = false;
             // 
             // Wizard1
             // 
             this.Wizard1.Name = "Wizard1";
-            this.Wizard1.Size = new System.Drawing.Size(119, 22);
+            this.Wizard1.Size = new System.Drawing.Size(127, 22);
             this.Wizard1.Text = "Wizard &1";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItem1.Text = "Wizard &2";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(119, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItem2.Text = "Wizard &3";
             // 
             // helpToolStripMenuItem
@@ -345,37 +355,37 @@ namespace FireFly.CourseEditor.GUI
             this.toolStripSeparator7,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             this.helpToolStripMenuItem.Visible = false;
             // 
             // contentsToolStripMenuItem
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.contentsToolStripMenuItem.Text = "&Contents";
             // 
             // indexToolStripMenuItem
             // 
             this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
-            this.indexToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.indexToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.indexToolStripMenuItem.Text = "&Index";
             // 
             // searchToolStripMenuItem
             // 
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.searchToolStripMenuItem.Text = "&Search";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(119, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(126, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             // 
             // BottomToolStripPanel
@@ -692,6 +702,7 @@ namespace FireFly.CourseEditor.GUI
         private System.Windows.Forms.ToolStripMenuItem miLastCourses;
         private System.Windows.Forms.ToolStripMenuItem miShowToolBar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
     }
 }
 

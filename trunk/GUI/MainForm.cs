@@ -27,10 +27,7 @@ namespace FireFly.CourseEditor.GUI
             InitializeComponent();
 
             Course.CourseOpened += Course_Opened;
-            Course.CourseClosed += () =>
-            {
-                stopPreviewToolStripButton.Enabled = startPreviewToolStripButton.Enabled = saveAsToolStripMenuItem.Enabled = saveToolStripMenuItem.Enabled = saveToolStripButton.Enabled = false;
-            };
+            Course.CourseClosed += Course_Closed;
             Course.CourseChanged += () =>
             {
                 saveToolStripButton.Enabled = saveToolStripMenuItem.Enabled = true;
@@ -174,6 +171,7 @@ namespace FireFly.CourseEditor.GUI
             base.OnLoad(e);
             LoadDockingSettings();
             Activate();
+            Manifest_TitleChanged();
         }
 
         protected override void OnShown(EventArgs e)
@@ -324,17 +322,26 @@ namespace FireFly.CourseEditor.GUI
 
         private void Course_Opened()
         {
-            saveToolStripMenuItem.Enabled = saveAsToolStripMenuItem.Enabled = saveToolStripButton.Enabled = true;
+            saveToolStripMenuItem.Enabled = saveAsToolStripMenuItem.Enabled = saveToolStripButton.Enabled = false;
             Course.Manifest.TitleChanged += Manifest_TitleChanged;
             Manifest_TitleChanged();
 
             startPreviewToolStripButton.Enabled = true;
             stopPreviewToolStripButton.Enabled = false;
+            closeToolStripMenuItem.Enabled = true;
+        }
+
+        private void Course_Closed()
+        {
+            stopPreviewToolStripButton.Enabled = startPreviewToolStripButton.Enabled = saveAsToolStripMenuItem.Enabled = saveToolStripMenuItem.Enabled = saveToolStripButton.Enabled = false;
+            Manifest_TitleChanged();
+
+            closeToolStripMenuItem.Enabled = false;
         }
 
         private void Manifest_TitleChanged()
         {
-            Text = string.Format(Settings.Default.MainFormCaptionFormat, Course.Manifest.Identifier);
+            Text = string.Format(Settings.Default.MainFormCaptionFormat, (Course.Manifest == null ? "" : Course.Manifest.Identifier));
         }
 
         #endregion
@@ -414,6 +421,11 @@ namespace FireFly.CourseEditor.GUI
                 ReLoadLastCourses(fileName);
             }
             saveToolStripButton.Enabled = saveToolStripMenuItem.Enabled = false;
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Course.Close();
         }
 
         private void miReopen_Click(object sender, EventArgs e)

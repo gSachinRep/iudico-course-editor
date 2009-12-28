@@ -342,12 +342,17 @@ namespace FireFly.CourseEditor.Course
             if (CanClose())
             {
                 __Manifest = null;
+                __Organization = null;
+                Answers = null;
                 var tempFullPath = __FullPath;
                 __FullPath = null;
-                if (CourseClosed != null && !failed)
+                if (!failed)
                 {
                     HtmlPageBase.ReleasePages();
-                    CourseClosed();
+                    if (CourseClosed != null)
+                    {
+                        CourseClosed();
+                    }
                 }
                 try
                 {
@@ -361,8 +366,10 @@ namespace FireFly.CourseEditor.Course
                 __ContainedFileResource.Clear();
 
                 State &= ~CourseStates.Opened;
+
                 return true;
             }
+
             return false;
         }
 
