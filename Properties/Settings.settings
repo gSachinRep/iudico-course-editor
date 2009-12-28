@@ -102,7 +102,7 @@
       <Value Profile="(Default)">Summary</Value>
     </Setting>
     <Setting Name="MainFormCaptionFormat" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{0} - FireFly Course Editor</Value>
+      <Value Profile="(Default)">{0} - FireFly Course Editor r6</Value>
     </Setting>
     <Setting Name="Options_PlainTextEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

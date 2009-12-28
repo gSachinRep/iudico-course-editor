@@ -188,8 +188,8 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
 
         private void UnSelectControlInternal(HtmlDesignMovableControl c)
         {
-#if CHECKERS
             int index = _selectionList.FindIndex(bc => bc.Owner.Equals(c));
+#if CHECKERS
             if (index < 0)
             {
                 throw new FireFlyException("{0} is not selected", c.Title);
