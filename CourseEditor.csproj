@@ -10,7 +10,7 @@
     <RootNamespace>FireFly.CourseEditor</RootNamespace>
     <AssemblyName>CourseEditor</AssemblyName>
     <SignAssembly>false</SignAssembly>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
