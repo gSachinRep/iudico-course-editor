@@ -86,6 +86,18 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         }
 
         ///<summary>
+        /// Address of the remote service to run compiled test
+        ///</summary>
+        [Category("Data")]
+        [DisplayName("Service address")]
+        [Description("Address of the remote service to run compiled test")]
+        public string ServiceAddress
+        {
+            get { return _ServiceAddress; }
+            set { _ServiceAddress = value; }
+        }
+
+        ///<summary>
         /// Set of cases should be used to check user code
         ///</summary>
         [Category("Data")]
@@ -144,7 +156,32 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
 
         public override string GetScoTestInitializer()
         {
-            return string.Format("new simpleTest('{0}')", Name);
+            string testCase = "";
+
+            for(int i = 0; i < TestCases.Count; ++i)
+            {
+                CompiledTestCase item = TestCases[i];
+
+                string strItem = string.Format("new TestCase('{0}', '{1}')", item.Input, item.Output);
+
+                if (i != TestCases.Count - 1)
+                {
+                    strItem += ",";
+                }
+                testCase += strItem;
+            }
+
+            string result = string.Format("new compiledTest('{0}', {1}, {2}, {3}, {4}, '{5}', '{6}'", 
+                Name, Rank, MemoryLimit, TimeLimit, OutputLimit, CompiledQuestion.GetLanguageString(Language), ServiceAddress, testCase);
+
+            if (testCase.Length > 0)
+            {
+                result += string.Format(", {0}", testCase);
+            }
+
+            result += ")";
+
+            return result;
         }
 
         protected override Control CreateWindowControl()
@@ -167,6 +204,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         private long _MemoryLimit;
         private long _TimeLimit;
         private long _OutputLimit;
+        private string _ServiceAddress = "NULL";
         private List<CompiledTestCase> _TestCases;
         private CompiledQuestion.LANGUAGE? _Language;
                                         

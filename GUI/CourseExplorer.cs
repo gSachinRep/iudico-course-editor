@@ -278,7 +278,7 @@ namespace FireFly.CourseEditor.GUI
 
         private void fsWatcher_Action(object sender, FileSystemEventArgs e)
         {
-            if (e.ChangeType == WatcherChangeTypes.Created /*&& (Directory.Exists(e.FullPath) || File.Exists(e.FullPath))*/ )
+            if (e.ChangeType == WatcherChangeTypes.Created && (Directory.Exists(e.FullPath) || File.Exists(e.FullPath)) )
             {
                 AddNode(e.FullPath);
             }

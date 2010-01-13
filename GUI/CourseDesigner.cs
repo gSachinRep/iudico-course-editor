@@ -221,9 +221,37 @@ namespace FireFly.CourseEditor.GUI
             var resource = new ResourceType(resIdn, "webcontent", pageType, resIdn + ".html");
             Course.Manifest.resources.Resources.Add(resource);
 
+            if (pageType == PageType.Question)
+            {
+                string depId = "ExaminationDependency";
+
+
+                if (Course.Manifest.resources[depId] == null)
+                {
+                    var depRes = new ResourceType(depId, "webcontent", pageType, "");
+
+                    depRes.file.Clear();
+
+                    foreach (string href in HtmlPageBase.__NeededScripts)
+                    {
+                        depRes.file.Add(new FileType(href));
+                    }
+                    Course.Manifest.resources.Resources.Add(depRes);
+                }
+
+                DependencyType dep = new DependencyType();
+                dep.identifierref = depId;
+
+                resource.dependency.Add(dep);
+            }
+            
+
             var node = (IItemContainer)tvItems.SelectedNode.Tag;
             var resultItem = ItemType.CreateNewItem(title, resIdn, resIdn, pageType);
             node.SubItems.Add(resultItem);
+
+            
+
             return resultItem;
         }
 
@@ -541,7 +569,16 @@ namespace FireFly.CourseEditor.GUI
             {
                 try
                 {
+                    //var node = (ItemType)tvItems.SelectedNode.Tag;
+                    //var res = Course.Manifest.resources[node.IdentifierRef];
+
+                    
                     ((IDisposable)tvItems.SelectedNode.Tag).Dispose();
+
+                    //if (res != null)
+                    //{
+                    //    Course.Manifest.resources.Resources.Remove(res);
+                    //}
 
                     IContainer c = tvItems.SelectedNode.Parent.Tag as IContainer;
                     Debug.Assert(c != null, "Parent of the selected object is not support Manifest.IContainer");

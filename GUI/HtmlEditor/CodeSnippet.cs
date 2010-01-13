@@ -46,6 +46,8 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
                 }
             }
             HtmlCode = TransformHtmlToXHTML(FileUtils.ReadAllText(fileName));
+
+            //HtmlCode = FileUtils.ReadAllText(fileName);
             File.Delete(fileName);
         }
 
@@ -77,7 +79,9 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             var sgmlReader = new SgmlReader {DocType = "HTML"};
             var stringReader = new StringReader(inputHtml);
             sgmlReader.InputStream = stringReader;
+
             var stringWriter = new StringWriter();
+
             using (var xmlWriter = new XmlTextWriter(stringWriter))
             {
                 sgmlReader.Read();
