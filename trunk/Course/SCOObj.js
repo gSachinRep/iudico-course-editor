@@ -88,39 +88,33 @@ function TestCase(input, output) {
 }
 function service(userAnswer, allInfo, serviceAddress)
 {
-    var input = "[";
-    var output = "[";
+    var input =new Array();
+    var output = new Array();
     for(var i = 0; i < allInfo.TestCases.length; i++)
     {
-        input += "\"" + allInfo.TestCases[i].Input + "\"";
-        output += "\"" + allInfo.TestCases[i].Output + "\"";
-        if( i != allInfo.TestCases.lenth - 1)
-        {
-            input += ",";
-            output += ",";
-        }
-    }
-    input += "]";
-    output += "]";
+        input[i] = allInfo.TestCases[i].Input;
+        output[i]= allInfo.TestCases[i].Output;
 
+    }
     $.ajax({
         type: "POST",
-        url: "NULL", //потенційні граблі
-        contentType: "application/json; charset=utf-8",
-        data: "{'source': '" + userAnswer + "', 'language': "+ allInfo.Language+", 'input':' " + input +"', 'output': '"+ output + "', 'timeLimit': " + allInfo.TimeLimit + ", 'memoryLimit':"+ allInfo.MemoryLimit+"}",
-        dataType: "json",
+        url: serviceAddress, //webservice url
+        contentType: "application/x-www-form-urlencoded",
+        data:{'source': userAnswer, 'language': allInfo.Language,'input': input , 'output': output,'timeLimit': allInfo.TimeLimit,'memoryLimit':allInfo.MemoryLimit},
+        async: false,
         success: 
-                function(response)
-                {
-                   return response.d; 
-                },
+            function(response)
+            {
+               var x=response.getElementsByTagName("float")[0];
+               var y=x.childNodes[0];
+               return y.nodeValue; 
+            },
         error: 
             function(response)
             {
-               return 0; 
+                return 0;
             }
     });
-    return 0;
     
 }
 
