@@ -360,12 +360,33 @@ namespace FireFly.CourseEditor.Course.Manifest
             {
                 Course.Answers.RemoveItem(Identifier);
             }
+            
             var r = Course.Manifest.resources[IdentifierRef];
             if (r != null)
             {
                 r.Dispose();
+                Course.Manifest.resources.Resources.Remove(r);
             }
+            if (pageType == PageType.Question)
+            {
+                /* TODO:: 
+                 * 
+                 * IF course doesn't contain Question, 
+                 * THEN delete all scripts and remove ExaminationDependency from manifest 
+                 */
+            }
+
+            if (pageType == PageType.Chapter || pageType == PageType.Chapter)
+            {
+                foreach (ItemType item in SubItems)
+                {
+                    item.Dispose();
+                }
+                SubItems.Clear();
+            }
+
             base.Dispose();
+            
             if (Disposed != null)
             {
                 Disposed();

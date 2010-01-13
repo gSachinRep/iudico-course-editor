@@ -344,6 +344,12 @@ namespace FireFly.CourseEditor.Course
         {
         }
 
+
+        public static string GetLanguageString(LANGUAGE? lang)
+        {
+            return System.Enum.GetName(typeof(LANGUAGE), lang);
+        }
+
         public CompiledQuestion(int? rank, long memoryLimit, long outputLimit, long timeLimit, LANGUAGE? language)
             : base(null, rank)
         {

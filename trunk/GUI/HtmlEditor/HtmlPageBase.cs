@@ -178,6 +178,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             foreach (var sc in Scripts)
             {
                 w.AddAttribute(HtmlWriterAttribute.Src, sc);
+                w.AddAttribute(HtmlWriterAttribute.Type, "text/javascript");
                 w.RenderBeginTag(HtmlWriterTag.Script);
                 w.RenderEndTag();
             }
@@ -353,7 +354,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             }
         }
 
-        private static readonly string[] __NeededScripts = { "help.js", "LMSDebugger.js", "LMSIntf.js", "SCOObj.js" };
+        public static readonly string[] __NeededScripts = { "help.js", "LMSDebugger.js", "LMSIntf.js", "jquery.js",  "SCOObj.js" };
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IncludesCollection _Scripts, _Styles;

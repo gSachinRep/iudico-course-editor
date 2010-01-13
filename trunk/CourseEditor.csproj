@@ -440,6 +440,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\Error.bmp" />
+    <EmbeddedResource Include="Course\jquery.js" />
     <Content Include="Images\FireFly.ico" />
     <None Include="Images\Redo.bmp" />
     <None Include="Images\Rename.bmp" />

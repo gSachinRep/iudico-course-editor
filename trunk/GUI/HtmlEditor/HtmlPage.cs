@@ -85,6 +85,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             var scripts = new StringBuilder();
             var result = new StringBuilder(@"scoObj=new SCOObj(");
             result.Append(PassRank.ToString().IsNull("null"));
+            
             foreach (var hc in HtmlControls)
             {
                 var tc = hc as HtmlTestControl;

@@ -120,15 +120,6 @@ namespace FireFly.CourseEditor.Course.Manifest
         public virtual void Dispose()
         {
             _dispose(this);
-
-            
-            /*
-            var pc = Parent as IContainer;
-            if (pc != null)
-            {
-                pc.RemoveChild(this);
-            }
-            */
         }
 
         #endregion
