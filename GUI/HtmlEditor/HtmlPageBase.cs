@@ -206,6 +206,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         public virtual void WriteInnerHtml([NotNull]HtmlWriter w)
         {
             Course.EnsureCourseContainsResources(Course.NAMESPACE, string.Empty, __NeededScripts);
+            Course.EnsureCourseContainsResources(Course.NAMESPACE, string.Empty, __NeededFiles);
             Debug.Assert(IsWinControlCreated);
             foreach (Control c in Control.Controls)
             {
@@ -354,8 +355,8 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             }
         }
 
-        public static readonly string[] __NeededScripts = { "help.js", "LMSDebugger.js", "LMSIntf.js", "jquery.js",  "SCOObj.js" };
-
+        public static readonly string[] __NeededScripts = { /*"help.js", "LMSDebugger.js",*/ "LMSIntf.js", "jquery.min.extended.js", "SCOObj.js"};
+        public static readonly string[] __NeededFiles = { "expressInstall.swf", "flXHR.swf", "flXHR.js", "flensed.js" };
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IncludesCollection _Scripts, _Styles;
 

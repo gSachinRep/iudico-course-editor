@@ -236,6 +236,10 @@ namespace FireFly.CourseEditor.GUI
                     {
                         depRes.file.Add(new FileType(href));
                     }
+                    foreach (string href in HtmlPageBase.__NeededFiles)
+                    {
+                        depRes.file.Add(new FileType(href));
+                    }
                     Course.Manifest.resources.Resources.Add(depRes);
                 }
 
