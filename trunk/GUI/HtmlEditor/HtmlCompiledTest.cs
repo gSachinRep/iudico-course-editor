@@ -162,7 +162,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             {
                 CompiledTestCase item = TestCases[i];
 
-                string strItem = string.Format("new TestCase('{0}', '{1}')", item.Input, item.Output);
+                string strItem = string.Format("['{0}', '{1}']", item.Input, item.Output);
 
                 if (i != TestCases.Count - 1)
                 {

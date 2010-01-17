@@ -1,137 +1,194 @@
-function SCOObj(passRank)
+﻿function SCOObj(passRank)
 {
-    this.passRank = passRank;
-    this.tests = new Array();
-    this.length = function(){
-        return this.tests.length;
-    }
-    this.Commit = function(){
-        doInitialize();
-        
-        var score = 0;
-        
-        for(var i=0;i < this.length();i++) {
-            score += (this.tests[i].getScore() * this.tests[i].Rank );
-        }
-        //alert(score);
-        doSetValue("cmi.score", (( score >= passRank) ? 1 : 0)); 
-          
-        //doSetValue("cmi.answers." + i + ".value", this.tests[i].getAnswer());
-        doSetValue("cmi.completion_status", "completed");
-        doSetValue("cmi.exit", "normal");
-        doCommit();
-        doTerminate();
-    }
-    
-    var c = arguments.length;
-    for (var i=1; i<c; i++)
-        this.tests.push(arguments[i]);
-}
-
-function simpleTest(ID, rank, answer){
-    this.ID = ID;
-    this.Rank = rank;
-    this.Answer = answer;
-    
-    this.getAnswer = function(){
-        return document.getElementById(this.ID).value;
-    }
-    
-    this.getScore = function(){
-        return (this.getAnswer() == this.Answer) ? 1 : 0;
-    }
-}
-
-function compiledTest(ID, rank, memoryLimit, timeLimit, outputLimit, language, address){
-    this.ID = ID;
-    this.Rank = rank;
-    this.MemoryLimit = memoryLimit;
-    this.TimeLimit = timeLimit;
-    this.OutputLimit = outputLimit;
-    this.Language = language;
-    this.Address = address;
-    this.TestCases = new Array();
-    
-    this.getAnswer = function() {
-        return document.getElementById(this.ID).value;
-    }
-    this.getScore = function() {
-        var res = service(
-                this.getAnswer(), 
-                new this.allInfo(
-                    this.Rank, this.MemoryLimit, this.TimeLimit, this.OutputLimit, this.Language, this.TestCases
-                    ),
-                this.Address
-            );
-        
-        return res;
-    }
-    
-    this.allInfo = function(rank, memoryLimit, timeLimit, outputLimit, language, testCases) {
-    
-        this.Rank = rank;
-        this.MemoryLimit = memoryLimit;
-        this.TimeLimit = timeLimit;
-        this.OutputLimit = outputLimit;
-        this.TestCases = testCases;
-        this.Language = language;
-    }
-    
-    var c = arguments.length;
-    for (var i = 6; i < c; i++) {
-        this.TestCases.push(arguments[i]);
-    }
-}
-function TestCase(input, output) {
-    this.Input = input;
-    this.Output = input;
-}
-function service(userAnswer, allInfo, serviceAddress)
-{
-    var input =new Array();
-    var output = new Array();
-    for(var i = 0; i < allInfo.TestCases.length; i++)
+  this.passRank = passRank;
+  this.tests = new Array();
+  this.compiled = 0;
+  
+  this.length = function()
+  {
+    return this.tests.length;
+  }
+  
+  this.Commit = function()
+  {
+	doInitialize();
+	
+    for (var i = 0 ; i < this.length(); i++)
     {
-        input[i] = allInfo.TestCases[i].Input;
-        output[i]= allInfo.TestCases[i].Output;
-
+		if (this.tests[i].CompiledTest = true)
+		{
+			this.tests[i].getAnswer(this, i);
+			this.compiled++;
+		}
+		else
+		{
+			doSetValue("cmi.interactions." + i + ".learner_response", this.tests[i].getAnswer());
+		}
     }
-    $.ajax({
-        type: "POST",
-        url: serviceAddress, //webservice url
-        contentType: "application/x-www-form-urlencoded",
-        data:{'source': userAnswer, 'language': allInfo.Language,'input': input , 'output': output,'timeLimit': allInfo.TimeLimit,'memoryLimit':allInfo.MemoryLimit},
-        async: false,
-        success: 
-            function(response)
-            {
-               var x=response.getElementsByTagName("float")[0];
-               var y=x.childNodes[0];
-               return y.nodeValue; 
-            },
-        error: 
-            function(response)
-            {
-                return 0;
-            }
-    });
     
+	$('#Button1').disabled = true;
+
+	if (this.compiled == 0)
+	{
+		this.FinishUp();
+	}
+  }
+  
+  this.FinishUp = function()
+  {
+	this.compiled--;
+	
+	if (this.compiled <= 0)
+	{
+		doSetValue("cmi.completion_status", "completed");
+		doSetValue("cmi.exit", "suspend");
+		  
+		doCommit();
+		doTerminate();
+	}
+  }
+  
+  var argLength = arguments.length;
+
+  for (var i = 1; i < argLength; i++)
+  {
+    this.tests.push(arguments[i]);
+    
+    numInteractions = doGetValue("cmi.interactions._count");
+    //alert(numInteractions);
+    if (numInteractions == 0)
+    {
+      doSetValue("cmi.interactions." + (i-1) + ".correct_responses.0.pattern", this.tests[i-1].getCorrectAnswer());
+      doSetValue("cmi.interactions." + (i-1) + ".type", this.tests[i-1].getType());
+    }
+    else if (numInteractions > 0)
+    {
+      learnerResponse = doGetValue("cmi.interactions." + (i-1) + ".learner_response");
+      //alert(learnerResponse);
+      if (learnerResponse)
+      {
+        $('#Button1').disabled = true;
+        this.tests[i-1].setAnswer(learnerResponse);
+        //doGetValue("cmi.interactions." + (i-1) + ".correct_responses.0.pattern");
+      }
+    }
+  }
 }
 
-function complexTest(ID, rank, answer){
-    this.ID = ID;
-    this.Rank = rank;
-    this.Answer = answer;
+function simpleTest(ID, correctAnswer)
+{
+  this.ID = ID;
+  this.correctAnswer = correctAnswer;
+	
+  this.getAnswer = function()
+  {
+    return $('#' + this.ID).value;
+  }
+  
+  this.setAnswer = function(answer)
+  {
+    document.$('#' + this.ID).value = answer;
+  }
+  
+  this.getCorrectAnswer = function()
+  {
+    return this.correctAnswer;
+  }
+  
+  this.getType = function()
+  {
+    return "fill-in";
+  }
+}
+
+function complexTest(ID, correctAnswer)
+{
+  this.ID = ID;
+  this.correctAnswer = correctAnswer;
+  
+  this.getAnswer = function()
+  {
+    var result = [];
+    var inputArray = $('#' + this.ID + ' input');
     
-    this.getAnswer = function(){
-        var result = "";
-        var inputArray = document.getElementById(this.ID).getElementsByTagName("input");
-        for(var i=0; i<inputArray.length; i++)
-            result+=inputArray[i].checked ? "1":"0";
-        return result;
+    for(var i=0; i<inputArray.length; i++)
+    {
+      result[i] = (inputArray[i].checked ? "1" : "0");
     }
+		
+    return result.join(',');
+  }
+  
+  this.setAnswer = function(answer)
+  {
+    var result = answer.split(',');
+    var inputArray = $('#' + this.ID + ' input');
     
-    this.getScore = function() {
-        return (this.getAnswer() == this.Answer) ? 1 : 0;;
+    for (var i = 0; i < inputArray.length; i++)
+    {
+      inputArray[i].checked = (result[i] == "1");
     }
+  }
+  
+  this.getCorrectAnswer = function()
+  {
+    return this.correctAnswer;
+  }
+  
+  this.getType = function()
+  {
+    return "choice";
+  }
+}
+
+function compiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylimit, input, output)
+{
+	this.CompiledTest = true;
+	
+	this.ID = ID;
+	this.IDBefore = IDBefore;
+	this.IDAfter = IDAfter;
+	this.language = language;
+	this.timilimit = timelimit;
+	this.memorylimit = memorylimit;
+	this.input = input;
+	this.output = output;
+	this.url = url;
+	
+	jQuery.flXHRproxy.registerOptions(this.url, {xmlResponseText: false, loadPolicyURL: 'http://localhost:49440/crossdomain.xml', onerror: this.handlError});
+	
+	this.getAnswer = function(SCOObj, i)
+	{
+		var sourceT = $('#' + this.IDBefore + ' pre').text() + $('#' + this.ID).val() + $('#' + this.IDAfter + ' pre').text();
+		var dataT = {'source': sourceT, 'language': language, 'input': input, 'output': output, 'timelimit': timelimit, 'memorylimit': memorylimit};
+
+		$.ajax({
+			type: "POST",
+			url: this.url,
+			data: dataT,
+			dataType: 'xml',
+			transport: 'flXHRproxy',
+			complete: function(transport)
+			{
+				var bool = ($(transport.responseText).text());
+				doSetValue("cmi.interactions." + i + ".learner_response", bool);
+				SCOObj.FinishUp();
+			}
+		});
+	}
+	
+	this.setAnswer = function(answer)
+	{
+		$('#' + this.ID).value = answer;
+	}
+	
+	this.getCorrectAnswer = function()
+	{
+		return "true";
+	}
+	
+	this.getType = function()
+	{
+		return "true-false";
+	}
 }

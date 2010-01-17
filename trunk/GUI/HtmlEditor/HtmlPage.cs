@@ -113,6 +113,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             return result.ToString();
         }
 
+
         ///<summary>
         /// Writes head html
         ///</summary>
