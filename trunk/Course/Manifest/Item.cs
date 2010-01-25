@@ -45,17 +45,15 @@ namespace FireFly.CourseEditor.Course.Manifest
         public static ItemType CreateNewItem([NotNull]string title, [NotNull]string identifier, [NotNull]string identifierRef, PageType pageType)
         {
             var result = new ItemType(title, identifier, identifierRef);
-            if (pageType != PageType.Chapter && pageType != PageType.ControlChapter)
+            result.pageType = pageType;
+
+            result.Sequencing = SequencingManager.CreateNewSequencing(pageType);
+
+            if (pageType == PageType.Question)
             {
-                result.Sequencing = new SequencingType { controlMode = new ControlModeType() };
-                result.Sequencing.controlMode.flow = true;
-                result.Sequencing.controlMode.choice = !(result.Sequencing.controlMode.forwardOnly = pageType == PageType.Question);
-            }
-            if ((result.PageType = pageType) == PageType.Question)
-            {
-                (result.Sequencing.limitConditions = new LimitConditionsType()).attemptLimit = "1";
                 Course.Answers.Organizations[Course.Organization.identifier].Items.Add(new Item(identifier));
             }
+
             return result;
         }
 
