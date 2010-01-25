@@ -29,6 +29,9 @@ namespace FireFly.CourseEditor.Course.Manifest
                 case PageType.ControlChapter:
                     CustomizeControlChapter(ref result);
                     break;
+                case PageType.Question:
+                    CustomizeQuestionPage(ref result);
+                    break;
                 default:
                     
                     break;
@@ -38,12 +41,30 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         /// <summary>
+        /// Creates simple Sequencing for organization.
+        /// </summary>
+        /// <returns>SequencingType value with default sequencing strategy elements for organization.</returns>
+        public static SequencingType CreateOrganizationDefaultSequencing()
+        {
+            SequencingType result = new SequencingType();
+
+            result.controlMode = new ControlModeType();
+            result.controlMode.choice = true;
+            result.controlMode.flow = true;
+
+            return result;
+        }
+        
+        /// <summary>
         /// Customizes sequencing for simple chapter.
         /// </summary>
         /// <param name="sequencing">SequencingType value represents object to customize.</param>
         public static void CustomizeChapter(ref SequencingType sequencing)
         {
-            sequencing.controlMode = new ControlModeType();
+            if (sequencing.controlMode == null)
+            {
+                sequencing.controlMode = new ControlModeType();
+            }
             sequencing.controlMode.flow = true;
             sequencing.controlMode.choice = true;
         }
@@ -54,18 +75,34 @@ namespace FireFly.CourseEditor.Course.Manifest
         /// <param name="sequencing">SequencingType value represents object to customize.</param>
         public static void CustomizeControlChapter(ref SequencingType sequencing)
         {
-            sequencing.controlMode = new ControlModeType();
+            if (sequencing.controlMode == null)
+            { 
+                sequencing.controlMode = new ControlModeType();
+            }            
             sequencing.controlMode.flow = true;
             sequencing.controlMode.forwardOnly = true;
             sequencing.controlMode.choice = false;
             sequencing.controlMode.choiceExit = false;
 
-            sequencing.sequencingRules = new SequencingRulesType();
-            sequencing.sequencingRules.preConditionRule = new ManifestNodeList<PreConditionRuleType>(sequencing.sequencingRules);
-            sequencing.sequencingRules.preConditionRule.Add(CreateSimplePreConditionRule(SequencingRuleConditionType.attemptLimitExceeded, PreConditionRuleActionType.disabled));            
-            
-            sequencing.limitConditions = new LimitConditionsType();
+            if (sequencing.limitConditions == null)
+            {
+                sequencing.limitConditions = new LimitConditionsType();
+            }
             sequencing.limitConditions.attemptLimit = "1";
+        }
+
+        /// <summary>
+        /// Customizes sequencing for question page.
+        /// </summary>
+        /// <param name="sequencing">SequencingType value represents object to customize.</param>
+        public static void CustomizeQuestionPage(ref SequencingType sequencing)
+        {
+            if (sequencing.deliveryControls == null)
+            { 
+                sequencing.deliveryControls = new DeliveryControlsType();
+            }            
+            sequencing.deliveryControls.completionSetByContent = true;
+            sequencing.deliveryControls.tracked = true;            
         }
 
         /// <summary>

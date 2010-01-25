@@ -16,15 +16,18 @@ namespace FireFly.CourseEditor.Course.Manifest
         private ManifestNodeList<ItemType> m_SubItems;
 
         private MetadataType metadataField;
-
+        
         private string identifierField;
 
         private string structureField;
+
+        private SequencingType sequencingField;
 
         public OrganizationType()
         {
             identifier = string.Concat("Organization", number++);
             structureField = "hierarchical";
+            this.Sequencing = SequencingManager.CreateOrganizationDefaultSequencing();
         }
 
         //TODO: Fix FFServer and remove this stub
@@ -105,6 +108,21 @@ namespace FireFly.CourseEditor.Course.Manifest
             {
                 structureField = value;
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        [Category("Main")]
+        [XmlElement("sequencing", Namespace = ManifestNamespaces.Imsss)]
+        public SequencingType Sequencing
+        {
+            get
+            {
+                return sequencingField;
+            }
+            set
+            {
+                sequencingField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
             }
         }
 

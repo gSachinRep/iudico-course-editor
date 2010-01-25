@@ -1941,6 +1941,7 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         public event Action TitleChanged;
 
+        [XmlIgnore]
         public string Title
         {
             get
