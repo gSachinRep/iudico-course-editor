@@ -228,7 +228,7 @@ namespace FireFly.CourseEditor.GUI
 
                 if (Course.Manifest.resources[depId] == null)
                 {
-                    var depRes = new ResourceType(depId, "webcontent", pageType, "");
+                    var depRes = new ResourceType(depId, "webcontent", PageType.Theory, null);
 
                     depRes.file.Clear();
 

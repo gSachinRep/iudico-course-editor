@@ -347,6 +347,10 @@ namespace FireFly.CourseEditor.Course
 
         public static string GetLanguageString(LANGUAGE? lang)
         {
+            if (lang == null)
+            {
+                return "";
+            }
             return System.Enum.GetName(typeof(LANGUAGE), lang);
         }
 
