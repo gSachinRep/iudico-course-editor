@@ -356,7 +356,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         }
 
         public static readonly string[] __NeededScripts = { /*"help.js", "LMSDebugger.js",*/ "LMSIntf.js", "jquery.min.extended.js", "SCOObj.js"};
-        public static readonly string[] __NeededFiles = { "expressInstall.swf", "flXHR.swf", "flXHR.js", "flensed.js" };
+        public static readonly string[] __NeededFiles = { "expressInstall.swf", "flXHR.swf", "flXHR.js", "flensed.js", "checkplayer.js", "swfobject.js" };
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IncludesCollection _Scripts, _Styles;
 
