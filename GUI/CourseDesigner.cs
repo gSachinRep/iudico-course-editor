@@ -216,6 +216,8 @@ namespace FireFly.CourseEditor.GUI
         [NotNull]
         private ItemType CreateNewItem([NotNull]PageType pageType)
         {
+            Course.Manifest.metadata = new MetadataType("ADL SCORM", "2004 4th Edition");
+ 
             var title = ConfigHelper.GetDefaultItemTitle(pageType);
             var resIdn = IdGenerator.GenerateUniqueFileName(title, ".html", Course.FullPath);
             var resource = new ResourceType(resIdn, "webcontent", pageType, resIdn + ".html");
