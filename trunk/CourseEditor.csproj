@@ -440,12 +440,13 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\Error.bmp" />
-    <Content Include="Course\checkplayer.js" />
+    <EmbeddedResource Include="Course\checkplayer.js" />
     <EmbeddedResource Include="Course\expressInstall.swf" />
     <EmbeddedResource Include="Course\flensed.js" />
     <EmbeddedResource Include="Course\flXHR.js" />
     <EmbeddedResource Include="Course\flXHR.swf" />
     <EmbeddedResource Include="Course\jquery.min.extended.js" />
+    <EmbeddedResource Include="Course\swfobject.js" />
     <Content Include="Images\FireFly.ico" />
     <None Include="Images\Redo.bmp" />
     <None Include="Images\Rename.bmp" />

@@ -1,4 +1,4 @@
-﻿function SCOObj(passRank)
+function SCOObj(passRank)
 {
   this.passRank = passRank;
   this.tests = new Array();
@@ -17,12 +17,13 @@
     {
 		if (this.tests[i].CompiledTest = true)
 		{
-			this.tests[i].getAnswer(this, i);
+			this.tests[i].processAnswer(this, i);
 			this.compiled++;
 		}
 		else
 		{
 			doSetValue("cmi.interactions." + i + ".learner_response", this.tests[i].getAnswer());
+			doSetValue("cmi.interactions." + i + ".result", this.test[i].getResult());
 		}
     }
     
@@ -99,6 +100,11 @@ function simpleTest(ID, correctAnswer)
   {
     return "fill-in";
   }
+  
+  this.getResult = function()
+  {
+	return (this.getCorrectAnswer() == this.getAnswer() ? "correct" : "incorrect");
+  }
 }
 
 function complexTest(ID, correctAnswer)
@@ -139,6 +145,11 @@ function complexTest(ID, correctAnswer)
   {
     return "choice";
   }
+  
+  this.getResult = function()
+  {
+	return (this.getCorrectAnswer() == this.getAnswer() ? "correct" : "incorrect");
+  }
 }
 
 function compiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylimit, input, output)
@@ -155,12 +166,14 @@ function compiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylim
 	this.output = output;
 	this.url = url;
 	
-	jQuery.flXHRproxy.registerOptions(this.url, {xmlResponseText: false, loadPolicyURL: 'http://localhost:49440/crossdomain.xml', onerror: this.handlError});
+	jQuery.flXHRproxy.registerOptions(this.url, {xmlResponseText: false});
 	
-	this.getAnswer = function(SCOObj, i)
+	this.processAnswer = function(SCOObj, i)
 	{
 		var sourceT = $('#' + this.IDBefore + ' pre').text() + $('#' + this.ID).val() + $('#' + this.IDAfter + ' pre').text();
 		var dataT = {'source': sourceT, 'language': language, 'input': input, 'output': output, 'timelimit': timelimit, 'memorylimit': memorylimit};
+		
+		doSetValue("cmi.interactions." + i + ".learner_response", $('#' + this.ID).val());
 
 		$.ajax({
 			type: "POST",
@@ -171,7 +184,7 @@ function compiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylim
 			complete: function(transport)
 			{
 				var bool = ($(transport.responseText).text());
-				doSetValue("cmi.interactions." + i + ".learner_response", bool);
+				doSetValue("cmi.interactions." + i + ".result", (bool == "true" ? "correct" : "incorrect"));
 				SCOObj.FinishUp();
 			}
 		});
@@ -182,13 +195,18 @@ function compiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylim
 		$('#' + this.ID).value = answer;
 	}
 	
+	this.getAnswer = function()
+	{
+		return "";
+	}
+	
 	this.getCorrectAnswer = function()
 	{
-		return "true";
+		return "";
 	}
 	
 	this.getType = function()
 	{
-		return "true-false";
+		return "other";
 	}
 }

@@ -15,7 +15,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         //}
 
         public FFHtmlWriter(ItemType item)
-            : base(new StreamWriter(item.PageHref, false, Encoding.Unicode) { AutoFlush = false })
+            : base(new StreamWriter(item.PageHref, false, Encoding.ASCII) { AutoFlush = false })
         {
         }
 

@@ -156,28 +156,27 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
 
         public override string GetScoTestInitializer()
         {
-            string testCase = "";
+            string input = "[";
+            string output = "[";
 
             for(int i = 0; i < TestCases.Count; ++i)
             {
                 CompiledTestCase item = TestCases[i];
-
-                string strItem = string.Format("['{0}', '{1}']", item.Input, item.Output);
+                input += item.Input;
+                output += item.Output;
 
                 if (i != TestCases.Count - 1)
                 {
-                    strItem += ",";
+                    input += ",";
+                    output += ",";
                 }
-                testCase += strItem;
             }
+            input += "]";
+            output += "]";
 
-            string result = string.Format("new compiledTest('{0}', {1}, {2}, {3}, {4}, '{5}', '{6}'", 
-                Name, Rank, MemoryLimit, TimeLimit, OutputLimit, CompiledQuestion.GetLanguageString(Language), ServiceAddress, testCase);
+            string result = string.Format("new compiledTest('', '', '{0}', '{1}', '{2}', {3}, {4}, {5}, {6}",
+                Name, ServiceAddress, CompiledQuestion.GetLanguageString(Language), TimeLimit, MemoryLimit, input, output);
 
-            if (testCase.Length > 0)
-            {
-                result += string.Format(", {0}", testCase);
-            }
 
             result += ")";
 
