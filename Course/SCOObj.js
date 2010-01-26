@@ -123,7 +123,7 @@ function complexTest(ID, correctAnswer)
       result[i] = (inputArray[i].checked ? "1" : "0");
     }
 		
-    return result.join(',');
+    return result.join('');
   }
   
   this.setAnswer = function(answer)
