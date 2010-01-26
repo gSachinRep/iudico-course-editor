@@ -14,7 +14,7 @@ function SCOObj(passRank)
 	
     for (var i = 0 ; i < this.length(); i++)
     {
-		if (this.tests[i].CompiledTest = true)
+		if (this.tests[i].CompiledTest == true)
 		{
 			this.tests[i].processAnswer(this, i);
 			this.compiled++;
@@ -22,7 +22,7 @@ function SCOObj(passRank)
 		else
 		{
 			doSetValue("cmi.interactions." + i + ".learner_response", this.tests[i].getAnswer());
-			doSetValue("cmi.interactions." + i + ".result", this.test[i].getResult());
+			doSetValue("cmi.interactions." + i + ".result", this.tests[i].getResult());
 		}
     }
     
@@ -174,7 +174,7 @@ function compiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylim
 		var sourceT = $('#' + this.IDBefore + ' pre').text() + $('#' + this.ID).val() + $('#' + this.IDAfter + ' pre').text();
 		var dataT = {'source': sourceT, 'language': language, 'input': input, 'output': output, 'timelimit': timelimit, 'memorylimit': memorylimit};
 		
-		doSetValue("cmi.interactions." + i + ".learner_response", $('#' + this.ID).val());
+		
 
 		$.ajax({
 			type: "POST",
@@ -184,8 +184,9 @@ function compiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylim
 			transport: 'flXHRproxy',
 			complete: function(transport)
 			{
-				var bool = ($(transport.responseText).text());
-				doSetValue("cmi.interactions." + i + ".result", (bool == "true" ? "correct" : "incorrect"));
+				var response = ($(transport.responseText).text());
+				doSetValue("cmi.interactions." + i + ".learner_response", response);
+				doSetValue("cmi.interactions." + i + ".result", (response == "Accepted" ? "correct" : "incorrect"));
 				SCOObj.FinishUp();
 			}
 		});
@@ -203,7 +204,7 @@ function compiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylim
 	
 	this.getCorrectAnswer = function()
 	{
-		return "";
+		return "Accepted";
 	}
 	
 	this.getType = function()
