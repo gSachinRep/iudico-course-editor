@@ -154,6 +154,13 @@
     <Compile Include="Common\ConfigHelper.cs" />
     <Compile Include="Common\UndoRedoUtils.cs" />
     <Compile Include="Course\SequencingManager.cs" />
+    <Compile Include="GUI\HtmlEditor\AdvanchedCompiledTest\AdvanchedCompiledTest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\AdvanchedCompiledTest\AdvanchedCompiledTest.designer.cs">
+      <DependentUpon>AdvanchedCompiledTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\HtmlEditor\AdvanchedCompiledTest\HtmlAdvanchedCompiledTest.cs" />
     <Compile Include="GUI\HtmlEditor\BoundControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -415,6 +422,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GUI\HtmlEditor\AdvanchedCompiledTest\AdvanchedCompiledTest.resx">
+      <DependentUpon>AdvanchedCompiledTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\sample.css" />
     <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\highlight.js" />
     <EmbeddedResource Include="GUI\HtmlEditor\HighlightControl\axapta.js" />

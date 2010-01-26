@@ -11,6 +11,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
     using System.IO;
     using System.Windows.Forms;
     using HighlightControl;
+    using AdvanchedCompiledTestControl;
 
     ///<summary>
     /// Html Editor
@@ -32,6 +33,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             btnHighlightedText.Tag = typeof(HtmlHighlightedCode);
             btnCodeSnippet.Tag = typeof(HtmlCodeSnippet);
             btnCompiledTest.Tag = typeof(HtmlCompiledTest);
+            btnAdvanchedCompiledTest.Tag = typeof(HtmlAdvanchedCompiledTest);
 
             miProperties.Click += (sender, e) => Forms.PropertyEditor.Show();
 
