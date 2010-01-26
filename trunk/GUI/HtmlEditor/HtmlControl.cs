@@ -13,7 +13,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
     using Common;
     using HighlightControl;
     using Course.Manifest;
-  using AdvanchedCompiledTestControl;
+  using AdvancedCompiledTestControl;
 
     ///<summary>
     /// Abstract base class for all controls of Editor.
@@ -379,9 +379,9 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
                     if (at != null)
                     {
                         var name = at.Value;
-                        if (name == "advanchedCompiledTest")
+                        if (name == "advancedCompiledTest")
                         {
-                          return new HtmlAdvanchedCompiledTest();
+                          return new HtmlAdvancedCompiledTest();
                         }
                         if (name == "snippet")
                         {

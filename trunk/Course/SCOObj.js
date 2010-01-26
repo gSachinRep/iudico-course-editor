@@ -11,7 +11,6 @@ function SCOObj(passRank)
   
   this.Commit = function()
   {
-	doInitialize();
 	
     for (var i = 0 ; i < this.length(); i++)
     {
@@ -48,6 +47,8 @@ function SCOObj(passRank)
 		doTerminate();
 	}
   }
+  
+  doInitialize();
   
   var argLength = arguments.length;
 
@@ -211,53 +212,3 @@ function compiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylim
 	}
 }
 
-function advanchedCompiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylimit, input, output) {
-    this.CompiledTest = true;
-
-    this.ID = ID;
-    this.IDBefore = IDBefore;
-    this.IDAfter = IDAfter;
-    this.language = language;
-    this.timelimit = timelimit;
-    this.memorylimit = memorylimit;
-    this.input = input;
-    this.output = output;
-    this.url = url;
-    var learnerResponse=document.getElementById(this.ID).innerText;
-
-    this.processAnswer = function(SCOObj, i) {
-        var sourceT = $('#' + this.IDBefore + ' pre').text() + $('#' + this.ID).val() + $('#' + this.IDAfter + ' pre').text();
-        var dataT = { 'source': sourceT, 'language': language, 'input': input, 'output': output, 'timelimit': timelimit, 'memorylimit': memorylimit };
-
-        //doSetValue("cmi.interactions." + i + ".learner_response", $('#' + this.ID).val());
-
-        $.ajax({
-            type: "POST",
-            url: this.url,
-            data: dataT,
-            dataType: 'xml',
-            transport: 'flXHRproxy',
-            complete: function(transport) {
-                var bool = ($(transport.responseText).text());
-                doSetValue("cmi.interactions." + i + ".result", (bool == "true" ? "correct" : "incorrect"));
-                SCOObj.FinishUp();
-            }
-        });
-    }
-
-    this.setAnswer = function(answer) {
-        $('#' + this.ID).value = answer;
-    }
-
-    this.getAnswer = function() {
-        return "";
-    }
-
-    this.getCorrectAnswer = function() {
-        return "";
-    }
-
-    this.getType = function() {
-        return "other";
-    }
-}

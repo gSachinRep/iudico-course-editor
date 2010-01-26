@@ -10,7 +10,7 @@ using HtmlAttribute = System.Web.UI.HtmlTextWriterAttribute;
 using HtmlStyleAttribute = System.Web.UI.HtmlTextWriterStyle;
 using HtmlTag = System.Web.UI.HtmlTextWriterTag;
 
-namespace FireFly.CourseEditor.GUI.HtmlEditor.AdvanchedCompiledTestControl
+namespace FireFly.CourseEditor.GUI.HtmlEditor.AdvancedCompiledTestControl
 {
   using Common;
   using Course;
@@ -22,7 +22,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor.AdvanchedCompiledTestControl
   /// [code added by lector]
   /// </summary>
   [HtmlSerializeSettings(SerializeElems.ALL)]
-  class HtmlAdvanchedCompiledTest : HtmlCompiledTest//, IJavaScriptInitializable
+  class HtmlAdvancedCompiledTest : HtmlCompiledTest//, IJavaScriptInitializable
   {
     /*
     private HtmlHighlightedCode.LANGUAGE? _LanguageToHighlight;
@@ -77,8 +77,8 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor.AdvanchedCompiledTestControl
       input += "]";
       output += "]";
 
-      string result = string.Format("new advanchedCompiledTest('', '', '{0}', '{1}', '{2}', {3}, {4}, {5}, {6}",
-          Name, ServiceAddress, CompiledQuestion.GetLanguageString(Language), TimeLimit, MemoryLimit, input, output);
+      string result = string.Format("new compiledTest('TextBoxBefore', 'TextBoxAfter', 'TextBoxUserCode', '{0}', '{1}', {2}, {3}, {4}, {5}",
+          ServiceAddress, CompiledQuestion.GetLanguageString(Language), TimeLimit, MemoryLimit, input, output);
 
 
       result += ")";
@@ -88,7 +88,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor.AdvanchedCompiledTestControl
 
     protected override Control CreateWindowControl()
     {
-      return new AdvanchedCompiledTest();
+      return new AdvancedCompiledTest();
     }
 
     public override void WriteHtml(System.Web.UI.HtmlTextWriter w)
@@ -115,7 +115,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor.AdvanchedCompiledTestControl
 
       //<div>
       w.AddAttribute(HtmlAttribute.Id, Name);
-      w.AddAttribute(HtmlAttribute.Name, "advanchedCompiledTest");
+      w.AddAttribute(HtmlAttribute.Name, "advancedCompiledTest");
       w.AddStyleAttribute(HtmlStyleAttribute.Position, "absolute");
       HtmlSerializeHelper<HtmlCompiledTest>.WriteRootElementAttributes(w, this);
       w.RenderBeginTag(HtmlTag.Div);
@@ -125,21 +125,21 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor.AdvanchedCompiledTestControl
       //<span name="BeforeCode">//there will be lector code
       w.AddAttribute(HtmlAttribute.Id, "TextBoxBefore");
       w.AddStyleAttribute(HtmlStyleAttribute.Overflow, "scroll");
-      w.AddStyleAttribute(HtmlStyleAttribute.Height, (Control as AdvanchedCompiledTest).TextBoxBefore.Height.ToString());
-      w.AddStyleAttribute(HtmlStyleAttribute.Width, (Control as AdvanchedCompiledTest).TextBoxBefore.Width.ToString());
+      w.AddStyleAttribute(HtmlStyleAttribute.Height, (Control as AdvancedCompiledTest).TextBoxBefore.Height.ToString());
+      w.AddStyleAttribute(HtmlStyleAttribute.Width, (Control as AdvancedCompiledTest).TextBoxBefore.Width.ToString());
       w.RenderBeginTag(HtmlTag.Span);
       //w.AddAttribute(HtmlAttribute.Class, ls);
       //w.WriteFullBeginTag(string.Concat("pre><code class=\"", ls, "\""));
       w.WriteFullBeginTag(string.Concat("pre><code"));
-      w.Write((Control as AdvanchedCompiledTest).TextBoxBefore.Text.HttpEncode());
+      w.Write((Control as AdvancedCompiledTest).TextBoxBefore.Text.HttpEncode());
       w.WriteFullBeginTag("/code></pre");
       w.RenderEndTag();
       //</span>
 
       //<textarea>//there will be user code
       w.AddAttribute(HtmlAttribute.Id, "TextBoxUserCode");
-      w.AddStyleAttribute(HtmlStyleAttribute.Width, (Control as AdvanchedCompiledTest).TextBoxUserCode.Width.ToString());
-      w.AddStyleAttribute(HtmlStyleAttribute.Height, (Control as AdvanchedCompiledTest).TextBoxUserCode.Height.ToString());
+      w.AddStyleAttribute(HtmlStyleAttribute.Width, (Control as AdvancedCompiledTest).TextBoxUserCode.Width.ToString());
+      w.AddStyleAttribute(HtmlStyleAttribute.Height, (Control as AdvancedCompiledTest).TextBoxUserCode.Height.ToString());
       w.RenderBeginTag(HtmlTextWriterTag.Textarea);
       w.RenderEndTag();
       //</textarea>
@@ -147,13 +147,13 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor.AdvanchedCompiledTestControl
       //<span name="AfterCode">//there will be lector code
       w.AddAttribute(HtmlAttribute.Id, "TextBoxAfter");
       w.AddStyleAttribute(HtmlStyleAttribute.Overflow, "scroll");
-      w.AddStyleAttribute(HtmlStyleAttribute.Height, (Control as AdvanchedCompiledTest).TextBoxAfter.Height.ToString());
-      w.AddStyleAttribute(HtmlStyleAttribute.Width, (Control as AdvanchedCompiledTest).TextBoxAfter.Width.ToString());
+      w.AddStyleAttribute(HtmlStyleAttribute.Height, (Control as AdvancedCompiledTest).TextBoxAfter.Height.ToString());
+      w.AddStyleAttribute(HtmlStyleAttribute.Width, (Control as AdvancedCompiledTest).TextBoxAfter.Width.ToString());
       w.RenderBeginTag(HtmlTag.Span);
       //w.AddAttribute(HtmlAttribute.Class, ls);
       //w.WriteFullBeginTag(string.Concat("pre><code class=\"", ls, "\""));
       w.WriteFullBeginTag(string.Concat("pre><code"));
-      w.Write((Control as AdvanchedCompiledTest).TextBoxAfter.Text.HttpEncode());
+      w.Write((Control as AdvancedCompiledTest).TextBoxAfter.Text.HttpEncode());
       w.WriteFullBeginTag("/code></pre");
       w.RenderEndTag();
       //</span>
@@ -166,9 +166,9 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor.AdvanchedCompiledTestControl
     {
       base.Parse(node);
       Control.Text = "";
-      (Control as AdvanchedCompiledTest).TextBoxBefore.Text = node.ChildNodes[0].InnerText;//.HttpDecode();
-      (Control as AdvanchedCompiledTest).TextBoxAfter.Text = node.ChildNodes[2].InnerText;//.HttpDecode();
-      (Control as AdvanchedCompiledTest).AdvanchedCompiledTest_Resize(null, null);
+      (Control as AdvancedCompiledTest).TextBoxBefore.Text = node.ChildNodes[0].InnerText;//.HttpDecode();
+      (Control as AdvancedCompiledTest).TextBoxAfter.Text = node.ChildNodes[2].InnerText;//.HttpDecode();
+      (Control as AdvancedCompiledTest).AdvancedCompiledTest_Resize(null, null);
     }
     
     /*
@@ -177,7 +177,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor.AdvanchedCompiledTestControl
     public string GetJavaScriptInitializer()
     {
       var page = GetParentPage();
-      if (/*Control.Text.IsNotNull()((Control as AdvanchedCompiledTest).TextBoxBefore.Text.IsNotNull() || (Control as AdvanchedCompiledTest).TextBoxAfter.Text.IsNotNull()) 
+      if (/*Control.Text.IsNotNull()((Control as AdvancedCompiledTest).TextBoxBefore.Text.IsNotNull() || (Control as AdvancedCompiledTest).TextBoxAfter.Text.IsNotNull()) 
           && LanguageToHighlight != null && ((page.InitializedLanguages & LanguageToHighlight) == 0))
       {
         page.InitializedLanguages |= LanguageToHighlight.Value;
