@@ -43,11 +43,11 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
           this.btnCodeSnippet = new System.Windows.Forms.ToolStripButton();
           this.btnHighlightedText = new System.Windows.Forms.ToolStripButton();
           this.btnCompiledTest = new System.Windows.Forms.ToolStripButton();
+          this.btnAdvancedCompiledTest = new System.Windows.Forms.ToolStripButton();
           this.cmsHtmlElement = new System.Windows.Forms.ContextMenuStrip(this.components);
           this.miEditInMSWord = new System.Windows.Forms.ToolStripMenuItem();
           this.miDelete = new System.Windows.Forms.ToolStripMenuItem();
           this.miProperties = new System.Windows.Forms.ToolStripMenuItem();
-          this.btnAdvancedCompiledTest = new System.Windows.Forms.ToolStripButton();
           this.tsComponents.SuspendLayout();
           this.cmsHtmlElement.SuspendLayout();
           this.SuspendLayout();
@@ -202,6 +202,15 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
           this.btnCompiledTest.Size = new System.Drawing.Size(30, 30);
           this.btnCompiledTest.Text = "Compiled Test";
           // 
+          // btnAdvancedCompiledTest
+          // 
+          this.btnAdvancedCompiledTest.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.btnAdvancedCompiledTest.Image = ((System.Drawing.Image)(resources.GetObject("btnAdvancedCompiledTest.Image")));
+          this.btnAdvancedCompiledTest.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.btnAdvancedCompiledTest.Name = "btnAdvancedCompiledTest";
+          this.btnAdvancedCompiledTest.Size = new System.Drawing.Size(30, 30);
+          this.btnAdvancedCompiledTest.Text = "AdvancedCompiledTest";
+          // 
           // cmsHtmlElement
           // 
           this.cmsHtmlElement.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -239,15 +248,6 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
           this.miProperties.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Return)));
           this.miProperties.Size = new System.Drawing.Size(177, 22);
           this.miProperties.Text = "&Properties";
-          // 
-          // btnAdvancedCompiledTest
-          // 
-          this.btnAdvancedCompiledTest.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.btnAdvancedCompiledTest.Image = ((System.Drawing.Image)(resources.GetObject("btnAdvancedCompiledTest.Image")));
-          this.btnAdvancedCompiledTest.ImageTransparentColor = System.Drawing.Color.Magenta;
-          this.btnAdvancedCompiledTest.Name = "btnAdvancedCompiledTest";
-          this.btnAdvancedCompiledTest.Size = new System.Drawing.Size(30, 30);
-          this.btnAdvancedCompiledTest.Text = "toolStripButton1";
           // 
           // PageEditor
           // 
