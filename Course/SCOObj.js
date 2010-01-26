@@ -60,8 +60,9 @@ function SCOObj(passRank)
     //alert(numInteractions);
     if (numInteractions == 0)
     {
-      doSetValue("cmi.interactions." + (i-1) + ".correct_responses.0.pattern", this.tests[i-1].getCorrectAnswer());
-      doSetValue("cmi.interactions." + (i-1) + ".type", this.tests[i-1].getType());
+      doSetValue("cmi.interactions." + (i-1) + ".id", this.tests[i-1].ID);
+      doSetValue("cmi.interactions." + (i-1) + ".type", this.tests[i-1].getType());      
+      doSetValue("cmi.interactions." + (i-1) + ".correct_responses.0.pattern", this.tests[i-1].getCorrectAnswer());      
     }
     else if (numInteractions > 0)
     {
