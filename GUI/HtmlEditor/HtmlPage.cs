@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using HtmlWriterTag = System.Web.UI.HtmlTextWriterTag;
 using HtmlWriter = System.Web.UI.HtmlTextWriter;
+using HtmlWriterAttribute = System.Web.UI.HtmlTextWriterAttribute;
 
 namespace FireFly.CourseEditor.GUI.HtmlEditor
 {
@@ -120,8 +121,25 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         ///<param name="w"></param>
         public void WriteHeadText(HtmlWriter w)
         {
+
+            WriteHeadMetaCharset(w);
             WriteIncludedScripts(w);
             WriteIncludedStyles(w);
+        }
+
+        /// <summary>
+        /// Writes charset type into meta-tag
+        /// </summary>
+        /// <param name="w"></param>
+        public void WriteHeadMetaCharset(HtmlWriter w)
+        {
+            // meta-tag
+            w.AddAttribute("http-equiv", "Content-Type");
+            w.AddAttribute("content", "text/html; charset=" + w.Encoding.HeaderName);
+
+            w.RenderBeginTag(HtmlWriterTag.Meta);
+            w.RenderEndTag();
+            //
         }
 
         protected override void InternalValidate()
