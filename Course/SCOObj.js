@@ -11,7 +11,6 @@ function SCOObj(passRank)
   
   this.Commit = function()
   {
-	
     for (var i = 0 ; i < this.length(); i++)
     {
 		if (this.tests[i].CompiledTest == true)
@@ -26,7 +25,7 @@ function SCOObj(passRank)
 		}
     }
     
-	$('#Button1').disabled = true;
+	$('#Button1')[0].disabled = true;
 
 	if (this.compiled == 0)
 	{
@@ -70,7 +69,7 @@ function SCOObj(passRank)
       //alert(learnerResponse);
       if (learnerResponse)
       {
-        $('#Button1').disabled = true;
+        $('#Button1')[0].disabled = true;
         this.tests[i-1].setAnswer(learnerResponse);
         //doGetValue("cmi.interactions." + (i-1) + ".correct_responses.0.pattern");
       }
@@ -174,8 +173,6 @@ function compiledTest(IDBefore, IDAfter, ID, url, language, timelimit, memorylim
 	{
 		var sourceT = $('#' + this.IDBefore + ' pre').text() + $('#' + this.ID).val() + $('#' + this.IDAfter + ' pre').text();
 		var dataT = {'source': sourceT, 'language': language, 'input': input, 'output': output, 'timelimit': timelimit, 'memorylimit': memorylimit};
-		
-		
 
 		$.ajax({
 			type: "POST",
