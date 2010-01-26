@@ -9,14 +9,14 @@ using System.Windows.Forms;
 
 namespace FireFly.CourseEditor.GUI.HtmlEditor
 {
-  public partial class AdvanchedCompiledTest : UserControl
+  public partial class AdvancedCompiledTest : UserControl
   {
-    public AdvanchedCompiledTest()
+    public AdvancedCompiledTest()
     {
       InitializeComponent();
     }
 
-    public void AdvanchedCompiledTest_Resize(object sender, EventArgs e)
+    public void AdvancedCompiledTest_Resize(object sender, EventArgs e)
     {
       TextBoxBefore.Left = 10;
       TextBoxBefore.Top = 5;

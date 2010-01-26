@@ -1,6 +1,6 @@
 ﻿namespace FireFly.CourseEditor.GUI.HtmlEditor
 {
-  partial class AdvanchedCompiledTest
+  partial class AdvancedCompiledTest
   {
     /// <summary> 
     /// Required designer variable.
@@ -67,16 +67,16 @@
       this.TextBoxUserCode.Size = new System.Drawing.Size(212, 67);
       this.TextBoxUserCode.TabIndex = 3;
       // 
-      // AdvanchedCompiledTest
+      // AdvancedCompiledTest
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.TextBoxUserCode);
       this.Controls.Add(this.TextBoxAfter);
       this.Controls.Add(this.TextBoxBefore);
-      this.Name = "AdvanchedCompiledTest";
+      this.Name = "AdvancedCompiledTest";
       this.Size = new System.Drawing.Size(245, 251);
-      this.Resize += new System.EventHandler(this.AdvanchedCompiledTest_Resize);
+      this.Resize += new System.EventHandler(this.AdvancedCompiledTest_Resize);
       this.ResumeLayout(false);
       this.PerformLayout();
 
