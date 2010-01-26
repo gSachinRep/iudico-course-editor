@@ -57,7 +57,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
 
         public override string GetScoTestInitializer()
         {
-            return string.Format("new complexTest('{0}', {1}, '{2}')", Name, Rank, CorrectAnswer);
+            return string.Format("new complexTest('{0}','{1}')", Name, CorrectAnswer);
         }
 
         protected override Control CreateWindowControl()
