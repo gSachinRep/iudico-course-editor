@@ -1186,7 +1186,6 @@ namespace FireFly.CourseEditor.Course.Manifest
         attempted,
         attemptLimitExceeded,
         timeLimitExceeded,
-        outsideAvailableTimeRange,
         always,
     }
 
