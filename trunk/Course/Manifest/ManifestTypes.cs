@@ -949,20 +949,6 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         private string attemptAbsoluteDurationLimitField;
 
-        private string attemptExperiencedDurationLimitField;
-
-        private string activityAbsoluteDurationLimitField;
-
-        private string activityExperiencedDurationLimitField;
-
-        private DateTime beginTimeLimitField;
-
-        private bool beginTimeLimitFieldSpecified;
-
-        private DateTime endTimeLimitField;
-
-        private bool endTimeLimitFieldSpecified;
-
         [XmlAttribute(DataType = "nonNegativeInteger")]
         public string attemptLimit
         {
@@ -987,104 +973,6 @@ namespace FireFly.CourseEditor.Course.Manifest
             set
             {
                 attemptAbsoluteDurationLimitField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlAttribute(DataType = "duration")]
-        public string attemptExperiencedDurationLimit
-        {
-            get
-            {
-                return attemptExperiencedDurationLimitField;
-            }
-            set
-            {
-                attemptExperiencedDurationLimitField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlAttribute(DataType = "duration")]
-        public string activityAbsoluteDurationLimit
-        {
-            get
-            {
-                return activityAbsoluteDurationLimitField;
-            }
-            set
-            {
-                activityAbsoluteDurationLimitField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlAttribute(DataType = "duration")]
-        public string activityExperiencedDurationLimit
-        {
-            get
-            {
-                return activityExperiencedDurationLimitField;
-            }
-            set
-            {
-                activityExperiencedDurationLimitField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlAttribute]
-        public DateTime beginTimeLimit
-        {
-            get
-            {
-                return beginTimeLimitField;
-            }
-            set
-            {
-                beginTimeLimitField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlIgnoreAttribute]
-        public bool beginTimeLimitSpecified
-        {
-            get
-            {
-                return beginTimeLimitFieldSpecified;
-            }
-            set
-            {
-                beginTimeLimitFieldSpecified = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlAttribute]
-        public DateTime endTimeLimit
-        {
-            get
-            {
-                return endTimeLimitField;
-            }
-            set
-            {
-                endTimeLimitField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlIgnoreAttribute]
-        public bool endTimeLimitSpecified
-        {
-            get
-            {
-                return endTimeLimitFieldSpecified;
-            }
-            set
-            {
-                endTimeLimitFieldSpecified = value;
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
@@ -5000,6 +4888,11 @@ namespace FireFly.CourseEditor.Course.Manifest
         private string idField;
 
         private string iDRefField;
+
+        private ConstrainedChoiceConsiderationsType constrainedChoiceConsiderationsField;
+
+        private RollupConsiderationsType rollupConsiderationsField;
+        
         [Description(
         "Container for the sequencing control mode information including descriptions of the types of sequencing behaviors specified for an activity . This element captures information dealing with the types of sequencing requests that are permitted."
         )]
@@ -5016,6 +4909,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
+        
         [Description(
          "Container for a sequencing rule description. Each rule describes the sequencing behavior for an activity")]
         [Category("Main")]
@@ -5031,6 +4925,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
             }
         }
+        
         [Description("The limit condition deals with attempts on the activity and maximum time allowed in the attempt.")]
         [Category("Main")]
         public LimitConditionsType limitConditions
@@ -5077,6 +4972,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
             }
         }
+        
         [Description("Container for the set of objectives that are to be associated with an activity")]
         [Category("Main")]
         public ObjectivesType objectives
@@ -5091,10 +4987,12 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
             }
         }
+        
         [Description(
     "Element is the container for the descriptions of how children of an activity should be ordered during the sequence process"
     )]
         [Category("Main")]
+        
         public RandomizationType randomizationControls
         {
             get
@@ -5107,6 +5005,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
             }
         }
+        
         [Description(
         "Ñontainer for the descriptions of how children of an activity should be ordered during the sequence process.")]
         [Category("Main")]
@@ -5162,6 +5061,36 @@ namespace FireFly.CourseEditor.Course.Manifest
             {
                 iDRefField = value;
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        [Description("Container for the descriptions of how choice navigation requests should be constrained during the sequencing process.")]
+        [Category("Main")]
+        public ConstrainedChoiceConsiderationsType constrainChoiceConsiderations
+        {
+            get
+            {
+                return this.constrainedChoiceConsiderationsField;
+            }
+            set
+            {
+                this.constrainedChoiceConsiderationsField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
+            }
+        }
+
+        [Description("Container for the descriptions of when an activity should be included in the rollup process.")]
+        [Category("Main")]
+        public RollupConsiderationsType rollupConsiderations
+        {
+            get
+            {
+                return this.rollupConsiderationsField;
+            }
+            set
+            {
+                this.rollupConsiderationsField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
             }
         }
 
@@ -5288,13 +5217,13 @@ namespace FireFly.CourseEditor.Course.Manifest
         "Element is the container for the descriptions of how choice navigation requests should be constrained during the sequencing process. The constrained choice only applies to the activity for which it is defined"
         )]
     [Category("Main")]
-    public class ConstrainChoiceConsiderationsType : AbstractManifestNode, IManifestNode
+    public class ConstrainedChoiceConsiderationsType : AbstractManifestNode, IManifestNode
     {
         private bool preventActivationField;
 
         private bool constrainChoiceField;
 
-        public ConstrainChoiceConsiderationsType()
+        public ConstrainedChoiceConsiderationsType()
         {
             preventActivationField = false;
             constrainChoiceField = false;
