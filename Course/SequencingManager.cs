@@ -102,7 +102,12 @@ namespace FireFly.CourseEditor.Course.Manifest
                 sequencing.deliveryControls = new DeliveryControlsType();
             }            
             sequencing.deliveryControls.completionSetByContent = true;
-            sequencing.deliveryControls.tracked = true;            
+            sequencing.deliveryControls.tracked = true;
+            
+            if (sequencing.limitConditions == null)
+            {
+                sequencing.limitConditions = new LimitConditionsType();
+            }
         }
 
         /// <summary>
