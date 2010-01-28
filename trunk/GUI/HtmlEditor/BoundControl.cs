@@ -155,9 +155,12 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
 
         protected override void Dispose(bool disposing)
         {
+            
+
             base.Dispose(disposing);
             Owner.Control.LocationChanged -= Owner_LocationChanged;
             Owner.UnBindEvents(this);
+           
             Parent = null;
         }
 

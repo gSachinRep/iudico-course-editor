@@ -362,6 +362,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             var r = Course.Manifest.resources[IdentifierRef];
             if (r != null)
             {
+                
                 r.Dispose();
                 Course.Manifest.resources.Resources.Remove(r);
             }

@@ -180,6 +180,13 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
             Debug.WriteLine("PageEditor: '" + c.Title + "' - Selected");
             SelectionChanged();
         }
+        private void FreeResources(HtmlDesignMovableControl c)
+        {
+            if ((c as HtmlCodeSnippet) != null)
+            {
+                (c.Control as CodeSnippet).DeleteResources();
+            }
+        }
 
         private void UnSelectControl(HtmlDesignMovableControl c)
         {
@@ -337,8 +344,10 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
                 var mg = new ModificationCollection<HtmlControlModification>();
                 foreach (var c in list)
                 {
+                    FreeResources(c.Owner);
                     HtmlDesignMovableControl owner = c.Owner;
                     owner.NotifyDelete();
+
                     mg.Add(HtmlControlModification.GetRemoved(owner));
 
                     owner.Parent = null;

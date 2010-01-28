@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Xml;
 
 namespace FireFly.CourseEditor.GUI
 {
@@ -217,10 +218,12 @@ namespace FireFly.CourseEditor.GUI
         private ItemType CreateNewItem([NotNull]PageType pageType)
         {
             Course.Manifest.metadata = new MetadataType("ADL SCORM", "2004 4th Edition");
- 
+
             var title = ConfigHelper.GetDefaultItemTitle(pageType);
             var resIdn = IdGenerator.GenerateUniqueFileName(title, ".html", Course.FullPath);
             var resource = new ResourceType(resIdn, "webcontent", pageType, resIdn + ".html");
+
+
             Course.Manifest.resources.Resources.Add(resource);
 
             if (pageType == PageType.Question)
@@ -259,6 +262,20 @@ namespace FireFly.CourseEditor.GUI
             
 
             return resultItem;
+        }
+
+        /// <summary>
+        /// Creates new resource associated with indicated item
+        /// </summary>
+        /// <param name="pageType">Type of page should be created</param>
+        /// <returns>New resource associated with indicated item</returns>
+        public ResourceType CreateNewResource([NotNull]PageType pageType)
+        {
+            var title = ConfigHelper.GetDefaultItemTitle(pageType);
+            var resIdn = IdGenerator.GenerateUniqueFileName(title, ".html", Course.FullPath);
+            var resource = new ResourceType(resIdn, "webcontent", pageType, resIdn + ".html");
+
+            return resource;
         }
 
         /// <summary>
@@ -476,7 +493,45 @@ namespace FireFly.CourseEditor.GUI
                 throw new FireFlyException("Unsupported type: {0}", n.PageType);
             }
 #endif
-            EditUsingWord(n.PageHref);
+            Process p = EditUsingWord(n.PageHref);
+            if (p != null)
+            {
+                using (p)
+                {
+                    p.WaitForExit();
+                }
+            }
+
+            AppendWordResources(n);
+        }
+        private void AppendWordResources(ItemType item)
+        {
+            string dirShortPath = string.Format("{0}.files", item.IdentifierRef);
+            string dirFullPath = Path.Combine(Course.FullPath, dirShortPath);
+
+            bool dirExists = Directory.Exists(dirFullPath);
+
+            if (dirExists == true)
+            {
+                string xmlFilePath = Path.Combine(dirFullPath, "filelist.xml");
+
+                XmlDocument doc = new XmlDocument();
+                doc.Load(xmlFilePath);
+
+                XmlNodeList list = doc.GetElementsByTagName("o:File");
+
+                string resId = item.IdentifierRef;
+
+                foreach (XmlNode file in list)
+                {
+                    string href = Path.Combine(dirShortPath, file.Attributes["HRef"].Value);
+
+                    if (Course.Manifest.resources[resId].file.Exists(f => { return f.href == href; }) == false)
+                    {
+                        Course.Manifest.resources[resId].file.Add(new FileType(href));
+                    }
+                }
+            }
         }
 
         private void AddChapterMenuItem_Click(object sender, EventArgs e)
@@ -512,7 +567,17 @@ namespace FireFly.CourseEditor.GUI
             var ti = CreateNewItem(PageType.Theory);
             var fileName = ti.PageHref;
             FileUtils.WriteAllText(fileName, @"<html></html>");
-            EditUsingWord(fileName);
+            Process p = EditUsingWord(fileName);
+            if (p != null)
+            {
+                using (p)
+                {
+                    p.WaitForExit();
+                }
+            }
+
+            AppendWordResources(ti);
+            
             (tvItems.SelectedNode = tvItems.Nodes.Find(ti.UID, true)[0]).Expand();
         }
 
@@ -579,6 +644,7 @@ namespace FireFly.CourseEditor.GUI
                     //var res = Course.Manifest.resources[node.IdentifierRef];
 
                     
+
                     ((IDisposable)tvItems.SelectedNode.Tag).Dispose();
 
                     //if (res != null)

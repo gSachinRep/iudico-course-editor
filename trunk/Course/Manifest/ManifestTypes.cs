@@ -2114,7 +2114,11 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         new public void Dispose()
         {
-            File.Delete(MapPath(href));
+            foreach( FileType f in file)
+            {
+                File.Delete(MapPath(f.href));
+            }
+            //File.Delete(MapPath(href));
             base.Dispose();
         }
 
