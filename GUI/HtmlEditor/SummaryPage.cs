@@ -59,7 +59,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
                         {
                             hasQuestions = true;
                             var obj = item.Sequencing.objectives = new ObjectivesType { primaryObjective = new ObjectivesTypePrimaryObjective(item.Identifier, true) };
-                            obj.primaryObjective.mapInfo.Add(ObjectiveTypeMapInfo.CreateForQuestion(item.Identifier));
+                            obj.primaryObjective.mapInfo.Add(ObjectiveMappingType.CreateForQuestion(item.Identifier));
                             PageItem.Sequencing.objectives.objective.Add(ObjectivesTypeObjective.CreateGlobalObj(item.Identifier));
                             w.RenderBeginTag(HtmlWriterTag.Tr);
                             {

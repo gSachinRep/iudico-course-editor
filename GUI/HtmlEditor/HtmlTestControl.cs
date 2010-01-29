@@ -91,6 +91,6 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private int? _Rank;
+        private int? _Rank = 1;
     }
 }

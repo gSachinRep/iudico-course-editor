@@ -26,38 +26,323 @@ namespace FireFly.CourseEditor.Course.Manifest
                 new XmlQualifiedName("adlcp", Adlcp),
                 new XmlQualifiedName("adlseq", Adlseq), 
                 new XmlQualifiedName("adlnav", Adlnav)});
-    }
+    }    
 
-    [XmlType("dependency", Namespace = ManifestNamespaces.Imscp)]
-    [Description("Element used to group sets of files")]
+    #region Sequencing
+
+    [Description("Sequencing information is associated with items in a hierarchical structure by associating a single <sequencing> element with the hierarchical item. Encapsulates all of the necessary sequencing information for a given activity.")]
     [Category("Main")]
-    public class DependencyType : AbstractManifestNode, IManifestNode
+    [XmlType("sequencing", Namespace = ManifestNamespaces.Imsss)]
+    public class SequencingType : AbstractManifestNode, IContainer
     {
-        private string identifierrefField;
+        private ControlModeType controlModeField;
 
-        [XmlAttribute]
-        public string identifierref
+        private SequencingRulesType sequencingRulesField;
+
+        private LimitConditionsType limitConditionsField;
+
+        private ManifestNodeList<AuxiliaryResourceType> auxiliaryResourcesField;
+
+        private RollupRulesType rollupRulesField;
+
+        private ObjectivesType objectivesField;
+
+        private RandomizationType randomizationControlsField;
+
+        private DeliveryControlsType deliveryControlsField;
+
+        private XmlElement[] anyField;
+
+        private string idField;
+
+        private string iDRefField;
+
+        private ConstrainedChoiceConsiderationsType constrainedChoiceConsiderationsField;
+
+        private RollupConsiderationsType rollupConsiderationsField;
+
+        [Description("Container for the sequencing control mode information including descriptions of the types of sequencing behaviors specified for an activity . This element captures information dealing with the types of sequencing requests that are permitted.")]
+        [Category("Main")]
+        public ControlModeType controlMode
         {
             get
             {
-                return identifierrefField;
+                return controlModeField;
             }
             set
             {
-                identifierrefField = value;
+                controlModeField = value;
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
 
-        public override string ToString()
+        [Description("Container for a sequencing rule description. Each rule describes the sequencing behavior for an activity.")]
+        [Category("Main")]
+        public SequencingRulesType sequencingRules
         {
-            return identifierref;
+            get
+            {
+                return sequencingRulesField;
+            }
+            set
+            {
+                sequencingRulesField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
+            }
         }
+
+        [Description("The limit condition deals with attempts on the activity and maximum time allowed in the attempt.")]
+        [Category("Main")]
+        public LimitConditionsType limitConditions
+        {
+            get
+            {
+                return limitConditionsField;
+            }
+            set
+            {
+                limitConditionsField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
+            }
+        }
+
+        [Description("At this time, ADL recommends to use the auxiliaryResources element with caution.")]
+        [XmlArrayItem("auxiliaryResource")]
+        public ManifestNodeList<AuxiliaryResourceType> auxiliaryResources
+        {
+            get
+            {
+                return auxiliaryResourcesField;
+            }
+            set
+            {
+                auxiliaryResourcesField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        [Description("Container for the set of rollup rules defined for the activity.")]
+        [Category("Main")]
+        public RollupRulesType rollupRules
+        {
+            get
+            {
+                return rollupRulesField;
+            }
+            set
+            {
+                rollupRulesField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
+            }
+        }
+
+        [Description("Container for the set of objectives that are to be associated with an activity.")]
+        [Category("Main")]
+        public ObjectivesType objectives
+        {
+            get
+            {
+                return objectivesField;
+            }
+            set
+            {
+                objectivesField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
+            }
+        }
+
+        [Description("Element is the container for the descriptions of how children of an activity should be ordered during the sequence process.")]
+        [Category("Main")]
+        public RandomizationType randomizationControls
+        {
+            get
+            {
+                return randomizationControlsField;
+            }
+            set
+            {
+                randomizationControlsField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
+            }
+        }
+
+        [Description("Ñontainer for the descriptions of how children of an activity should be ordered during the sequence process.")]
+        [Category("Main")]
+        public DeliveryControlsType deliveryControls
+        {
+            get
+            {
+                return deliveryControlsField;
+            }
+            set
+            {
+                deliveryControlsField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
+            }
+        }
+
+        [XmlAnyElementAttribute]
+        public XmlElement[] Any
+        {
+            get
+            {
+                return anyField;
+            }
+            set
+            {
+                anyField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        [Description("The unique identifier assigned to this set of sequencing information.")]
+        [XmlAttribute(DataType = "ID")]
+        public string ID
+        {
+            get
+            {
+                return idField;
+            }
+            set
+            {
+                idField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        [Description("A reference to a unique identifier (i.e., ID attribute of a <sequencing> element) assigned to a set of sequencing information.")]
+        [XmlAttribute(DataType = "IDREF")]
+        public string IDRef
+        {
+            get
+            {
+                return iDRefField;
+            }
+            set
+            {
+                iDRefField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        [Description("Container for the descriptions of how choice navigation requests should be constrained during the sequencing process.")]
+        [Category("Main")]
+        public ConstrainedChoiceConsiderationsType constrainedChoiceConsiderations
+        {
+            get
+            {
+                return this.constrainedChoiceConsiderationsField;
+            }
+            set
+            {
+                this.constrainedChoiceConsiderationsField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
+            }
+        }
+
+        [Description("Container for the descriptions of when an activity should be included in the rollup process.")]
+        [Category("Main")]
+        public RollupConsiderationsType rollupConsiderations
+        {
+            get
+            {
+                return this.rollupConsiderationsField;
+            }
+            set
+            {
+                this.rollupConsiderationsField = value;
+                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
+            }
+        }
+
+        #region IContainer Members
+
+        public void RemoveChild(IManifestNode child)
+        {
+            switch (child.GetType().Name)
+            {
+                case "AuxiliaryResourceType":
+                    {
+                        var item = child as AuxiliaryResourceType;
+                        if (auxiliaryResources.Contains(item))
+                        {
+                            auxiliaryResources.Remove(item);
+                            return;
+                        }
+                        break;
+                    }
+                case "ControlModeType":
+                    {
+                        if (controlMode != null)
+                        {
+                            controlMode = null;
+                            return;
+                        }
+                        break;
+                    }
+                case "SequencingRulesType":
+                    {
+                        if (sequencingRules != null)
+                        {
+                            sequencingRules = null;
+                            return;
+                        }
+                        break;
+                    }
+                case "LimitConditionsType":
+                    {
+                        if (limitConditions != null)
+                        {
+                            limitConditions = null;
+                            return;
+                        }
+                        break;
+                    }
+                case "RollupRulesType":
+                    {
+                        if (rollupRules != null)
+                        {
+                            rollupRules = null;
+                            return;
+                        }
+                        break;
+                    }
+                case "ObjectivesType":
+                    {
+                        if (objectives != null)
+                        {
+                            objectives = null;
+                            return;
+                        }
+                        break;
+                    }
+                case "RandomizationType":
+                    {
+                        if (randomizationControls != null)
+                        {
+                            randomizationControls = null;
+                            return;
+                        }
+                        break;
+                    }
+                case "DeliveryControlsType":
+                    {
+                        if (deliveryControls != null)
+                        {
+                            deliveryControls = null;
+                            return;
+                        }
+                        break;
+                    }
+            }
+            throw new FireFlyException("Item '{0}' not found", child);
+        }
+
+        #endregion
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description(
-        "Ñontainer for the descriptions of how children of an activity should be ordered during the sequence process.")]
+    [Description("Describe actions the LMS will take prior to an attempt on an activity beginning and after the attempt ends.")]
     [Category("Main")]
     public class DeliveryControlsType : AbstractManifestNode, IManifestNode
     {
@@ -75,6 +360,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("This attribute indicates that the objective progress information and activity/attempt progress information for the attempt should be recorded (true or false) and the data will contribute to the rollup for its parent activity.")]
         [DefaultValue(true)]
         public bool tracked
         {
@@ -90,6 +376,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("This attribute indicates that the attempt completion status for the activity will be set by the SCO (true or false).")]
         [DefaultValue(false)]
         public bool completionSetByContent
         {
@@ -105,6 +392,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("This attribute indicates that the objective satisfied status for the activity’s associated objective that contributes to rollup will be set by the SCO.")]
         [DefaultValue(false)]
         public bool objectiveSetByContent
         {
@@ -121,9 +409,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description(
-        "Element is the container for the descriptions of how children of an activity should be ordered during the sequence process"
-        )]
+    [Description("Element is the container for the descriptions of how children of an activity should be ordered during the sequence process.")]
     [Category("Main")]
     public class RandomizationType : AbstractManifestNode, IManifestNode
     {
@@ -143,6 +429,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("This attribute indicates when the ordering of the children of the activity should occur.")]
         [DefaultValue(RandomTimingType.never)]
         public RandomTimingType randomizationTiming
         {
@@ -158,6 +445,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute(DataType = "nonNegativeInteger")]
+        [Description("This attribute indicates the number of child activities that must be selected from the set of child activities associated with the activity.")]
         public string selectCount
         {
             get
@@ -172,6 +460,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("This attribute indicates that the order of the child activities is randomized.")]
         [DefaultValue(false)]
         public bool reorderChildren
         {
@@ -187,6 +476,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("This attribute indicates when the selection should occur.")]
         [DefaultValue(RandomTimingType.never)]
         public RandomTimingType selectionTiming
         {
@@ -203,6 +493,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
+    [Description("This attribute indicates when the ordering of the children of the activity should occur.")]
     public enum RandomTimingType
     {
         never,
@@ -211,9 +502,11 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    public class ObjectiveMappingType: AbstractManifestNode, IManifestNode
+    [Description("Container for the objective map description. This defines the mapping of an activity’s local objective information to and from a shared global objective.")]
+    [Category("Main")]
+    public class ObjectiveTypeMapInfo : AbstractManifestNode, IManifestNode
     {
-        public ObjectiveMappingType()
+        public ObjectiveTypeMapInfo()
         {
             readSatisfiedStatus = true;
             readNormalizedMeasure = true;
@@ -222,26 +515,43 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute(DataType = "anyURI")]
+        [Description("The identifier of the global shared objective targeted for the mapping.")]
         public string targetObjectiveID { get; set; }
 
         [XmlAttribute]
+        [Description("This attribute indicates that the satisfaction status for the identified local objective should be retrieved (true or false) from the identified shared global objective when the progress for the global objective is defined.")]
         [DefaultValue(true)]
         public bool readSatisfiedStatus { get; set; }
 
         [XmlAttribute]
+        [Description("This attribute indicates that the normalized measure for the identified local objective should be retrieved (true or false) from the identified shared global objective when the measure for the global objective is defined.")]
         [DefaultValue(true)]
         public bool readNormalizedMeasure { get; set; }
 
         [XmlAttribute]
+        [Description("This attribute indicates that the satisfaction status for the identified local objective should be transferred (true or false) to the identified shared global objective upon termination ( Termination(“”) ) of the attempt on the activity.")]
         [DefaultValue(false)]
         public bool writeSatisfiedStatus { get; set; }
 
         [XmlAttribute]
+        [Description("This attribute indicates that the normalized measure for the identified local objective should be transferred (true or false) to the identified shared global objective upon termination ( Termination(“”) ) of the attempt on the activity.")]
         [DefaultValue(false)]
         public bool writeNormalizedMeasure { get; set; }
+
+        public override string ToString()
+        {
+            if (this.targetObjectiveID == null || this.targetObjectiveID == "")
+            {
+                return "mapInfo";
+            }
+            return this.targetObjectiveID;
+        }
     }
 
+    [XmlInclude(typeof(ObjectivesTypeObjective))]
+    [XmlInclude(typeof(ObjectivesTypePrimaryObjective))]
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
+    [Description("Identifies objectives that do not contribute to rollup associated with the activity. This element can only exist if a <primaryObjective> has been defined.")]
     public class ObjectiveType : AbstractManifestNode, IManifestNode
     {
         private decimal minNormalizedMeasureField;
@@ -254,6 +564,8 @@ namespace FireFly.CourseEditor.Course.Manifest
             satisfiedByMeasure = false;
         }
 
+        [XmlElement(Namespace=ManifestNamespaces.Imsss)]
+        [Description("Identifies minimum satisfaction measure for the objective. The value is normalized between –1 and 1 (inclusive).")]
         [DefaultValue(typeof(decimal), "1.00000")]
         public decimal minNormalizedMeasure
         {
@@ -269,6 +581,8 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("mapInfo")]
+        [Description("Container for the objective map description.")]
+        [Category("Main")]
         public List<ObjectiveTypeMapInfo> mapInfo
         {
             get
@@ -285,14 +599,16 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("This attribute indicates that the <minNormalizedMeasure> shall be used (if value is set to true) in place of any other method to determine if the objective associated with the activity is satisfied.")]
         [DefaultValue(false)]
         public bool satisfiedByMeasure { get; set; }
     }
 
     [XmlType(AnonymousType = true)]
-    public class ObjectiveTypeMapInfo : ObjectiveMappingType
+    [Description("Container for the objective map description. This defines the mapping of an activity’s local objective information to and from a shared global objective.")]
+    public class ObjectiveMappingType : ObjectiveTypeMapInfo
     {
-        public ObjectiveTypeMapInfo(string TargetObjectiveID, bool ReadNormalizedMeasure, bool WriteNormalizedMeasure)
+        public ObjectiveMappingType(string TargetObjectiveID, bool ReadNormalizedMeasure, bool WriteNormalizedMeasure)
             : this(TargetObjectiveID)
         {
             writeSatisfiedStatus = true;
@@ -300,26 +616,26 @@ namespace FireFly.CourseEditor.Course.Manifest
             writeNormalizedMeasure = WriteNormalizedMeasure;
         }
 
-        public ObjectiveTypeMapInfo(string TargetObjectiveID)
+        public ObjectiveMappingType(string TargetObjectiveID)
         {
             targetObjectiveID = TargetObjectiveID;
         }
 
-        public ObjectiveTypeMapInfo()
+        public ObjectiveMappingType()
         {
         }
 
-        public static ObjectiveTypeMapInfo CreateForQuestion(string TargetID)
+        public static ObjectiveMappingType CreateForQuestion(string TargetID)
         {
-            var result = new ObjectiveTypeMapInfo(TargetID);
+            var result = new ObjectiveMappingType(TargetID);
             result.readNormalizedMeasure = result.readSatisfiedStatus =
                 result.writeNormalizedMeasure = result.writeSatisfiedStatus = true;
             return result;
         }
 
-        public static ObjectiveTypeMapInfo CreateForSummary(string TargetID)
+        public static ObjectiveMappingType CreateForSummary(string TargetID)
         {
-            var result = new ObjectiveTypeMapInfo(TargetID);
+            var result = new ObjectiveMappingType(TargetID);
             result.readNormalizedMeasure = result.readSatisfiedStatus = true;
             result.writeNormalizedMeasure = result.writeSatisfiedStatus = false;
             return result;
@@ -327,7 +643,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description("Container for the set of objectives that are to be associated with an activity")]
+    [Description("Container for the set of objectives that are to be associated with an activity.")]
     [Category("Main")]
     public class ObjectivesType : AbstractManifestNode, IContainer
     {
@@ -335,6 +651,7 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         private ManifestNodeList<ObjectivesTypeObjective> objectiveField;
 
+        [Description("Identifies the objective that contributes to the rollup associated with the activity.")]
         public ObjectivesTypePrimaryObjective primaryObjective
         {
             get
@@ -349,6 +666,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("objective")]
+        [Description("Identifies objectives that do not contribute to rollup associated with the activity.")]
         public ManifestNodeList<ObjectivesTypeObjective> objective
         {
             get
@@ -398,11 +716,13 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(AnonymousType = true, Namespace = ManifestNamespaces.Imsss)]
+    [Description("Identifies the objective that contributes to the rollup associated with the activity.")]
     public class ObjectivesTypePrimaryObjective : ObjectiveType
     {
         private string objectiveIDField;
 
         [XmlAttribute(DataType = "anyURI")]
+        [Description("The identifier of the objective associated with the activity.")]
         public string objectiveID
         {
             get
@@ -418,7 +738,11 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         public override string ToString()
         {
-            return objectiveID;
+            if (this.objectiveID == null || this.objectiveID == "")
+            {
+                return "primaryObjective";
+            }
+            return this.objectiveID;
         }
 
         public ObjectivesTypePrimaryObjective(string ID)
@@ -438,6 +762,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(AnonymousType = true, Namespace = ManifestNamespaces.Imsss)]
+    [Description("Identifies objectives that do not contribute to rollup associated with the activity. This element can only exist if a <primaryObjective> has been defined.")]
     public class ObjectivesTypeObjective : ObjectiveType
     {
         public ObjectivesTypeObjective(string ID)
@@ -452,6 +777,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         private string objectiveIDField;
 
         [XmlAttribute(DataType = "anyURI")]
+        [Description("The identifier of the objective associated with the activity.")]
         public string objectiveID
         {
             get
@@ -467,19 +793,23 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         public override string ToString()
         {
-            return objectiveID;
+            if (this.objectiveID == null || this.objectiveID == "")
+            {
+                return "objective";
+            }
+            return this.objectiveID;
         }
 
         public static ObjectivesTypeObjective CreateGlobalObj(string ID)
         {
             var result = new ObjectivesTypeObjective(ID);
-            result.mapInfo.Add(ObjectiveTypeMapInfo.CreateForSummary(ID));
+            result.mapInfo.Add(ObjectiveMappingType.CreateForSummary(ID));
             return result;
         }
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description("Container for the set of rollup rules defined for the activity")]
+    [Description("Container for each rollup rule that is to be applied to an activity. The general format for a rule can be expressed informally as 'If child-activity set, condition set Then action'. Multiple conditions are permitted.")]
     [Category("Main")]
     public class RollupRuleType : AbstractManifestNode, IContainer
     {
@@ -499,7 +829,8 @@ namespace FireFly.CourseEditor.Course.Manifest
             minimumCountField = "0";
             minimumPercentField = 0m;
         }
-        [Description("Container for the set of conditions that are applied within a single rollup rule")]
+        
+        [Description("Container for the set of conditions that are applied within a single rollup rule.")]
         [Category("Main")]
         public RollupRuleTypeRollupConditions rollupConditions
         {
@@ -514,6 +845,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
 
+        [Description("Identifies a condition to be applied in the rollup rule.")]
         public RollupRuleTypeRollupAction rollupAction
         {
             get
@@ -528,6 +860,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("This attribute indicates whose data values are used to evaluate the rollup condition.")]
         [DefaultValue(ChildActivityType.all)]
         public ChildActivityType childActivitySet
         {
@@ -543,6 +876,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute(DataType = "nonNegativeInteger")]
+        [Description("The minimumCount attribute shall be used when the childActivitySet attribute is set to \"atLeastCount\".")]
         [DefaultValue("0")]
         public string minimumCount
         {
@@ -558,6 +892,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("The minimumPercent attribute shall be used when the childActivitySet attribute is set to atLeastPercent.")]
         [DefaultValue(typeof(decimal), "0")]
         public decimal minimumPercent
         {
@@ -597,14 +932,14 @@ namespace FireFly.CourseEditor.Course.Manifest
                         break;
                     }
             }
-            throw new FireFlyException("Manifest item '{0}' not found", child); 
+            throw new FireFlyException("Manifest item '{0}' not found", child);
         }
 
         #endregion
     }
 
     [XmlType(AnonymousType = true)]
-    [Description("Container for the set of conditions that are applied within a single rollup rule")]
+    [Description("Container for the set of conditions that are applied within a single rollup rule.")]
     [Category("Main")]
     public class RollupRuleTypeRollupConditions : AbstractManifestNode, IContainer
     {
@@ -618,7 +953,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("rollupCondition")]
-        [Description("Identifies a condition to be applied in the rollup rule")]
+        [Description("Identifies a condition to be applied in the rollup rule.")]
         [Category("Main")]
         public ManifestNodeList<RollupRuleTypeRollupConditionsRollupCondition> rollupCondition
         {
@@ -638,7 +973,7 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         [XmlAttribute]
         [DefaultValue(ConditionCombinationType.any)]
-        [Description("This attribute indicates how rule conditions are combined in evaluating the rule")]
+        [Description("This attribute indicates how rule conditions are combined in evaluating the rule.")]
         [Category("Main")]
         public ConditionCombinationType conditionCombination
         {
@@ -677,7 +1012,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(AnonymousType = true)]
-    [Description("Identifies a condition to be applied in the rollup rule")]
+    [Description("Identifies a condition to be applied in the rollup rule.")]
     [Category("Main")]
     public class RollupRuleTypeRollupConditionsRollupCondition : AbstractManifestNode, IManifestNode
     {
@@ -691,6 +1026,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("The unary logical operator to be applied to the individual condition.")]
         [DefaultValue(ConditionOperatorType.noOp)]
         public ConditionOperatorType @operator
         {
@@ -706,6 +1042,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("Indicates the condition element for the rule.")]
         public RollupRuleConditionType condition
         {
             get
@@ -721,6 +1058,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
+    [Description("The unary logical operator to be applied to the individual condition.")]
     public enum ConditionOperatorType
     {
         not,
@@ -728,6 +1066,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
+    [Description("Indicates the condition element for the rule.")]
     public enum RollupRuleConditionType
     {
         satisfied,
@@ -794,9 +1133,9 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description("Container for the set of rollup rules defined for the activity")]
+    [Description("Container for the set of rollup rules defined for the activity.")]
     [Category("Main")]
-    public class RollupRulesType : AbstractManifestNode, IManifestNode
+    public class RollupRulesType : AbstractManifestNode, IContainer
     {
         private ManifestNodeList<RollupRuleType> rollupRuleField;
 
@@ -814,7 +1153,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("rollupRule")]
-        [Description("Container for the set of rollup rules defined for the activity")]
+        [Description("Container for the set of rollup rules defined for the activity.")]
         [Category("Main")]
         public ManifestNodeList<RollupRuleType> rollupRule
         {
@@ -832,6 +1171,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
 
+        [Description("This attribute indicates that the objective’s satisfied status associated with the activity is included in the rollup for its parent activity.")]
         [XmlAttribute]
         [DefaultValue(true)]
         public bool rollupObjectiveSatisfied
@@ -847,6 +1187,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
 
+        [Description("This attribute indicates that the attempt’s completion status associated with the activity is included in the rollup for its parent activity.")]
         [XmlAttribute]
         [DefaultValue(true)]
         public bool rollupProgressCompletion
@@ -862,6 +1203,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
 
+        [Description("This attribute indicates the weighting factor applied to the objectives normalized measure used during rollup for the parent activity.")]
         [XmlAttribute]
         [DefaultValue(typeof(decimal), "1.0000")]
         public decimal objectiveMeasureWeight
@@ -900,6 +1242,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
+    [Description("At this time, ADL recommends to use the auxiliaryResources element with caution.")]
     public class AuxiliaryResourceType : AbstractManifestNode, IManifestNode
     {
         private string auxiliaryResourceIDField;
@@ -949,6 +1292,7 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         private string attemptAbsoluteDurationLimitField;
 
+        [Description("This value indicates the maximum number of attempts for the activity.")]
         [XmlAttribute(DataType = "nonNegativeInteger")]
         public string attemptLimit
         {
@@ -963,6 +1307,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
 
+        [Description("This value indicates the maximum time duration that the learner is permitted to spend on any single learner attempt on the activity. The limit applies to only the time the learner is actually interacting with the activity and does not apply when the activity is suspended.")]
         [XmlAttribute(DataType = "duration")]
         public string attemptAbsoluteDurationLimit
         {
@@ -982,16 +1327,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     [XmlInclude(typeof(PostConditionRuleType))]
     [XmlInclude(typeof(ExitConditionRuleType))]
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description(
-        "Container for a sequencing rule description. Each rule describes the sequencing behavior for an activity")]
+    [Description("Container for a sequencing rule description. Each rule describes the sequencing behavior for an activity.")]
     [Category("Main")]
     public abstract class SequencingRuleType : AbstractManifestNode, IManifestNode
     {
         private SequencingRuleTypeRuleConditions ruleConditionsField;
-        [Description(
-                "Container for the set of conditions that are to be applied either the pre-condition, post-condition and exit condition rules"
-        )]
-         [Category("Main")]
+        
+        [Description("Container for the set of conditions that are to be applied either the pre-condition, post-condition and exit condition rules.")]
+        [Category("Main")]
         public SequencingRuleTypeRuleConditions ruleConditions
         {
             get
@@ -1007,9 +1350,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(AnonymousType = true)]
-    [Description(
-        "Container for the set of conditions that are to be applied either the pre-condition, post-condition and exit condition rules"
-        )]
+    [Description("Container for the set of conditions that are to be applied either the pre-condition, post-condition and exit condition rules.")]
     [Category("Main")]
     public class SequencingRuleTypeRuleConditions : AbstractManifestNode, IContainer
     {
@@ -1023,7 +1364,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("ruleCondition")]
-        [Description("Element represents the condition that is evaluated")]
+        [Description("Element represents the condition that is evaluated.")]
         [Category("Main")]
         public ManifestNodeList<SequencingRuleTypeRuleConditionsRuleCondition> ruleCondition
         {
@@ -1043,7 +1384,7 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         [XmlAttribute]
         [DefaultValue(ConditionCombinationType.all)]
-        [Description("This attribute indicates how rule conditions are combined in evaluating the rule")]
+        [Description("This attribute indicates how rule conditions are combined in evaluating the rule.")]
         [Category("Main")]
         public ConditionCombinationType conditionCombination
         {
@@ -1082,15 +1423,13 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(AnonymousType = true)]
-    [Description("Element represents the condition that is evaluated")]
+    [Description("Element represents the condition that is evaluated.")]
     [Category("Main")]
     public class SequencingRuleTypeRuleConditionsRuleCondition : AbstractManifestNode, IManifestNode
     {
         private string referencedObjectiveField;
 
         private decimal measureThresholdField;
-
-        private bool measureThresholdFieldSpecified;
 
         private ConditionOperatorType operatorField;
 
@@ -1101,6 +1440,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             operatorField = ConditionOperatorType.noOp;
         }
 
+        [Description("This attribute represents the identifier of a local objective associated with the activity. The status of this objective will be used during the evaluation of the condition.")]
         [XmlAttribute(DataType = "anyURI")]
         public string referencedObjective
         {
@@ -1115,6 +1455,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
 
+        [Description("The value used as a threshold during measurebased condition evaluations.")]
         [XmlAttribute]
         public decimal measureThreshold
         {
@@ -1129,20 +1470,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
 
-        [XmlIgnoreAttribute]
-        public bool measureThresholdSpecified
-        {
-            get
-            {
-                return measureThresholdFieldSpecified;
-            }
-            set
-            {
-                measureThresholdFieldSpecified = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
+        [Description("The unary logical operator to be applied to the condition.")]
         [XmlAttribute]
         [DefaultValue(ConditionOperatorType.noOp)]
         public ConditionOperatorType @operator
@@ -1158,6 +1486,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
 
+        [Description("This attribute represents the actual condition for the rule.")]
         [XmlAttribute]
         public SequencingRuleConditionType condition
         {
@@ -1173,6 +1502,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
     }
 
+    [Description("This attribute represents the actual condition for the rule.")]
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
     public enum SequencingRuleConditionType
     {
@@ -1190,14 +1520,13 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description(
-        "Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are used to determine if the activity will be delivered"
-        )]
+    [Description("Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are used to determine if the activity will be delivered.")]
     [Category("Main")]
     public class PreConditionRuleType : SequencingRuleType, IContainer
     {
         private PreConditionRuleTypeRuleAction ruleActionField;
-        [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+        
+        [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
         [Category("Main")]
         public PreConditionRuleTypeRuleAction ruleAction
         {
@@ -1244,14 +1573,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(AnonymousType = true)]
-    [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+    [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
     [Category("Main")]
     public class PreConditionRuleTypeRuleAction : AbstractManifestNode, IManifestNode
     {
         private PreConditionRuleActionType actionField;
 
         [XmlAttribute]
-        [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+        [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
         [Category("Main")]
         public PreConditionRuleActionType action
         {
@@ -1268,7 +1597,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+    [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
     [Category("Main")]
     public enum PreConditionRuleActionType
     {
@@ -1279,14 +1608,13 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description(
-        "Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are applied when the activity attempt terminates"
-        )]
+    [Description("Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are applied when the activity attempt terminates.")]
     [Category("Main")]
     public class PostConditionRuleType : SequencingRuleType
     {
         private PostConditionRuleTypeRuleAction ruleActionField;
-        [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+        
+        [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
         [Category("Main")]
         public PostConditionRuleTypeRuleAction ruleAction
         {
@@ -1333,14 +1661,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(AnonymousType = true)]
-    [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+    [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
     [Category("Main")]
     public class PostConditionRuleTypeRuleAction : AbstractManifestNode, IManifestNode
     {
         private PostConditionRuleActionType actionField;
 
         [XmlAttribute]
-        [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+        [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
         [Category("Main")]
         public PostConditionRuleActionType action
         {
@@ -1362,7 +1690,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+    [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
     [Category("Main")]
     public enum PostConditionRuleActionType
     {
@@ -1375,14 +1703,13 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description(
-        "Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are applied after an activity attempt on a descendent activity terminates"
-        )]
+    [Description("Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are applied after an activity attempt on a descendent activity terminates.")]
     [Category("Main")]
     public class ExitConditionRuleType : SequencingRuleType, IContainer
     {
         private ExitConditionRuleTypeRuleAction ruleActionField;
-        [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+        
+        [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
         [Category("Main")]
         public ExitConditionRuleTypeRuleAction ruleAction
         {
@@ -1429,14 +1756,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(AnonymousType = true)]
-    [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+    [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
     [Category("Main")]
     public class ExitConditionRuleTypeRuleAction : AbstractManifestNode, IManifestNode
     {
         private ExitConditionRuleActionType actionField;
 
         [XmlAttribute]
-        [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+        [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
         [Category("Main")]
         public ExitConditionRuleActionType action
         {
@@ -1453,7 +1780,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description("Element is the desired sequencing behavior if the rule evaluates to true")]
+    [Description("Element is the desired sequencing behavior if the rule evaluates to true.")]
     [Category("Main")]
     public enum ExitConditionRuleActionType
     {
@@ -1461,8 +1788,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description(
-        "Container for a sequencing rule description. Each rule describes the sequencing behavior for an activity")]
+    [Description("Container for a sequencing rule description. Each rule describes the sequencing behavior for an activity.")]
     [Category("Main")]
     public class SequencingRulesType : AbstractManifestNode, IContainer
     {
@@ -1473,9 +1799,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         private ManifestNodeList<PostConditionRuleType> postConditionRuleField;
 
         [XmlElement("preConditionRule")]
-        [Description(
-          "Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are used to determine if the activity will be delivered"
-         )]
+        [Description("Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are used to determine if the activity will be delivered.")]
         [Category("Main")]
         public ManifestNodeList<PreConditionRuleType> preConditionRule
         {
@@ -1494,9 +1818,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("exitConditionRule")]
-        [Description(
-    "Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are applied after an activity attempt on a descendent activity terminates"
-    )]
+        [Description("Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are applied after an activity attempt on a descendent activity terminates.")]
         [Category("Main")]
         public ManifestNodeList<ExitConditionRuleType> exitConditionRule
         {
@@ -1515,9 +1837,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("postConditionRule")]
-        [Description(
-    "Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are applied when the activity attempt terminates"
-    )]
+        [Description("Container for the description of actions that control sequencing decisions and delivery of a specific activity. Rules that include such actions are applied when the activity attempt terminates.")]
         [Category("Main")]
         public ManifestNodeList<PostConditionRuleType> postConditionRule
         {
@@ -1579,11 +1899,9 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType(Namespace = ManifestNamespaces.Imsss)]
-    [Description(
-        "Container for the sequencing control mode information including descriptions of the types of sequencing behaviors specified for an activity . This element captures information dealing with the types of sequencing requests that are permitted."
-        )]
+    [Description("Container for the sequencing control mode information including descriptions of the types of sequencing behaviors specified for an activity . This element captures information dealing with the types of sequencing requests that are permitted.")]
     [Category("Main")]
-    public class ControlModeType: AbstractManifestNode
+    public class ControlModeType : AbstractManifestNode
     {
         public ControlModeType()
         {
@@ -1595,33 +1913,319 @@ namespace FireFly.CourseEditor.Course.Manifest
             useCurrentAttemptProgressInfo = true;
         }
 
+        [Description("Indicates that a choice sequencing request is permitted (or not permitted if value = false) to target the children of the activity.")]
         [XmlAttribute]
         [DefaultValue(true)]
         public bool choice { get; set; }
 
+        [Description("Indicates that an active child of this activity is permitted to terminate (or not permitted if value = false) if a choice sequencing request is processed.")]
         [XmlAttribute]
         [DefaultValue(true)]
         public bool choiceExit { get; set; }
 
+        [Description("Indicates the flow sequencing requests is permitted (or not permitted if value = false) to the children of this activity.")]
         [XmlAttribute]
         [DefaultValue(false)]
         public bool flow { get; set; }
 
+        [Description("Indicates that backward targets (in terms of activity tree traversal) are not permitted (or are permitted if value = false) for the children of this activity.")]
         [XmlAttribute]
         [DefaultValue(false)]
         public bool forwardOnly { get; set; }
 
+        [Description("Indicates that the objective progress information for the children of the activity will only be used (or not used if value = false) in rule evaluations and rollup if that information was recorded during the current attempt on the activity.")]
         [XmlAttribute]
         [DefaultValue(true)]
         public bool useCurrentAttemptObjectiveInfo { get; set; }
 
+        [Description("Indicates that the attempt progress information for the children of the activity will only be used (or not used if value = false) in rule evaluations and rollup if that information was recorded during the current attempt on the activity.")]
         [XmlAttribute]
         [DefaultValue(true)]
         public bool useCurrentAttemptProgressInfo { get; set; }
     }
 
+    [XmlType("constrainedChoiceConsiderations", Namespace = ManifestNamespaces.Adlseq)]
+    [Description("Element is the container for the descriptions of how choice navigation requests should be constrained during the sequencing process. The constrained choice only applies to the activity for which it is defined.")]
+    public class ConstrainedChoiceConsiderationsType : AbstractManifestNode, IManifestNode
+    {
+        private bool preventActivationField;
+
+        private bool constrainChoiceField;
+
+        public ConstrainedChoiceConsiderationsType()
+        {
+            preventActivationField = false;
+            constrainChoiceField = false;
+        }
+
+        [XmlAttribute]
+        [Description("This attribute indicates that attempts on children activities should not begin unless the current activity is the parent.")]
+        [DefaultValue(false)]
+        public bool preventActivation
+        {
+            get
+            {
+                return preventActivationField;
+            }
+            set
+            {
+                preventActivationField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+
+        [XmlAttribute]
+        [Description("This attribute indicates that only activities which are logically 'next' from the constrained activities can be targets of a choice navigation request.")]
+        [DefaultValue(false)]
+        public bool constrainChoice
+        {
+            get
+            {
+                return constrainChoiceField;
+            }
+            set
+            {
+                constrainChoiceField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        public override string ToString()
+        {
+            return "constrainedChoiceConsiderations";
+        }
+    }
+
+    [XmlType("rollupConsiderations", Namespace = ManifestNamespaces.Adlseq)]
+    [Description("Element is the container for the descriptions of when an activity should be included in the rollup process.")]
+    public class RollupConsiderationsType : AbstractManifestNode, IManifestNode
+    {
+        private RollupConsiderationType requiredForSatisfiedField;
+
+        private RollupConsiderationType requiredForNotSatisfiedField;
+
+        private RollupConsiderationType requiredForCompletedField;
+
+        private RollupConsiderationType requiredForIncompleteField;
+
+        private bool measureSatisfactionIfActiveField;
+
+        public RollupConsiderationsType()
+        {
+            requiredForSatisfiedField = RollupConsiderationType.always;
+            requiredForNotSatisfiedField = RollupConsiderationType.always;
+            requiredForCompletedField = RollupConsiderationType.always;
+            requiredForIncompleteField = RollupConsiderationType.always;
+            measureSatisfactionIfActiveField = true;
+        }
+
+        [XmlAttribute]
+        [Description("This attribute indicates the condition under which the activity is included in its parent’s evaluation of a satisfied rollup rule.")]
+        [DefaultValue(RollupConsiderationType.always)]
+        public RollupConsiderationType requiredForSatisfied
+        {
+            get
+            {
+                return requiredForSatisfiedField;
+            }
+            set
+            {
+                requiredForSatisfiedField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        [XmlAttribute]
+        [Description("This attribute indicates the condition under which the activity is included in its parent’s evaluation of a not satisfied rollup rule.")]
+        [DefaultValue(RollupConsiderationType.always)]
+        public RollupConsiderationType requiredForNotSatisfied
+        {
+            get
+            {
+                return requiredForNotSatisfiedField;
+            }
+            set
+            {
+                requiredForNotSatisfiedField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        [XmlAttribute]
+        [Description("This attribute indicates the condition under which the activity is included in its parent’s evaluation of a completed rollup rule.")]
+        [DefaultValue(RollupConsiderationType.always)]
+        public RollupConsiderationType requiredForCompleted
+        {
+            get
+            {
+                return requiredForCompletedField;
+            }
+            set
+            {
+                requiredForCompletedField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+
+        [XmlAttribute]
+        [Description("This attributeindicates the condition under which the activity is included in its parent’s evaluation of a incomplete rollup rule.")]
+        [DefaultValue(RollupConsiderationType.always)]
+        public RollupConsiderationType requiredForIncomplete
+        {
+            get
+            {
+                return requiredForIncompleteField;
+            }
+            set
+            {
+                requiredForIncompleteField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        [XmlAttribute]
+        [Description("This attribute indicates if the measure should be used to determine satisfaction during rollup when the activity is active.")]
+        [DefaultValue(true)]
+        public bool measureSatisfactionIfActive
+        {
+            get
+            {
+                return measureSatisfactionIfActiveField;
+            }
+            set
+            {
+                measureSatisfactionIfActiveField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        public override string ToString()
+        {
+            return "rollupConsiderations";
+        }
+    }
+
+    [XmlType(Namespace = ManifestNamespaces.Adlseq)]
+    [Description("When an activity should be included in the rollup process.")]
+    public enum RollupConsiderationType
+    {
+        always,
+        ifAttempted,
+        ifNotSkipped,
+        ifNotSuspended,
+    }
+
+    [XmlType(Namespace = ManifestNamespaces.Imsss)]
+    [Description("Container for the set of sequencing information. The reuse happens when the IDRef attribute of the <sequencing> element references an ID attribute of a <sequencing> element that it is a child element of the <sequencingCollection>.")]
+    [Category("Main")]
+    public class SequencingCollection : AbstractManifestNode, IContainer
+    {
+        private ManifestNodeList<SequencingType> sequencingCollectionField;
+                
+        [XmlElement("sequencing", Namespace=ManifestNamespaces.Imsss)]
+        [Description("Container for the set of sequencing information.")]
+        [Category("Main")]
+        public ManifestNodeList<SequencingType> sequencingCollection
+        {
+            get
+            {
+                return this.sequencingCollectionField;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    this.sequencingCollectionField = new ManifestNodeList<SequencingType>();
+                }
+                else
+                {
+                    this.sequencingCollectionField = value;
+                }
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        public SequencingCollection()
+        {
+            this.sequencingCollection = new ManifestNodeList<SequencingType>();
+        }
+
+        public override string ToString()
+        {
+            return "sequencingCollection";
+        }
+
+        #region IContainer Members
+
+        public void RemoveChild(IManifestNode child)
+        {
+            switch (child.GetType().Name)
+            {
+                case "SequencingType":
+                    {
+                        SequencingType item = child as SequencingType;
+                        if (this.sequencingCollection.Contains(item))
+                        {
+                            this.sequencingCollection.Remove(item);
+                            return;
+                        }
+                        break;
+                    }                
+            }
+            throw new FireFlyException("Item '{0}' not found", child);
+        }
+
+        #endregion
+    }
+
+    #endregion //Sequencing
+    
+    /// <summary>
+    /// Defines type of item-page.
+    /// </summary>
+    public enum PageType
+    {
+        Unknown,
+        Theory,
+        Question,
+        Summary,
+        Chapter,
+        ControlChapter
+    }
+
+    #region Other Manifest Elements
+
+    [XmlType("dependency", Namespace = ManifestNamespaces.Imscp)]
+    [Description("Element used to group sets of files.")]
+    [Category("Main")]
+    public class DependencyType : AbstractManifestNode, IManifestNode
+    {
+        private string identifierrefField;
+
+        [XmlAttribute]
+        public string identifierref
+        {
+            get
+            {
+                return identifierrefField;
+            }
+            set
+            {
+                identifierrefField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
+        public override string ToString()
+        {
+            return identifierref;
+        }
+    }
+
     [XmlType("file", Namespace = ManifestNamespaces.Imscp)]
-    [Description("Describes an Asset in a context insensitive manner")]
+    [Description("Describes an Asset in a context insensitive manner.")]
     [Category("Main")]
     public class FileType : AbstractManifestNode, IManifestNode
     {
@@ -1637,6 +2241,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         {
             this.href = href;
         }
+        
         [Description("Contains relevant information that describes the content package as a whole.")]
         [Category("Main")]
         public MetadataType metadata
@@ -1671,31 +2276,22 @@ namespace FireFly.CourseEditor.Course.Manifest
             return href;
         }
     }
-
-    public enum PageType
-    {
-        Unknown,
-        Theory,
-        Question,
-        Summary,
-        Chapter,
-        ControlChapter
-    }
-
+    
     [XmlRoot("manifest", Namespace = ManifestNamespaces.Imscp)]
-    [Description("Element represents a reusable unit of instruction that encapsulates meta-data, organizations and resource references")]
+    [Description("Element represents a reusable unit of instruction that encapsulates meta-data, organizations and resource references.")]
     [Category("Main")]
     public class ManifestType : AbstractManifestNode, IManifestNode, ITitled
     {
+        [NotNull]
         public static XmlSerializer Serializer;
 
         /// <summary>
-        /// Create empty manifest
+        /// Create empty manifest.
         /// </summary>
-        /// <param name="identifier">Identifier of new manifest</param>
+        /// <param name="identifier">Identifier of new manifest.</param>
         public ManifestType(string identifier)
         {
-            var org = new OrganizationType {SubItems = new ManifestNodeList<ItemType>(this), Title = "Chapter 1"};
+            var org = new OrganizationType { SubItems = new ManifestNodeList<ItemType>(this), Title = "Chapter 1" };
             organizations = new OrganizationsType();
             organizations.Organizations.Add(org);
             resources = new ResourcesType();
@@ -1703,10 +2299,11 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         /// <summary>
-        /// Create new manifest
+        /// Create new manifest.
         /// </summary>
         public ManifestType()
         {
+            this.sequencingCollection = new SequencingCollection();
         }
 
         private MetadataType metadataField;
@@ -1714,6 +2311,8 @@ namespace FireFly.CourseEditor.Course.Manifest
         private OrganizationsType organizationsField;
 
         private ResourcesType resourcesField;
+
+        private SequencingCollection sequencingCollectionField;
 
         private ManifestNodeList<ManifestType> manifestField;
 
@@ -1735,7 +2334,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description("Contains the content structure or organization of the learning resources making up a stand-alone unit or units of instruction")]
+        
+        [Description("Contains the content structure or organization of the learning resources making up a stand-alone unit or units of instruction.")]
         [Category("Main")]
         public OrganizationsType organizations
         {
@@ -1749,7 +2349,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description("Element is a collection of references to resources")]
+        
+        [Description("Element is a collection of references to resources.")]
         [Category("Main")]
         public ResourcesType resources
         {
@@ -1764,10 +2365,24 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
 
+        [XmlElement("sequencingCollection", Namespace = ManifestNamespaces.Imsss)]
+        [Description("Container for the set of sequencing information.")]
+        [Category("Main")]
+        public SequencingCollection sequencingCollection
+        {
+            get
+            {
+                return this.sequencingCollectionField;
+            }
+            set
+            {
+                this.sequencingCollectionField = value;
+                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
+            }
+        }
+
         [XmlElement("manifest")]
-        [Description(
-    "Element represents a reusable unit of instruction that encapsulates meta-data, organizations and resource references"
-    )]
+        [Description("Element represents a reusable unit of instruction that encapsulates meta-data, organizations and resource references.")]
         [Category("Main")]
         public ManifestNodeList<ManifestType> manifest
         {
@@ -1786,6 +2401,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute("identifier")]
+        [Description("This attribute identifies the manifest. The identifier is unique within the manifest element.")]
         public string Identifier
         {
             get
@@ -1807,6 +2423,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [Description("The version attribute identifies the version of the manifest.")]
         [DefaultValue(0)]
         public int version
         {
@@ -1861,13 +2478,15 @@ namespace FireFly.CourseEditor.Course.Manifest
         {
         }
 
+        [Description("The <schema> element describes the schema that defines and controls the manifest element.")]
         public string schema { get; set; }
 
+        [Description("The <schemaversion> element describes the version of the above schema (<schema>).")]
         public string schemaversion { get; set; }
     }
 
     [XmlType("resource", Namespace = ManifestNamespaces.Imscp)]
-    [Description("Element is a reference to a resource. There are two primary types of resources defined within SCORM: Asset and SCO")]
+    [Description("Element is a reference to a resource. There are two primary types of resources defined within SCORM: Asset and SCO.")]
     [Category("Main")]
     public class ResourceType : AbstractManifestNode, IManifestNode, IDisposable
     {
@@ -1922,6 +2541,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
+        
         [Description("scormType shall be set to sco or asset")]
         [Category("Main")]
         [XmlAttribute("scormType", Namespace = ManifestNamespaces.Adlcp)]
@@ -1937,6 +2557,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
+        
         [Description("Describes an Asset in a context insensitive manner")]
         [Category("Main")]
         [XmlElement("file")]
@@ -1977,17 +2598,12 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         [Editor("string", typeof(string))]
         [XmlArrayItem("langstring", IsNullable = false)]
-        [Description(
-    "Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified"
-    )]
+        [Description("Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified.")]
         [Category("Main")]
         public ManifestNodeList<LangstringType> description
         {
             get
             {
-                if (descriptionField == null)
-                    descriptionField = new ManifestNodeList<LangstringType>(this);
-
                 return descriptionField;
             }
             set
@@ -2114,7 +2730,7 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         new public void Dispose()
         {
-            foreach( FileType f in file)
+            foreach (FileType f in file)
             {
                 File.Delete(MapPath(f.href));
             }
@@ -2126,7 +2742,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("resources", Namespace = ManifestNamespaces.Imscp)]
-    [Description("Element is a collection of references to resources")]
+    [Description("Element is a collection of references to resources.")]
     [Category("Main")]
     public class ResourcesType : AbstractManifestNode, IResourceContainer
     {
@@ -2205,16 +2821,15 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("aggregationlevel", Namespace = ManifestNamespaces.Imsmd)]
-    [Description("Element shall describe the functional granularity of the learning object")]
+    [Description("Element shall describe the functional granularity of the learning object.")]
     [Category("Main")]
     public class AggregationlevelType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -2244,9 +2859,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("annotation", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Provides comments on the educational use of the SCORM Content Model Component and information on when and by whom the comments were created"
-        )]
+    [Description("Provides comments on the educational use of the SCORM Content Model Component and information on when and by whom the comments were created.")]
     [Category("Main")]
     public class AnnotationType : AbstractManifestNode, IManifestNode
     {
@@ -2284,9 +2897,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified"
-    )]
+        
+        [Description("Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified.")]
         [Category("Main")]
         [XmlArrayItem("langstring", IsNullable = false)]
         public ManifestNodeList<LangstringType> description
@@ -2340,9 +2952,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlArrayItem("langstring", IsNullable = false)]
-        [Description(
-    "Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified"
-    )]
+        [Description("Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified.")]
         [Category("Main")]
         public ManifestNodeList<LangstringType> entry
         {
@@ -2425,9 +3035,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Element describes a taxonomic path in a specific classification system. Each succeeding level is a refinement in the definition of the proceeding level"
-    )]
+        [Description("Element describes a taxonomic path in a specific classification system. Each succeeding level is a refinement in the definition of the proceeding level.")]
         [Category("Main")]
         [XmlElement("taxonpath")]
         public ManifestNodeList<TaxonpathType> taxonpath
@@ -2444,9 +3052,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlArrayItem("langstring", IsNullable = false)]
-        [Description(
-    "Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified"
-    )]
+        [Description("Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified.")]
         [Category("Main")]
         public ManifestNodeList<LangstringType> description
         {
@@ -2496,9 +3102,8 @@ namespace FireFly.CourseEditor.Course.Manifest
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -2539,8 +3144,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         private DateType dateField;
 
         private List<string> textField;
-        [Description(
-    "Element defines the kind or type of contribution made by the contributor (identified by the Entity element")]
+        [Description("Element defines the kind or type of contribution made by the contributor (identified by the Entity element.")]
         [Category("Main")]
         public RoleType role
         {
@@ -2568,7 +3172,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description("Element identifies the date of the contribution made by the entity")]
+        [Description("Element identifies the date of the contribution made by the entity.")]
         [Category("Main")]
         public DateType date
         {
@@ -2599,18 +3203,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("copyrightandotherrestrictions", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element describes whether copyright or other restrictions apply to the use of the SCORM Content Model Component"
-        )]
+    [Description("Element describes whether copyright or other restrictions apply to the use of the SCORM Content Model Component.")]
     [Category("Main")]
     public class CopyrightandotherrestrictionsType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -2640,16 +3240,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("cost", Namespace = ManifestNamespaces.Imsmd)]
-    [Description("Element represents whether or not the SCORM Content Model Component requires some sort of payment")]
+    [Description("Element represents whether or not the SCORM Content Model Component requires some sort of payment.")]
     [Category("Main")]
     public class CostType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -2680,9 +3278,7 @@ namespace FireFly.CourseEditor.Course.Manifest
 
 
     [XmlType("coverage", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element shall be used to describe the time, culture, geography or region to which the SCORM Content Model Component applies"
-        )]
+    [Description("Element shall be used to describe the time, culture, geography or region to which the SCORM Content Model Component applies.")]
     [Category("Main")]
     public class CoverageType : AbstractManifestNode, IManifestNode
     {
@@ -2704,7 +3300,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("date", Namespace = ManifestNamespaces.Imsmd)]
-    [Description("Element identifies the date of the contribution made by the entity")]
+    [Description("Element identifies the date of the contribution made by the entity.")]
     [Category("Main")]
     public class DateType : AbstractManifestNode, IManifestNode
     {
@@ -2726,9 +3322,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlArrayItem("langstring", IsNullable = false)]
-        [Description(
-    "Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified"
-    )]
+        [Description("Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified.")]
         [Category("Main")]
         public ManifestNodeList<LangstringType> description
         {
@@ -2745,7 +3339,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("description", Namespace = ManifestNamespaces.Imsmd)]
-    [Description("Element shall be used to comment on how the SCORM Content Model Component is to be used")]
+    [Description("Element shall be used to comment on how the SCORM Content Model Component is to be used.")]
     [Category("Main")]
     public class DescriptionType : AbstractManifestNode, IManifestNode
     {
@@ -2767,9 +3361,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("difficulty", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element represents how hard it is to work with or through the SCORM Content Model Component for the typical intended target audience"
-        )]
+    [Description("Element represents how hard it is to work with or through the SCORM Content Model Component for the typical intended target audience.")]
     [Category("Main")]
     public class DifficultyType : AbstractManifestNode, IManifestNode
     {
@@ -2805,9 +3397,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("educational", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Describes the key educational or pedagogic characteristics of the SCORM Content Model Component. This category allows for the description of the educational characteristics and is typically used by teachers, managers, authors and learners"
-        )]
+    [Description("Describes the key educational or pedagogic characteristics of the SCORM Content Model Component. This category allows for the description of the educational characteristics and is typically used by teachers, managers, authors and learners.")]
     [Category("Main")]
     public class EducationalType : AbstractManifestNode, IManifestNode
     {
@@ -3022,9 +3612,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("entry", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element represents the value of the identifier within the identification or cataloging scheme (see <catalog> element) that designates or identifies the target SCORM Content Model Component"
-        )]
+    [Description("Element represents the value of the identifier within the identification or cataloging scheme (see <catalog> element) that designates or identifies the target SCORM Content Model Component.")]
     [Category("Main")]
     public class EntryType : AbstractManifestNode, IManifestNode
     {
@@ -3046,9 +3634,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("general", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "General information that describes the resource as a whole. The resource in this case is the particular SCORM Content Model Component (Asset, SCO, Activity or Content Organization) being described. This general information is sometimes viewed as key information in that it is important for describing the particular component"
-        )]
+    [Description("General information that describes the resource as a whole. The resource in this case is the particular SCORM Content Model Component (Asset, SCO, Activity or Content Organization) being described. This general information is sometimes viewed as key information in that it is important for describing the particular component.")]
     [Category("Main")]
     public class GeneralType : AbstractManifestNode, IManifestNode
     {
@@ -3125,9 +3711,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlArrayItem("langstring", typeof(LangstringType), IsNullable = false)]
-        [Description(
-    "Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified"
-    )]
+        [Description("Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified.")]
         [Category("Main")]
         public List<List<LangstringType>> description
         {
@@ -3169,7 +3753,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description("Element shall describe the underlying organizational structure of the SCORM Content Model Component")]
+        
+        [Description("Element shall describe the underlying organizational structure of the SCORM Content Model Component.")]
         [Category("Main")]
         public StructureType structure
         {
@@ -3183,7 +3768,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description("Element shall describe the functional granularity of the learning object")]
+        
+        [Description("Element shall describe the functional granularity of the learning object.")]
         [Category("Main")]
         public AggregationlevelType aggregationlevel
         {
@@ -3214,7 +3800,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("intendedenduserrole", Namespace = ManifestNamespaces.Imsmd)]
-    [Description("Element represents the principal user(s) for which the SCORM Content Model Component was designed. If multiple elements are used, the most dominant role should be first")]
+    [Description("Element represents the principal user(s) for which the SCORM Content Model Component was designed. If multiple elements are used, the most dominant role should be first.")]
     [Category("Main")]
     public class IntendedenduserroleType : AbstractManifestNode, IManifestNode
     {
@@ -3250,9 +3836,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("interactivitylevel", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Represents the degree of interactivity characterizing the SCORM Content Model Component. Interactivity in this context refers to the degree to which the learner can influence the aspect or behavior of the component"
-        )]
+    [Description("Represents the degree of interactivity characterizing the SCORM Content Model Component. Interactivity in this context refers to the degree to which the learner can influence the aspect or behavior of the component.")]
     [Category("Main")]
     public class InteractivitylevelType : AbstractManifestNode, IManifestNode
     {
@@ -3260,9 +3844,7 @@ namespace FireFly.CourseEditor.Course.Manifest
 
         private ValueType valueField;
 
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -3276,7 +3858,6 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-
 
         public ValueType value
         {
@@ -3293,16 +3874,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("interactivitytype", Namespace = ManifestNamespaces.Imsmd)]
-    [Description("Element represents the dominant mode of learning supported by the SCORM Content Model Component")]
+    [Description("Element represents the dominant mode of learning supported by the SCORM Content Model Component.")]
     [Category("Main")]
     public class InteractivitytypeType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -3332,9 +3911,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("keyword", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element contains keywords and phrases descriptive of the SCORM Content Model Component relative to the stated Purpose (<purpose>) of this specific classification, such as discipline, idea, skill level, educational objective, etc"
-        )]
+    [Description("Element contains keywords and phrases descriptive of the SCORM Content Model Component relative to the stated Purpose (<purpose>) of this specific classification, such as discipline, idea, skill level, educational objective, etc.")]
     [Category("Main")]
     public class KeywordType : AbstractManifestNode, IManifestNode
     {
@@ -3356,18 +3933,15 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("kind", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element describes the nature of the relationship between the SCORM Content Model Component and the target component identified by the Resource"
-        )]
+    [Description("Element describes the nature of the relationship between the SCORM Content Model Component and the target component identified by the Resource.")]
     [Category("Main")]
     public class KindType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -3397,9 +3971,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("langstring", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified"
-        )]
+    [Description("Data type that represents one or more characterstrings, in which the language for which the characterstring is represented in is identified.")]
     [Category("Main")]
     public class LangstringType : AbstractManifestNode, IManifestNode
     {
@@ -3437,9 +4009,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("learningresourcetype", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element represents the specific kind of the SCORM Content Model Component. This element is repeatable in order to fully describe the types of resources used in the component"
-        )]
+    [Description("Element represents the specific kind of the SCORM Content Model Component. This element is repeatable in order to fully describe the types of resources used in the component.")]
     [Category("Main")]
     public class LearningresourcetypeType : AbstractManifestNode, IManifestNode
     {
@@ -3475,9 +4045,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("lifecycle", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Related to the history and current state of the SCORM Content Model Component and those who have affected the component during its evolution"
-        )]
+    [Description("Related to the history and current state of the SCORM Content Model Component and those who have affected the component during its evolution.")]
     [Category("Main")]
     public class LifecycleType : AbstractManifestNode, IManifestNode
     {
@@ -3502,9 +4070,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Element shall describe the completion status or condition of the SCORM Content Model Component. A component may have several statuses during its lifetime (draft, final, etc…)"
-    )]
+        
+        [Description("Element shall describe the completion status or condition of the SCORM Content Model Component. A component may have several statuses during its lifetime (draft, final, etc…)")]
         [Category("Main")]
         public StatusType status
         {
@@ -3549,9 +4116,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("location", Namespace = ManifestNamespaces.Adlcp)]
-    [Description(
-        "Element is a string that specifies the location of the SCORM Content Model Component described by the meta-data"
-        )]
+    [Description("Element is a string that specifies the location of the SCORM Content Model Component described by the meta-data.")]
     [Category("Main")]
     public class LocationType : AbstractManifestNode, IManifestNode
     {
@@ -3602,9 +4167,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("lom", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element contains important elements that SCORM requires to describe all of the SCORM Content Model Components")
-    ]
+    [Description("Element contains important elements that SCORM requires to describe all of the SCORM Content Model Components.")]
     [Category("Main")]
     public class LomType : AbstractManifestNode, IManifestNode
     {
@@ -3625,9 +4188,8 @@ namespace FireFly.CourseEditor.Course.Manifest
         private ManifestNodeList<AnnotationType> annotationField;
 
         private ManifestNodeList<ClassificationType> classificationField;
-        [Description(
-    "General information that describes the resource as a whole. The resource in this case is the particular SCORM Content Model Component (Asset, SCO, Activity or Content Organization) being described. This general information is sometimes viewed as key information in that it is important for describing the particular component"
-    )]
+        
+        [Description("General information that describes the resource as a whole. The resource in this case is the particular SCORM Content Model Component (Asset, SCO, Activity or Content Organization) being described. This general information is sometimes viewed as key information in that it is important for describing the particular component.")]
         [Category("Main")]
         public GeneralType general
         {
@@ -3641,9 +4203,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Related to the history and current state of the SCORM Content Model Component and those who have affected the component during its evolution"
-    )]
+        
+        [Description("Related to the history and current state of the SCORM Content Model Component and those who have affected the component during its evolution.")]
         [Category("Main")]
         public LifecycleType lifecycle
         {
@@ -3657,9 +4218,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Provides elements that describe the meta-data record itself and not the SCORM Content Model Component the record is describing. This category describes how the meta-data instance itself can be identified, who created the meta-data instance, how, when and with what references"
-    )]
+        
+        [Description("Provides elements that describe the meta-data record itself and not the SCORM Content Model Component the record is describing. This category describes how the meta-data instance itself can be identified, who created the meta-data instance, how, when and with what references.")]
         [Category("Main")]
         public MetametadataType metametadata
         {
@@ -3673,8 +4233,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description("Describes all of the technical characteristics and requirements of the SCORM Content Model Component")
-]
+        
+        [Description("Describes all of the technical characteristics and requirements of the SCORM Content Model Component.")]
         [Category("Main")]
         public TechnicalType technical
         {
@@ -3688,9 +4248,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Describes the key educational or pedagogic characteristics of the SCORM Content Model Component. This category allows for the description of the educational characteristics and is typically used by teachers, managers, authors and learners"
-    )]
+        
+        [Description("Describes the key educational or pedagogic characteristics of the SCORM Content Model Component. This category allows for the description of the educational characteristics and is typically used by teachers, managers, authors and learners.")]
         [Category("Main")]
         public EducationalType educational
         {
@@ -3704,8 +4263,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Describes the intellectual property rights and conditions of use for the SCORM Content Model Component")]
+        
+        [Description("Describes the intellectual property rights and conditions of use for the SCORM Content Model Component.")]
         [Category("Main")]
         public RightsType rights
         {
@@ -3721,7 +4280,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("relation")]
-        [Description("Defines the relationship between the SCORM Content Model Component and other components, if any")]
+        [Description("Defines the relationship between the SCORM Content Model Component and other components, if any.")]
         [Category("Main")]
         public ManifestNodeList<RelationType> relation
         {
@@ -3735,9 +4294,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Provides comments on the educational use of the SCORM Content Model Component and information on when and by whom the comments were created"
-    )]
+        
+        [Description("Provides comments on the educational use of the SCORM Content Model Component and information on when and by whom the comments were created.")]
         [Category("Main")]
         [XmlElement("annotation")]
         public ManifestNodeList<AnnotationType> annotation
@@ -3754,7 +4312,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("classification")]
-        [Description("Describes where the SCORM Content Model Component falls within a particular classification system. Multiple Classification categories may be used to define multiple classifications")]
+        [Description("Describes where the SCORM Content Model Component falls within a particular classification system. Multiple Classification categories may be used to define multiple classifications.")]
         [Category("Main")]
         public ManifestNodeList<ClassificationType> classification
         {
@@ -3771,9 +4329,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("metametadata", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Provides elements that describe the meta-data record itself and not the SCORM Content Model Component the record is describing. This category describes how the meta-data instance itself can be identified, who created the meta-data instance, how, when and with what references"
-        )]
+    [Description("Provides elements that describe the meta-data record itself and not the SCORM Content Model Component the record is describing. This category describes how the meta-data instance itself can be identified, who created the meta-data instance, how, when and with what references.")]
     [Category("Main")]
     public class MetametadataType : AbstractManifestNode, IManifestNode
     {
@@ -3875,18 +4431,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("name", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element represents the required technology to use the SCORM Content Model Component. The value used for the Name element depends on the value identified by the Value element"
-        )]
+    [Description("Element represents the required technology to use the SCORM Content Model Component. The value used for the Name element depends on the value identified by the Value element.")]
     [Category("Main")]
     public class NameType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -3916,16 +4468,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("purpose", Namespace = ManifestNamespaces.Imsmd)]
-    [Description("Element defines the purpose for classifying the SCORM Content Model Component")]
+    [Description("Element defines the purpose for classifying the SCORM Content Model Component.")]
     [Category("Main")]
     public class PurposeType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -3955,7 +4505,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("relation", Namespace = ManifestNamespaces.Imsmd)]
-    [Description("Defines the relationship between the SCORM Content Model Component and other components, if any")]
+    [Description("Defines the relationship between the SCORM Content Model Component and other components, if any.")]
     [Category("Main")]
     public class RelationType : AbstractManifestNode, IManifestNode
     {
@@ -3964,9 +4514,8 @@ namespace FireFly.CourseEditor.Course.Manifest
         private ResourceType resourceField;
 
         private List<string> textField;
-        [Description(
-    "Element describes the nature of the relationship between the SCORM Content Model Component and the target component identified by the Resource"
-    )]
+        
+        [Description("Element describes the nature of the relationship between the SCORM Content Model Component and the target component identified by the Resource.")]
         [Category("Main")]
         public KindType kind
         {
@@ -3980,7 +4529,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description("Element is a reference to a resource. There are two primary types of resources defined within SCORM: Asset and SCO")]
+        
+        [Description("Element is a reference to a resource. There are two primary types of resources defined within SCORM: Asset and SCO.")]
         [Category("Main")]
         public ResourceType resource
         {
@@ -4011,7 +4561,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("requirement", Namespace = ManifestNamespaces.Imsmd)]
-    [Description("Element expresses the technical capabilities necessary for using the SCORM Content Model Component")]
+    [Description("Element expresses the technical capabilities necessary for using the SCORM Content Model Component.")]
     [Category("Main")]
     public class RequirementType : AbstractManifestNode, IManifestNode
     {
@@ -4024,9 +4574,8 @@ namespace FireFly.CourseEditor.Course.Manifest
         private string maximumversionField;
 
         private List<string> textField;
-        [Description(
-    "Element represents the technology required to use the SCORM Content Model Component (e.g., hardware, software, network, etc.)"
-    )]
+        
+        [Description("Element represents the technology required to use the SCORM Content Model Component (e.g., hardware, software, network, etc.)")]
         [Category("Main")]
         public TypeType type
         {
@@ -4040,9 +4589,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Element represents the required technology to use the SCORM Content Model Component. The value used for the Name element depends on the value identified by the Value element"
-    )]
+        
+        [Description("Element represents the required technology to use the SCORM Content Model Component. The value used for the Name element depends on the value identified by the Value element")]
         [Category("Main")]
         public NameType name
         {
@@ -4099,8 +4647,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("rights", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Describes the intellectual property rights and conditions of use for the SCORM Content Model Component")]
+    [Description("Describes the intellectual property rights and conditions of use for the SCORM Content Model Component.")]
     [Category("Main")]
     public class RightsType : AbstractManifestNode, IManifestNode
     {
@@ -4124,9 +4671,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Element describes whether copyright or other restrictions apply to the use of the SCORM Content Model Component"
-    )]
+        
+        [Description("Element describes whether copyright or other restrictions apply to the use of the SCORM Content Model Component.")]
         [Category("Main")]
         public CopyrightandotherrestrictionsType copyrightandotherrestrictions
         {
@@ -4154,8 +4700,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-
-
+        
         [XmlTextAttribute]
         public List<string> Text
         {
@@ -4172,17 +4717,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("role", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element defines the kind or type of contribution made by the contributor (identified by the Entity element")]
+    [Description("Element defines the kind or type of contribution made by the contributor (identified by the Entity element).")]
     [Category("Main")]
     public class RoleType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -4212,18 +4754,14 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("semanticdensity", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Represents the degree of conciseness of the SCORM Content Model Component. The semantic density of a SCORM component may be estimated in terms of its size, span or, in the case of self-timed resources such as audio or video, duration"
-        )]
+    [Description("Represents the degree of conciseness of the SCORM Content Model Component. The semantic density of a SCORM component may be estimated in terms of its size, span or, in the case of self-timed resources such as audio or video, duration.")]
     [Category("Main")]
     public class SemanticdensityType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -4253,9 +4791,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("source", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-        )]
+    [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
     [Category("Main")]
     public class SourceType : AbstractManifestNode, IManifestNode
     {
@@ -4276,18 +4812,15 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("status", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element shall describe the completion status or condition of the SCORM Content Model Component. A component may have several statuses during its lifetime (draft, final, etc…)"
-        )]
+    [Description("Element shall describe the completion status or condition of the SCORM Content Model Component. A component may have several statuses during its lifetime (draft, final, etc…)")]
     [Category("Main")]
     public class StatusType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -4324,9 +4857,8 @@ namespace FireFly.CourseEditor.Course.Manifest
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -4356,9 +4888,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("taxon", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element describes a particular term within a taxonomy. A taxon is a node that has a defined label or term. A taxon may also have an alphanumeric designation or identifier for standardized reference"
-        )]
+    [Description("Element describes a particular term within a taxonomy. A taxon is a node that has a defined label or term. A taxon may also have an alphanumeric designation or identifier for standardized reference.")]
     [Category("Main")]
     public class TaxonType : AbstractManifestNode, IManifestNode
     {
@@ -4394,9 +4924,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Element describes a particular term within a taxonomy. A taxon is a node that has a defined label or term. A taxon may also have an alphanumeric designation or identifier for standardized reference"
-    )]
+        
+        [Description("Element describes a particular term within a taxonomy. A taxon is a node that has a defined label or term. A taxon may also have an alphanumeric designation or identifier for standardized reference.")]
         [Category("Main")]
         public TaxonType taxon
         {
@@ -4413,9 +4942,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("taxonpath", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element describes a taxonomic path in a specific classification system. Each succeeding level is a refinement in the definition of the proceeding level"
-        )]
+    [Description("Element describes a taxonomic path in a specific classification system. Each succeeding level is a refinement in the definition of the proceeding level.")]
     [Category("Main")]
     public class TaxonpathType : AbstractManifestNode, IManifestNode
     {
@@ -4435,9 +4962,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Element describes a particular term within a taxonomy. A taxon is a node that has a defined label or term. A taxon may also have an alphanumeric designation or identifier for standardized reference"
-    )]
+        
+        [Description("Element describes a particular term within a taxonomy. A taxon is a node that has a defined label or term. A taxon may also have an alphanumeric designation or identifier for standardized reference.")]
         [Category("Main")]
         public TaxonType taxon
         {
@@ -4454,8 +4980,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("technical", Namespace = ManifestNamespaces.Imsmd)]
-    [Description("Describes all of the technical characteristics and requirements of the SCORM Content Model Component")
-    ]
+    [Description("Describes all of the technical characteristics and requirements of the SCORM Content Model Component.")]
     [Category("Main")]
     public class TechnicalType : AbstractManifestNode, IManifestNode
     {
@@ -4519,9 +5044,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("location")]
-        [Description(
-    "Element is a string that specifies the location of the SCORM Content Model Component described by the meta-data"
-    )]
+        [Description("Element is a string that specifies the location of the SCORM Content Model Component described by the meta-data.")]
         [Category("Main")]
         public ManifestNodeList<LocationType> location
         {
@@ -4537,7 +5060,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlElement("requirement")]
-        [Description("Element expresses the technical capabilities necessary for using the SCORM Content Model Component")]
+        [Description("Element expresses the technical capabilities necessary for using the SCORM Content Model Component.")]
         [Category("Main")]
         public ManifestNodeList<RequirementType> requirement
         {
@@ -4579,9 +5102,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Element represents the time a continuous SCORM Content Model Component takes when played at intended speed. This element is useful for sounds, movies, simulations and the like"
-    )]
+        
+        [Description("Element represents the time a continuous SCORM Content Model Component takes when played at intended speed. This element is useful for sounds, movies, simulations and the like.")]
         [Category("Main")]
         public DurationType duration
         {
@@ -4612,18 +5134,15 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("type", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element represents the technology required to use the SCORM Content Model Component (e.g., hardware, software, network, etc.)"
-        )]
+    [Description("Element represents the technology required to use the SCORM Content Model Component (e.g., hardware, software, network, etc.)")]
     [Category("Main")]
     public class TypeType : AbstractManifestNode, IManifestNode
     {
         private SourceType sourceField;
 
         private ValueType valueField;
-        [Description(
-    "Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy"
-    )]
+        
+        [Description("Element describes or names the classification system. This data element may use any recognized official taxonomy or any user-defined taxonomy.")]
         [Category("Main")]
         public SourceType source
         {
@@ -4653,9 +5172,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("typicalagerange", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element represents the age of the typical end user. This element shall refer to the developmental age, if that would be different from the chronological age"
-        )]
+    [Description("Element represents the age of the typical end user. This element shall refer to the developmental age, if that would be different from the chronological age.")]
     [Category("Main")]
     public class TypicalagerangeType : AbstractManifestNode, IManifestNode
     {
@@ -4677,9 +5194,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("typicallearningtime", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element represents the approximate of typical time it takes to work with or through the SCORM Content Model Component for the typical intended target audience"
-        )]
+    [Description("Element represents the approximate of typical time it takes to work with or through the SCORM Content Model Component for the typical intended target audience.")]
     [Category("Main")]
     public class TypicallearningtimeType : AbstractManifestNode, IManifestNode
     {
@@ -4754,9 +5269,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("version", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element shall describe the edition of the SCORM Content Model Component. A component may have several versions or editions during its lifetime. The <version> element allows for the description of the version of the component"
-        )]
+    [Description("Element shall describe the edition of the SCORM Content Model Component. A component may have several versions or editions during its lifetime. The <version> element allows for the description of the version of the component.")]
     [Category("Main")]
     public class VersionType : AbstractManifestNode, IManifestNode
     {
@@ -4778,8 +5291,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("installationremarks", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element is used to represent any specific instructions on how to install the SCORM Content Model Component")]
+    [Description("Element is used to represent any specific instructions on how to install the SCORM Content Model Component.")]
     [Category("Main")]
     public class InstallationremarksType : AbstractManifestNode, IManifestNode
     {
@@ -4801,9 +5313,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("otherplatformrequirements", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element is used to represent information about other software and hardware requirements of the SCORM Content Model Component. This element should be used to describe requirements that cannot be represented or expressed with the other Technical elements"
-        )]
+    [Description("Element is used to represent information about other software and hardware requirements of the SCORM Content Model Component. This element should be used to describe requirements that cannot be represented or expressed with the other Technical elements.")]
     [Category("Main")]
     public class OtherplatformrequirementsType : AbstractManifestNode, IManifestNode
     {
@@ -4825,9 +5335,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("duration", Namespace = ManifestNamespaces.Imsmd)]
-    [Description(
-        "Element represents the time a continuous SCORM Content Model Component takes when played at intended speed. This element is useful for sounds, movies, simulations and the like"
-        )]
+    [Description("Element represents the time a continuous SCORM Content Model Component takes when played at intended speed. This element is useful for sounds, movies, simulations and the like.")]
     [Category("Main")]
     public class DurationType : AbstractManifestNode, IManifestNode
     {
@@ -4863,328 +5371,8 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
     }
 
-    [Description(
-        "Sequencing information is associated with items in a hierarchical structure by associating a single <sequencing> element with the hierarchical item"
-        )]
-    [Category("Main")]
-    [XmlType("sequencing", Namespace = ManifestNamespaces.Imsss)]
-    public class SequencingType : AbstractManifestNode, IContainer
-    {
-        private ControlModeType controlModeField;
-
-        private SequencingRulesType sequencingRulesField;
-
-        private LimitConditionsType limitConditionsField;
-
-        private ManifestNodeList<AuxiliaryResourceType> auxiliaryResourcesField;
-
-        private RollupRulesType rollupRulesField;
-
-        private ObjectivesType objectivesField;
-
-        private RandomizationType randomizationControlsField;
-
-        private DeliveryControlsType deliveryControlsField;
-
-        private XmlElement[] anyField;
-
-        private string idField;
-
-        private string iDRefField;
-
-        private ConstrainedChoiceConsiderationsType constrainedChoiceConsiderationsField;
-
-        private RollupConsiderationsType rollupConsiderationsField;
-        
-        [Description(
-        "Container for the sequencing control mode information including descriptions of the types of sequencing behaviors specified for an activity . This element captures information dealing with the types of sequencing requests that are permitted."
-        )]
-        [Category("Main")]
-        public ControlModeType controlMode
-        {
-            get
-            {
-                return controlModeField;
-            }
-            set
-            {
-                controlModeField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-        
-        [Description(
-         "Container for a sequencing rule description. Each rule describes the sequencing behavior for an activity")]
-        [Category("Main")]
-        public SequencingRulesType sequencingRules
-        {
-            get
-            {
-                return sequencingRulesField;
-            }
-            set
-            {
-                sequencingRulesField = value;
-                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
-            }
-        }
-        
-        [Description("The limit condition deals with attempts on the activity and maximum time allowed in the attempt.")]
-        [Category("Main")]
-        public LimitConditionsType limitConditions
-        {
-            get
-            {
-                return limitConditionsField;
-            }
-            set
-            {
-                limitConditionsField = value;
-                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
-            }
-        }
-
-        [XmlArrayItem("auxiliaryResource", IsNullable = false)]
-        public ManifestNodeList<AuxiliaryResourceType> auxiliaryResources
-        {
-            get
-            {
-                if (auxiliaryResourcesField == null)
-                    auxiliaryResourcesField = new ManifestNodeList<AuxiliaryResourceType>(this);
-
-                return auxiliaryResourcesField;
-            }
-            set
-            {
-                auxiliaryResourcesField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [Description("Container for the set of rollup rules defined for the activity")]
-        [Category("Main")]
-        public RollupRulesType rollupRules
-        {
-            get
-            {
-                return rollupRulesField;
-            }
-            set
-            {
-                rollupRulesField = value;
-                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
-            }
-        }
-        
-        [Description("Container for the set of objectives that are to be associated with an activity")]
-        [Category("Main")]
-        public ObjectivesType objectives
-        {
-            get
-            {
-                return objectivesField;
-            }
-            set
-            {
-                objectivesField = value;
-                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
-            }
-        }
-        
-        [Description(
-    "Element is the container for the descriptions of how children of an activity should be ordered during the sequence process"
-    )]
-        [Category("Main")]
-        
-        public RandomizationType randomizationControls
-        {
-            get
-            {
-                return randomizationControlsField;
-            }
-            set
-            {
-                randomizationControlsField = value;
-                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
-            }
-        }
-        
-        [Description(
-        "Ñontainer for the descriptions of how children of an activity should be ordered during the sequence process.")]
-        [Category("Main")]
-        public DeliveryControlsType deliveryControls
-        {
-            get
-            {
-                return deliveryControlsField;
-            }
-            set
-            {
-                deliveryControlsField = value;
-                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
-            }
-        }
-
-        [XmlAnyElementAttribute]
-        public XmlElement[] Any
-        {
-            get
-            {
-                return anyField;
-            }
-            set
-            {
-                anyField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlAttribute(DataType = "ID")]
-        public string ID
-        {
-            get
-            {
-                return idField;
-            }
-            set
-            {
-                idField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlAttribute(DataType = "IDREF")]
-        public string IDRef
-        {
-            get
-            {
-                return iDRefField;
-            }
-            set
-            {
-                iDRefField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [Description("Container for the descriptions of how choice navigation requests should be constrained during the sequencing process.")]
-        [Category("Main")]
-        public ConstrainedChoiceConsiderationsType constrainChoiceConsiderations
-        {
-            get
-            {
-                return this.constrainedChoiceConsiderationsField;
-            }
-            set
-            {
-                this.constrainedChoiceConsiderationsField = value;
-                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
-            }
-        }
-
-        [Description("Container for the descriptions of when an activity should be included in the rollup process.")]
-        [Category("Main")]
-        public RollupConsiderationsType rollupConsiderations
-        {
-            get
-            {
-                return this.rollupConsiderationsField;
-            }
-            set
-            {
-                this.rollupConsiderationsField = value;
-                Course.NotifyManifestChanged(this, new IManifestNode[1] { value }, ManifestChangeTypes.ChildrenAdded);
-            }
-        }
-
-        #region IContainer Members
-
-        public void RemoveChild(IManifestNode child)
-        {
-            switch (child.GetType().Name)
-            {
-                case "AuxiliaryResourceType":
-                    {
-                        var item = child as AuxiliaryResourceType;
-                        if (auxiliaryResources.Contains(item))
-                        {
-                            auxiliaryResources.Remove(item);
-                            return;
-                        }
-                        break;
-                    }
-                case "ControlModeType":
-                    {
-                        if (controlMode != null)
-                        {
-                            controlMode = null;
-                            return;
-                        }
-                        break;
-                    }
-                case "SequencingRulesType":
-                    {
-                        if (sequencingRules != null)
-                        {
-                            sequencingRules = null;
-                            return;
-                        }
-                        break;
-                    }
-                case "LimitConditionsType":
-                    {
-                        if (limitConditions != null)
-                        {
-                            limitConditions = null;
-                            return;
-                        }
-                        break;
-                    }
-                case "RollupRulesType":
-                    {
-                        if (rollupRules != null)
-                        {
-                            rollupRules = null;
-                            return;
-                        }
-                        break;
-                    }
-                case "ObjectivesType":
-                    {
-                        if (objectives != null)
-                        {
-                            objectives = null;
-                            return;
-                        }
-                        break;
-                    }
-                case "RandomizationType":
-                    {
-                        if (randomizationControls != null)
-                        {
-                            randomizationControls = null;
-                            return;
-                        }
-                        break;
-                    }
-                case "DeliveryControlsType":
-                    {
-                        if (deliveryControls != null)
-                        {
-                            deliveryControls = null;
-                            return;
-                        }
-                        break;
-                    }
-            }
-            throw new FireFlyException("Item '{0}' not found", child);
-        }
-
-        #endregion
-    }
-
     [XmlType("scormType", Namespace = ManifestNamespaces.Adlcp)]
-    [Description("scormType shall be set to sco or asset")]
+    [Description("scormType shall be set to sco or asset.")]
     [Category("Main")]
     public enum ScormType
     {
@@ -5196,9 +5384,7 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("timeLimitAction", Namespace = ManifestNamespaces.Adlcp)]
-    [Description(
-        "Element defines the action that should be taken when the maximum time allowed in the current attempt of the activity is exceeded. All time tracking and time limit actions are controlled by the SCO"
-        )]
+    [Description("Element defines the action that should be taken when the maximum time allowed in the current attempt of the activity is exceeded. All time tracking and time limit actions are controlled by the SCO.")]
     [Category("Main")]
     public enum TimeLimitActionType
     {
@@ -5215,178 +5401,14 @@ namespace FireFly.CourseEditor.Course.Manifest
         continuenomessage,
     }
 
-    [XmlType("constrainedChoiceConsiderations", Namespace = ManifestNamespaces.Adlseq)]
-    [Description(
-        "Element is the container for the descriptions of how choice navigation requests should be constrained during the sequencing process. The constrained choice only applies to the activity for which it is defined"
-        )]
-    [Category("Main")]
-    public class ConstrainedChoiceConsiderationsType : AbstractManifestNode, IManifestNode
-    {
-        private bool preventActivationField;
-
-        private bool constrainChoiceField;
-
-        public ConstrainedChoiceConsiderationsType()
-        {
-            preventActivationField = false;
-            constrainChoiceField = false;
-        }
-
-
-        [XmlAttribute]
-        [DefaultValue(false)]
-        public bool preventActivation
-        {
-            get
-            {
-                return preventActivationField;
-            }
-            set
-            {
-                preventActivationField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-
-        [XmlAttribute]
-        [DefaultValue(false)]
-        public bool constrainChoice
-        {
-            get
-            {
-                return constrainChoiceField;
-            }
-            set
-            {
-                constrainChoiceField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-    }
-
-    [XmlType("rollupConsiderations", Namespace = ManifestNamespaces.Adlseq)]
-    [Description(
-        "Element is the container for the descriptions of when an activity should be included in the rollup process")]
-    [Category("Main")]
-    public class RollupConsiderationsType : AbstractManifestNode, IManifestNode
-    {
-        private RollupConsiderationType requiredForSatisfiedField;
-
-        private RollupConsiderationType requiredForNotSatisfiedField;
-
-        private RollupConsiderationType requiredForCompletedField;
-
-        private RollupConsiderationType requiredForIncompleteField;
-
-        private bool measureSatisfactionIfActiveField;
-
-        public RollupConsiderationsType()
-        {
-            requiredForSatisfiedField = RollupConsiderationType.always;
-            requiredForNotSatisfiedField = RollupConsiderationType.always;
-            requiredForCompletedField = RollupConsiderationType.always;
-            requiredForIncompleteField = RollupConsiderationType.always;
-            measureSatisfactionIfActiveField = true;
-        }
-
-
-        [XmlAttribute]
-        [DefaultValue(RollupConsiderationType.always)]
-        public RollupConsiderationType requiredForSatisfied
-        {
-            get
-            {
-                return requiredForSatisfiedField;
-            }
-            set
-            {
-                requiredForSatisfiedField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlAttribute]
-        [DefaultValue(RollupConsiderationType.always)]
-        public RollupConsiderationType requiredForNotSatisfied
-        {
-            get
-            {
-                return requiredForNotSatisfiedField;
-            }
-            set
-            {
-                requiredForNotSatisfiedField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlAttribute]
-        [DefaultValue(RollupConsiderationType.always)]
-        public RollupConsiderationType requiredForCompleted
-        {
-            get
-            {
-                return requiredForCompletedField;
-            }
-            set
-            {
-                requiredForCompletedField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-
-        [XmlAttribute]
-        [DefaultValue(RollupConsiderationType.always)]
-        public RollupConsiderationType requiredForIncomplete
-        {
-            get
-            {
-                return requiredForIncompleteField;
-            }
-            set
-            {
-                requiredForIncompleteField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlAttribute]
-        [DefaultValue(true)]
-        public bool measureSatisfactionIfActive
-        {
-            get
-            {
-                return measureSatisfactionIfActiveField;
-            }
-            set
-            {
-                measureSatisfactionIfActiveField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-    }
-
-    [XmlType(Namespace = ManifestNamespaces.Adlseq)]
-    public enum RollupConsiderationType
-    {
-        always,
-        ifAttempted,
-        ifNotSkipped,
-        ifNotSuspended,
-    }
-
     [XmlType("presentation", Namespace = ManifestNamespaces.Adlnav)]
-    [Description(
-        "Element is a container element that encapsulates presentation information for a given learning activity")]
+    [Description("Element is a container element that encapsulates presentation information for a given learning activity.")]
     [Category("Main")]
     public class PresentationType : AbstractManifestNode, IManifestNode
     {
         private List<HideLMSUIType> navigationInterfaceField;
-        [Description(
-    "Element indicates that the LMS should not provide user interface devices that enable the learner to trigger specific events"
-    )]
+        
+        [Description("Element indicates that the LMS should not provide user interface devices that enable the learner to trigger specific events.")]
         [Category("Main")]
         [XmlArrayItem("hideLMSUI", IsNullable = false)]
         public List<HideLMSUIType> navigationInterface
@@ -5405,12 +5427,9 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
     }
-
-
+    
     [XmlType("hideLMSUI", Namespace = ManifestNamespaces.Adlnav)]
-    [Description(
-        "Element indicates that the LMS should not provide user interface devices that enable the learner to trigger specific events"
-        )]
+    [Description("Element indicates that the LMS should not provide user interface devices that enable the learner to trigger specific events.")]
     [Category("Main")]
     public enum HideLMSUIType
     {
@@ -5421,16 +5440,13 @@ namespace FireFly.CourseEditor.Course.Manifest
     }
 
     [XmlType("navigationInterface", Namespace = ManifestNamespaces.Adlnav)]
-    [Description(
-        "Element is a container element that encapsulates navigation interface presentation requirements for a given learning activity"
-        )]
+    [Description("Element is a container element that encapsulates navigation interface presentation requirements for a given learning activity.")]
     [Category("Main")]
     public class NavigationInterfaceType : AbstractManifestNode, IManifestNode
     {
         private List<HideLMSUIType> hideLMSUIField;
-        [Description(
-    "Element indicates that the LMS should not provide user interface devices that enable the learner to trigger specific events"
-    )]
+        
+        [Description("Element indicates that the LMS should not provide user interface devices that enable the learner to trigger specific events.")]
         [Category("Main")]
         [XmlElement("hideLMSUI")]
         public List<HideLMSUIType> hideLMSUI
@@ -5446,6 +5462,8 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
     }
+
+    #endregion
 
     internal class MetadataConverter : ExpandableObjectConverter
     {
@@ -5474,7 +5492,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                 }
                 if (mt.schemaversion != null && mt.schemaversion.Trim() == string.Empty)
                 {
-                        mt.schemaversion = null;    
+                    mt.schemaversion = null;
                 }
 
                 if (mt.schema == null && mt.schemaversion == null)
@@ -5490,7 +5508,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         {
             if (sourceType == typeof(string))
             {
-                return true;                 
+                return true;
             }
             return base.CanConvertFrom(context, sourceType);
         }
@@ -5535,7 +5553,7 @@ namespace FireFly.CourseEditor.Course.Manifest
                     }
                     return null;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     throw new FireFlyException(CannotConvertToTypeMessage, e, sValue, "MetadataType");
                 }

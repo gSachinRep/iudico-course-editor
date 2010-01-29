@@ -27,8 +27,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         private string identifierField;
         private string _title;
         private string identifierrefField;
-        private bool isvisibleField;
-        private bool isvisibleFieldSpecified;
+        private bool isvisibleField = true;
         private string parametersField;
 
         public ItemType()
@@ -155,9 +154,8 @@ namespace FireFly.CourseEditor.Course.Manifest
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }
-        [Description(
-    "Sequencing information is associated with items in a hierarchical structure by associating a single <sequencing> element with the hierarchical item"
-    )]
+        
+        [Description("Sequencing information is associated with items in a hierarchical structure by associating a single <sequencing> element with the hierarchical item")]
         [Category("Main")]
         [XmlElement("sequencing", Namespace = ManifestNamespaces.Imsss)]
         public SequencingType Sequencing
@@ -173,8 +171,7 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
         }
 
-        [Description(
-    "Element is a container element that encapsulates presentation information for a given learning activity")]
+        [Description("Element is a container element that encapsulates presentation information for a given learning activity")]
         [Category("Main")]
         [XmlElement("presentation", Namespace = ManifestNamespaces.Adlnav)]
         public PresentationType Presentation
@@ -228,6 +225,7 @@ namespace FireFly.CourseEditor.Course.Manifest
         }
 
         [XmlAttribute]
+        [DefaultValue(true)]
         public bool isvisible
         {
             get
@@ -237,20 +235,6 @@ namespace FireFly.CourseEditor.Course.Manifest
             set
             {
                 isvisibleField = value;
-                Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
-            }
-        }
-
-        [XmlIgnoreAttribute]
-        public bool isvisibleSpecified
-        {
-            get
-            {
-                return isvisibleFieldSpecified;
-            }
-            set
-            {
-                isvisibleFieldSpecified = value;
                 Course.NotifyManifestChanged(this, ManifestChangeTypes.Changed);
             }
         }

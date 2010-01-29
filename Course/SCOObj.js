@@ -41,8 +41,9 @@ function SCOObj(passRank)
 	{
 		doSetValue("cmi.completion_status", "completed");
 		doSetValue("cmi.exit", "normal");
-		  
+	  
 		doCommit();
+    doSetValue("adl.nav.request", "continue");
 		doTerminate();
 	}
   }
