@@ -25,7 +25,7 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
                              NO_BUTTONS_ERROR = "No buttons is present on examination",
                              MORE_THEN_ONE_BUTTON = "Too many submit buttons present";
 
-        private int? _PassRank;
+        private int? _PassRank = 1;
 
         ///<summary>
         /// Determines how many points should take user to pass this test
@@ -77,7 +77,12 @@ namespace FireFly.CourseEditor.GUI.HtmlEditor
         ///<returns></returns>
         new public static HtmlPage GetPage(ItemType item)
         {
-            return (HtmlPage)HtmlPageBase.GetPage(item);
+            HtmlPage resultPage = (HtmlPage)HtmlPageBase.GetPage(item);
+            if (resultPage != null)
+            {
+                resultPage._PassRank = 1;
+            }
+            return resultPage;
         }
 
         public string GetJavaScriptInitializer()

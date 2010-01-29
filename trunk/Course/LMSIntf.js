@@ -1,37 +1,59 @@
-var findAPITries;
+var noAPIFound = "false";
+var findAPITries = 0;
 var apiHandle = null;
 var exitPageStatus = false;
 
-function isEmulationMode(){
+function isEmulationMode()
+{
     return window.location.search.toString().toLowerCase().indexOf('emulatelms=true') >= 0;
 }
 
-function findAPI(win){
-   while (win.API_1484_11 == null && win.parent != null && win.parent != win)
-      if (findAPITries++ > 500)
+function findAPI( win )
+{
+   while ( (win.API_1484_11 == null) && (win.parent != null) && (win.parent != win) )
+   {
+      findAPITries++;
+      if ( findAPITries > 500 )
+      {
+         alert( "Error finding API -- too deeply nested." );
          return null;
-      else
-        win = win.parent;
+      }
+      win = win.parent;
+   }
    return win.API_1484_11;
 }
 
-function getAPI(){
+function getAPI()
+{
     var result = null;
     if (isEmulationMode())
         result = new LMSDebugger();
-    else{
-       findAPITries = 0;
-       result = findAPI(window);
-
-       if (apiHandle == null && window.opener != null && typeof(window.opener) != "undefined")
+    else
+    {
+       var result = findAPI( window );    
+       if ( (result == null) && (window.opener != null) && (typeof(window.opener) != "undefined") )
+       {
           result = findAPI(window.opener);
+       }    
+       if (result == null)
+       {
+          alert("Unable to locate the LMS's API Implementation.\n" +
+                "Communication with the LMS will not occur.");    
+          noAPIFound = "true";
+       }
     }
     return result;
 }
 
-function getAPIHandle(){
-    if (apiHandle == null)
-            apiHandle = getAPI();
+function getAPIHandle()
+{
+    if ( apiHandle == null )
+    {
+      if ( noAPIFound == "false" )
+      {
+        apiHandle = getAPI();
+      }
+    }
 
    return apiHandle;
 }

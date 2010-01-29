@@ -234,5 +234,27 @@ namespace FireFly.CourseEditor.Course.Manifest
             }
             return currentNode is OrganizationType && Course.Manifest.organizations.Organizations.Count > 1;
         }
+
+        public static bool CanAddRollupConsiderations(object currentNode)
+        {
+            return currentNode is SequencingType && ((SequencingType)currentNode).rollupConsiderations == null;
+        }
+
+        public static bool CanAddConstrainedChoiceConsiderations(object currentNode)
+        {
+            return currentNode is SequencingType && ((SequencingType)currentNode).constrainedChoiceConsiderations == null;
+        }
+
+        //!!!!!!!!!!!!!! Should be implemented
+        public static bool CanAddExtensionObjectives(object currentNode)
+        {
+            //Zaglushka
+            return false;
+        }
+
+        public static bool CanAddCollectionSequencing(object currentNode)
+        {            
+            return (currentNode is SequencingCollection) && ((SequencingCollection)currentNode).sequencingCollection != null;
+        }
     }
 }

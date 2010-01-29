@@ -32,6 +32,9 @@ namespace FireFly.CourseEditor.Course.Manifest
                 case PageType.Question:
                     CustomizeQuestionPage(ref result);
                     break;
+                case PageType.Theory:
+                    CustomizeTheoryPage(ref result);
+                    break;
                 default:
                     
                     break;
@@ -107,7 +110,21 @@ namespace FireFly.CourseEditor.Course.Manifest
             if (sequencing.limitConditions == null)
             {
                 sequencing.limitConditions = new LimitConditionsType();
+                sequencing.limitConditions.attemptLimit = "1";
             }
+        }
+
+        /// <summary>
+        /// Customizes sequencing for theory page.
+        /// </summary>
+        /// <param name="sequencing">SequencingType value represents object to customize.</param>
+        public static void CustomizeTheoryPage(ref SequencingType sequencing)
+        {
+            if (sequencing.deliveryControls == null)
+            {
+                sequencing.deliveryControls = new DeliveryControlsType();
+            }
+            sequencing.deliveryControls.tracked = false;
         }
 
         /// <summary>

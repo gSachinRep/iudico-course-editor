@@ -284,6 +284,10 @@ namespace FireFly.CourseEditor.GUI
             Debug.Assert(c != null, "Parent of the selected object is not support Manifest.IContainer");
 
             c.RemoveChild(tvManifest.SelectedNode.Tag as IManifestNode);
+            if (tvManifest.SelectedNode.Parent != null)
+            {
+                tvManifest.SelectedNode = tvManifest.SelectedNode.Parent;
+            }
         }
 
         private void miExpandAll_Click(object sender, EventArgs e)
@@ -501,6 +505,49 @@ namespace FireFly.CourseEditor.GUI
             tvManifest.SelectedNode.Expand();
         }
 
+
+        private void miAddRollupConsiderations_Click(object sender, EventArgs e)
+        {
+            SequencingType c = (SequencingType)tvManifest.SelectedNode.Tag;
+
+            Debug.Assert(c.rollupConsiderations == null, "Rollup Considerations already exist");
+
+            c.rollupConsiderations = new RollupConsiderationsType();
+
+            Forms.PropertyEditor.Show(c.rollupConsiderations);
+            tvManifest.SelectedNode.Expand();
+        }
+
+        private void miAddConstrainedChoiceConsiderations_Click(object sender, EventArgs e)
+        {
+            SequencingType c = (SequencingType)tvManifest.SelectedNode.Tag;
+
+            Debug.Assert(c.constrainedChoiceConsiderations == null, "Constrained Choice Considerations already exist");
+
+            c.constrainedChoiceConsiderations = new ConstrainedChoiceConsiderationsType();
+
+            Forms.PropertyEditor.Show(c.constrainedChoiceConsiderations);
+            tvManifest.SelectedNode.Expand();
+        }
+
+        //!!!!!!!!!!!!!!
+        private void miAddExtensionObjectives_Click(object sender, EventArgs e)
+        {
+            //////// !!!!!!!!!!!! 
+            ///Still have to be implemented
+        }
+ 
+        private void miAddCollectionSequencing_Click(object sender, EventArgs e)
+        {
+            SequencingCollection c = (SequencingCollection)tvManifest.SelectedNode.Tag;
+
+            Debug.Assert(c.sequencingCollection != null, "Empty sequencing Collection.");
+
+            c.sequencingCollection.Add(new SequencingType());
+
+            Forms.PropertyEditor.Show(c.sequencingCollection);
+            tvManifest.SelectedNode.Expand();
+        }
         #endregion
 
         public ManifestBrowser(DockPanel parentDockPanel)
@@ -527,5 +574,7 @@ namespace FireFly.CourseEditor.GUI
                 miAdd.Enabled = en;
             };
         }
+
+       
     }
 }
