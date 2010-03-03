@@ -85,12 +85,12 @@ function simpleTest(ID, correctAnswer)
 	
   this.getAnswer = function()
   {
-    return $('#' + this.ID).value;
+    return $('#' + this.ID)[0].value;
   }
   
   this.setAnswer = function(answer)
   {
-    document.$('#' + this.ID).value = answer;
+    document.$('#' + this.ID)[0].value = answer;
   }
   
   this.getCorrectAnswer = function()
